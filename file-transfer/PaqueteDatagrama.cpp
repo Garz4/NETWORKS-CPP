@@ -5,20 +5,20 @@
 using namespace std;
 
 PaqueteDatagrama::PaqueteDatagrama(char* data_, unsigned int longitude_, char* address_, int port_){
-	strcpy(ip,address_);
-	datos = new char[longitude_];
-	memcpy(datos, data_, longitude_);
-	longitud = longitude_;
-	puerto = port_;
+  strcpy(ip,address_);
+  datos = new char[longitude_];
+  memcpy(datos, data_, longitude_);
+  longitud = longitude_;
+  puerto = port_;
 }
 
 PaqueteDatagrama::PaqueteDatagrama(unsigned int longitude_){
-	longitud = longitude_;
-	datos = new char[longitude_];
+  longitud = longitude_;
+  datos = new char[longitude_];
 }
 
 PaqueteDatagrama::~PaqueteDatagrama(){
-	delete []datos;
+  delete []datos;
 }
 
 char* PaqueteDatagrama::obtieneDireccion(){return ip;}

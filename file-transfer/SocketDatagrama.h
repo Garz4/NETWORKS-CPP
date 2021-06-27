@@ -12,25 +12,25 @@
 #include "PaqueteDatagrama.h"
 
 class SocketDatagrama{
-	private:
-		struct sockaddr_in direccionLocal;
-		struct sockaddr_in direccionForanea;
-		struct timeval timeout;
-		int s; //ID socket
+  private:
+    struct sockaddr_in direccionLocal;
+    struct sockaddr_in direccionForanea;
+    struct timeval timeout;
+    int s; //ID socket
 
-	public:
-		SocketDatagrama(int a);
-		~SocketDatagrama();
+  public:
+    SocketDatagrama(int a);
+    ~SocketDatagrama();
 
-		//Recibe un paquete tipo datagrama proveniente de este socket
-		int recibe(PaqueteDatagrama &p);
+    //Recibe un paquete tipo datagrama proveniente de este socket
+    int recibe(PaqueteDatagrama &p);
 
-		//Envía un paquete tipo datagrama desde este socket
-		int envia(PaqueteDatagrama &p);
+    //Envía un paquete tipo datagrama desde este socket
+    int envia(PaqueteDatagrama &p);
 
-		char* getClientIP();
-		unsigned short getClientPort();
-		int recibeTimeout(PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
+    char* getClientIP();
+    unsigned short getClientPort();
+    int recibeTimeout(PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
 };
 
 #endif

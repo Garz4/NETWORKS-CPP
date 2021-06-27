@@ -5,17 +5,17 @@
 #include <string.h>
 
 class Solicitud{
-	public:
-		~Solicitud();
-		Solicitud();
-		char* doOperation(char *IP, int puerto, char* solicitud);
-		char* getIP();
-	private:
-		SocketDatagrama *socketLocal;
-		struct mensaje Recibido;
-		struct mensaje Enviar;
-		char* dirIP;
-		char request;
+  public:
+    ~Solicitud();
+    Solicitud();
+    char* doOperation(char *IP, int puerto, char* solicitud);
+    char* getIP();
+  private:
+    SocketDatagrama *socketLocal;
+    struct mensaje Recibido;
+    struct mensaje Enviar;
+    char* dirIP;
+    char request;
 };
 
 #endif
