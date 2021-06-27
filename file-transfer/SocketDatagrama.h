@@ -11,7 +11,7 @@
 #include <string.h>
 #include "PaqueteDatagrama.h"
 
-class SocketDatagrama{
+class SocketDatagrama {
   private:
     struct sockaddr_in direccionLocal;
     struct sockaddr_in direccionForanea;
@@ -30,7 +30,8 @@ class SocketDatagrama{
 
     char* getClientIP();
     unsigned short getClientPort();
-    int recibeTimeout(PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
+    int recibeTimeout(
+      PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
 };
 
 #endif

@@ -4,12 +4,13 @@
 #include "Mensaje.h"
 #include <string.h>
 
-class Solicitud{
+class Solicitud {
   public:
     ~Solicitud();
     Solicitud();
     char* doOperation(char *IP, int puerto, char* solicitud);
     char* getIP();
+    
   private:
     SocketDatagrama *socketLocal;
     struct mensaje Recibido;
