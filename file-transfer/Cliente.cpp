@@ -56,8 +56,9 @@ int main(int argc, char* argv[]) {
         convertir = strs.str();
         strs.str(std::string());
 
-        for (int c = 0; c < (int)(convertir.length()); c++)
+        for (int c = 0; c < (int)(convertir.length()); c++) {
           mensajeEnvio.tam[c] = (convertir.c_str())[c];
+        }
         
         mensajeEnvio.tam[(int)(convertir.length())] = '\0';
 
@@ -77,13 +78,18 @@ int main(int argc, char* argv[]) {
           archivoEnviar.seekg(0, ios::beg);
           archivoEnviar.read(mensajeEnvio.archivo, tamArchivo);
           memcpy(
-            (char*)&mensajeRecibo, s.doOperation(argv[1], 7200,
-            (char*)&mensajeEnvio), sizeof(struct mensaje));
+              (char*)&mensajeRecibo,
+              s.doOperation(argv[1], 7200, (char*)&mensajeEnvio),
+              sizeof(struct mensaje));
           cout << "==================================" << endl;
           cout << mensajeRecibo.nombreArchivo << ": ";
 
-          if (mensajeRecibo.estatus == '0') cout << "Recibido." << endl;
-          else cout << "Error al recibir." << endl;
+          if (mensajeRecibo.estatus == '0') {
+            cout << "Recibido." << endl;
+          }
+          else {
+            cout << "Error al recibir." << endl;
+          }
         }
 
         archivoEnviar.close();

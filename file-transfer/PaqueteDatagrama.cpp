@@ -5,7 +5,7 @@
 using namespace std;
 
 PaqueteDatagrama::PaqueteDatagrama(
-  char* data_, unsigned int longitude_, char* address_, int port_) {
+    char* data_, unsigned int longitude_, char* address_, int port_) {
   strcpy(ip,address_);
   datos = new char[longitude_];
   memcpy(datos, data_, longitude_);
@@ -19,7 +19,7 @@ PaqueteDatagrama::PaqueteDatagrama(unsigned int longitude_) {
 }
 
 PaqueteDatagrama::~PaqueteDatagrama() {
-  delete []datos;
+  delete[] datos;
 }
 
 char* PaqueteDatagrama::obtieneDireccion() { return ip; }

@@ -15,7 +15,7 @@ char* Solicitud::doOperation(char *IP, int puerto, char* solicitud) {
   Enviar.requestId = request;
 
   PaqueteDatagrama paqueteEnvio(
-    (char*)&Enviar, sizeof(struct mensaje), IP, puerto);
+      (char*)&Enviar, sizeof(struct mensaje), IP, puerto);
 
   PaqueteDatagrama paqueteRecibo(sizeof(struct mensaje));
   int n;
@@ -40,16 +40,23 @@ char* Solicitud::doOperation(char *IP, int puerto, char* solicitud) {
       exit(0);
     }
     else {
-      if (((struct mensaje*)(paqueteRecibo.obtieneDatos()))->messageType!= '1') {
+      if (
+          ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->messageType !=
+          '1') {
         cout << "No se recibió el tipo de mensaje adecuado." << endl;
         exit(0);
       }
-      else if(((struct mensaje*)(paqueteRecibo.obtieneDatos()))->requestId != ((struct mensaje*)(paqueteEnvio.obtieneDatos()))->requestId) {
+      else if(
+          ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->requestId !=
+          ((struct mensaje*)(paqueteEnvio.obtieneDatos()))->requestId) {
         cout << "No se recibió el ID adecuado." << endl;
         exit(0);
       }
       else {
-        memcpy((char*)&Recibido, paqueteRecibo.obtieneDatos(), sizeof(struct mensaje));
+        memcpy(
+            (char*)&Recibido,
+            paqueteRecibo.obtieneDatos(),
+            sizeof(struct mensaje));
         dirIP = socketLocal->getClientIP();
         request++;
       }
@@ -57,6 +64,7 @@ char* Solicitud::doOperation(char *IP, int puerto, char* solicitud) {
       break;
     }
   }
+  
   return (char*)&Recibido;
 }
 

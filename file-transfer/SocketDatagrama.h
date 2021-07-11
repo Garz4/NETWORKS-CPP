@@ -31,7 +31,7 @@ class SocketDatagrama {
     char* getClientIP();
     unsigned short getClientPort();
     int recibeTimeout(
-      PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
+        PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
 };
 
 #endif

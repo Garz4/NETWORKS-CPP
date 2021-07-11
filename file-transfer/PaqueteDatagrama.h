@@ -9,7 +9,7 @@ class PaqueteDatagrama {
     int puerto;        //Almacena el puerto
   public:
     PaqueteDatagrama(
-      char *data_, unsigned int longitude_, char* address_, int port_);
+        char *data_, unsigned int longitude_, char* address_, int port_);
     PaqueteDatagrama(unsigned int );
     ~PaqueteDatagrama();
     char *obtieneDireccion();

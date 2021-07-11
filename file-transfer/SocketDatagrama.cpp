@@ -15,7 +15,7 @@
 using namespace std;
 
 SocketDatagrama::SocketDatagrama(int a) {
-  s=socket(AF_INET, SOCK_DGRAM, 0);
+  s = socket(AF_INET, SOCK_DGRAM, 0);
 
   bzero((char *)&direccionLocal, sizeof(direccionLocal));
   direccionLocal.sin_family = AF_INET;
@@ -35,18 +35,20 @@ int SocketDatagrama::recibe(PaqueteDatagrama &p) {
   char dat[p.obtieneLongitud()];
   unsigned int clileng = sizeof(direccionForanea);
 
-  recvfrom(s,
-    dat,
-    p.obtieneLongitud()*sizeof(char),
-    0,
-    (struct sockaddr *) &direccionForanea,
-    &clileng);
+  recvfrom(
+      s,
+      dat,
+      p.obtieneLongitud()*sizeof(char),
+      0,
+      (struct sockaddr *) &direccionForanea,
+      &clileng);
 
   p.inicializaDatos(dat);
   char str[16];
   inet_ntop(AF_INET, &direccionForanea.sin_addr.s_addr, str, 16);
   p.inicializaIp(str);
   p.inicializaPuerto(direccionForanea.sin_port);
+
   return 0;
 }
 
@@ -54,12 +56,13 @@ int SocketDatagrama::envia(PaqueteDatagrama &p) {
   inet_pton(AF_INET, p.obtieneDireccion(), &direccionForanea.sin_addr);
   direccionForanea.sin_port = htons(p.obtienePuerto());
 
-  sendto(s,
-    p.obtieneDatos(),
-    p.obtieneLongitud() * sizeof(char),
-    0,
-    (struct sockaddr *) &direccionForanea,
-    sizeof(direccionForanea));
+  sendto(
+      s,
+      p.obtieneDatos(),
+      p.obtieneLongitud() * sizeof(char),
+      0,
+      (struct sockaddr *) &direccionForanea,
+      sizeof(direccionForanea));
 
   return 0;
 }
@@ -73,7 +76,15 @@ int SocketDatagrama::recibeTimeout(
   char dat[p.obtieneLongitud()];
   unsigned int clileng = sizeof(direccionForanea);
   
-  if (recvfrom(s, dat, p.obtieneLongitud()*sizeof(char), 0, (struct sockaddr *) &direccionForanea, &clileng) < 0) {
+  if (
+      recvfrom(
+          s,
+          dat,
+          p.obtieneLongitud()*sizeof(char),
+          0,
+          (struct sockaddr *) &direccionForanea,
+          &clileng) <
+      0) {
     if (errno == EWOULDBLOCK) {
       fprintf(stderr, "Tiempo para recepción transcurrido.\n");
       return -1;

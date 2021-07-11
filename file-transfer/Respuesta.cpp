@@ -14,13 +14,14 @@ Respuesta::Respuesta(int pl) {
 struct mensaje* Respuesta::getRequest(void) {
   PaqueteDatagrama paqueteRecibo(sizeof(struct mensaje));
   socketLocal->recibe(paqueteRecibo);
-  if (requestIdPrev == ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->requestId) {
+  if (requestIdPrev ==
+      ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->requestId) {
     Recibido.messageType = 'n';
     return &Recibido;
   }
   else {
     memcpy((char*)&Recibido, paqueteRecibo.obtieneDatos(),
-      sizeof(struct mensaje));
+        sizeof(struct mensaje));
     dirIP = socketLocal->getClientIP();
     port = (int)(socketLocal->getClientPort());
     requestIdPrev = Recibido.requestId;
@@ -34,7 +35,7 @@ void Respuesta::sendReply(char *respuesta) {
   Enviar.requestId = Recibido.requestId;
 
   PaqueteDatagrama paqueteEnvio(
-    (char*)&Enviar, sizeof(struct mensaje), dirIP, htons(port));
+      (char*)&Enviar, sizeof(struct mensaje), dirIP, htons(port));
 
   socketLocal->envia(paqueteEnvio);
   return;
@@ -46,6 +47,10 @@ char* Respuesta::getIP() { return dirIP; }
 int Respuesta::getPort() { return port; }
 
 int flipBit(int bit) {
-  if (bit == 0) return 1;
-  else return 0;
+  if (bit == 0) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
 }

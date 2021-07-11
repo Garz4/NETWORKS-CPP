@@ -2,7 +2,7 @@
 
 using namespace std;
 
-struct mensaje{
+struct mensaje {
   char messageType; //0= Solicitud, 1 = Respuesta
   char requestId; //Identificador del mensaje
   char tam[5];

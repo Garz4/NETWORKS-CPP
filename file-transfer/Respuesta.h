@@ -4,7 +4,7 @@
 #include <string.h>
 #include "Mensaje.h"
 
-class Respuesta{
+class Respuesta {
   public:
     ~Respuesta();
     Respuesta(int pl);
