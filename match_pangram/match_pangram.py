@@ -76,6 +76,7 @@ def main(match_sentence, total_score):
         start = time.time()
         curr_sentence = input()
 
+        # TODO(Garz4): Make this a function and add more commands. (:r, :w)
         # Quit.
         if curr_sentence == ":q":
             break
