@@ -1,41 +1,69 @@
 # Python3.9
 
-# Pangrams:
-# 
-# Waltz, bad nymph, for quick jigs vex.
-# Glib jocks quiz nymph to vex dwarf.
-# Sphinx of black quartz, judge my vow.
-# How vexingly quick daft zebras jump!
-# The five boxing wizards jump quickly.
-# Jackdaws love my big sphinx of quartz.
-# Pack my box with five dozen liquor jugs.
-# The quick brown fox jumps over a lazy dog.
-
 import sys
 import time
+import random
 
-# To store and the colors when printing in terminal.
-class bcolors:
+# To store and use the colors when printing in terminal.
+class Colors:
     HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
+    OK_BLUE = '\033[94m'
+    OK_CYAN = '\033[96m'
+    OK_GREEN = '\033[92m'
     WARNING = '\033[93m'
     FAIL = '\033[91m'
-    ENDC = '\033[0m'
+    END = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
+        "Glib jocks quiz nymph to vex dwarf.",
+        "Sphinx of black quartz, judge my vow.",
+        "How vexingly quick daft zebras jump!",
+        "The five boxing wizards jump quickly.",
+        "Jackdaws love my big sphinx of quartz.",
+        "Pack my box with five dozen liquor jugs.",
+        "The quick brown fox jumps over a lazy dog."]
+
+match_sentence = ""
+total_score = 0
+
 # Print how to use the program and exits.
 def usage():
-    # TODO(Garz4): Actually print a usage lol.
+    print("usage: " + sys.argv[0] + " [-r | --random] " + 
+            "[-c <pangram> | --custom <pangram>] [-h | --help]")
+    exit(0)
 
-    print("")
+# Sets a custom pangram as current matching sentence.
+def set_custom_pangram(custom):
+    global match_sentence, total_score
 
+    match_sentence = custom
+    total_score = len(match_sentence)
+    print("======== " + match_sentence + " ========")
+
+# Sets a random pangram as current matching sentence.
+def set_random_pangram():
+    global match_sentence, total_score
+
+    match_sentence = PANGRAMS[random.randint(0, len(PANGRAMS)-1)]
+    total_score = len(match_sentence)
+    print("======== " + match_sentence + " ========")
+
+# Parse the current arguments and assign them to the global variables.
+def parse_arguments():
+    if sys.argv[1] == "-c" or sys.argv[1] == "--custom" and len(sys.argv == 3):
+        set_custom_pangram(sys.argv[2])
+    elif sys.argv[1] == "-r" or sys.argv[1] == "--random":
+        set_random_pangram()
+    else:
+        usage()
 
 # Matches the current sentence against the original pangram.
-def match_against(curr_sentence, match_sentence):
+def match_against(curr_sentence):
     # TODO(Garz4): Match like Source Control matches new code.
+
+    global match_sentence
 
     j = 0
     curr_score = 0
@@ -46,17 +74,19 @@ def match_against(curr_sentence, match_sentence):
     return curr_score
 
 # Prints the current score using colors. Kawaii!
-def print_score(curr_score, total_score, time_needed):
+def print_score(curr_score, time_needed):
+    global total_score
+
     percentage = (curr_score * 100) / total_score
 
     if percentage < 25:
-        print(bcolors.FAIL)
+        print(Colors.FAIL, end = "")
     elif percentage < 50:
-        print(bcolors.WARNING)
+        print(Colors.WARNING, end = "")
     elif percentage < 75:
-        print(bcolors.OKBLUE)
+        print(Colors.OK_BLUE, end = "")
     else:
-        print(bcolors.OKGREEN)
+        print(Colors.OK_GREEN, end = "")
 
     print("You scored " +
             str(curr_score) +
@@ -67,30 +97,38 @@ def print_score(curr_score, total_score, time_needed):
             "s.")
 
     # Get back to original color (at least in PowerShell).
-    print(bcolors.ENDC)
+    print(Colors.END, end = "")
+
+# Reads the current command.
+def read_command(command):
+    if command == ":q":
+        exit(0)
+    elif command == ":r":
+        set_random_pangram()
+    else:
+        print("Not a recognized command!")
 
 # Main function.
-def main(match_sentence, total_score):
-    print("========" + match_sentence + "========")
+def main():
     while True:
         start = time.time()
         curr_sentence = input()
-
-        # TODO(Garz4): Make this a function and add more commands. (:r, :w)
-        # Quit.
-        if curr_sentence == ":q":
-            break
-
         end = time.time()
-        
+
+        if curr_sentence == "":
+            continue
+        elif curr_sentence[0] == ":":
+            read_command(curr_sentence)
+            continue
+
         # Compute current score and print it.
-        curr_score = match_against(curr_sentence, match_sentence)
-        print_score(curr_score, total_score, end-start)
+        curr_score = match_against(curr_sentence)
+        print_score(curr_score, end - start)
 
 # Call main with current arguments or print usage and exist.
 if __name__ == '__main__':
-    argc = len(sys.argv)
-    if argc != 2:
+    if len(sys.argv) < 2:
         usage()
     else:
-        main(sys.argv[1], len(sys.argv[1]))
+        parse_arguments()
+        main()
