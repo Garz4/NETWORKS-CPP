@@ -88,8 +88,7 @@ int SocketDatagrama::recibeTimeout(
     if (errno == EWOULDBLOCK) {
       fprintf(stderr, "Tiempo para recepción transcurrido.\n");
       return -1;
-    }
-    else {
+    } else {
       fprintf(stderr, "Error en recvfrom.\n");
       return -2;
     }

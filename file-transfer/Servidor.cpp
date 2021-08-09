@@ -30,8 +30,7 @@ int main(void) {
       if (archivoGuardar.is_open()) {
         mensajeEnvio.estatus = '0';
         cout << "Guardado." << endl;
-      }
-      else {
+      } else {
         mensajeEnvio.estatus = '1';
         cout << "Fallo en escritura." << endl;
       }

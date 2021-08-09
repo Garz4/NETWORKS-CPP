@@ -18,8 +18,7 @@ struct mensaje* Respuesta::getRequest(void) {
       ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->requestId) {
     Recibido.messageType = 'n';
     return &Recibido;
-  }
-  else {
+  } else {
     memcpy((char*)&Recibido, paqueteRecibo.obtieneDatos(),
         sizeof(struct mensaje));
     dirIP = socketLocal->getClientIP();
@@ -50,7 +49,6 @@ int flipBit(int bit) {
   if (bit == 0) {
     return 1;
   }
-  else {
-    return 0;
-  }
+  
+  return 0;
 }

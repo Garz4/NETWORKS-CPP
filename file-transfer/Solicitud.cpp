@@ -27,32 +27,27 @@ char* Solicitud::doOperation(char *IP, int puerto, char* solicitud) {
     if (n == -1) {
       if (it != 19) {
         cout << "No se recibió ningún mensaje. Intentando de nuevo..." << endl;
-      }
-      else {
+      } else {
         cout << "--!! ADVERTENCIA: Servidor no disponible." << endl;
         cout << "Imposible contactar con el servidor."
              << "Inténtelo de nuevo más tarde." << endl;
         exit(0);
       }
-    }
-    else if (n == -2) {
+    } else if (n == -2) {
       cout << "--!! ERROR: Error en recvfrom." << endl;
       exit(0);
-    }
-    else {
+    } else {
       if (
           ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->messageType !=
           '1') {
         cout << "No se recibió el tipo de mensaje adecuado." << endl;
         exit(0);
-      }
-      else if(
+      } else if (
           ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->requestId !=
           ((struct mensaje*)(paqueteEnvio.obtieneDatos()))->requestId) {
         cout << "No se recibió el ID adecuado." << endl;
         exit(0);
-      }
-      else {
+      } else {
         memcpy(
             (char*)&Recibido,
             paqueteRecibo.obtieneDatos(),

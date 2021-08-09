@@ -112,6 +112,7 @@ def read_command(command):
         set_random_pangram()
     else:
         print("Not a recognized command!")
+        commands()
 
 # Main function.
 def main():

@@ -3,18 +3,18 @@
 #include <sstream>
 #include "Solicitud.h"
 
-/*
-Variables foráneas:
-  ->LIMITE_ARCHIVO
-  ->Ubicación: Mensaje.h
-
-Entidades foráneas:
-  ->struct mensaje
-  ->Ubicación: Mensaje.h
-
-  ->Solicitud
-  ->Ubicación: Solicitud.h
-*/
+/**
+ * Variables foráneas:
+ *   ->LIMITE_ARCHIVO
+ *   ->Ubicación: Mensaje.h
+ * 
+ * Entidades foráneas:
+ *   ->struct mensaje
+ *   ->Ubicación: Mensaje.h
+ * 
+ *   ->Solicitud
+ *   ->Ubicación: Solicitud.h
+ */
 
 using namespace std;
 
@@ -23,8 +23,7 @@ int main(int argc, char* argv[]) {
     cout << "--!! ERROR: Mala invocación del programa. Intente:" << endl;
     cout << "./cliente direccion_ip_del_servidor nombre_del_archivo" << endl;
     return 0;
-  }
-  else if (strlen(argv[1])>16) {
+  } else if (strlen(argv[1])>16) {
     cout << "--!! ERROR: IP inválida. Inténtelo de nuevo." << endl;
     return 0;
   }
@@ -68,8 +67,7 @@ int main(int argc, char* argv[]) {
                << mensajeEnvio.tam << " bytes y sobrepasa el límite de "
                << LIMITE_ARCHIVO << " bytes." << endl;
           cout << "El archivo será omitido." << endl;
-        }
-        else {
+        } else {
           for (int k = 0; k < linea.length()+1; k++)
             mensajeEnvio.nombreArchivo[k] = nombreLeer[k];
 
@@ -86,15 +84,13 @@ int main(int argc, char* argv[]) {
 
           if (mensajeRecibo.estatus == '0') {
             cout << "Recibido." << endl;
-          }
-          else {
+          } else {
             cout << "Error al recibir." << endl;
           }
         }
 
         archivoEnviar.close();
-      }
-      else {
+      } else {
         cout << "==================================" << endl;
         cout << "--!! ADVERTENCIA: " << nombreLeer
              << " es un archivo inexistente." << endl;
@@ -105,8 +101,7 @@ int main(int argc, char* argv[]) {
     }
 
     archivoLeer.close();
-  }
-  else {
+  } else {
     cout << "--!! ERROR: " << argv[2] << " es un archivo inexistente." << endl;
   }
 
