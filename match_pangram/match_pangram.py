@@ -140,7 +140,7 @@ def main():
         end = time.time()
 
         # Continue with the loop whether its a command or empty line.
-        if curr_sentence == "":
+        if not curr_sentence:
             continue
         elif curr_sentence.startswith(":"):
             read_command(curr_sentence)
