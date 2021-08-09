@@ -39,13 +39,17 @@ def commands():
             ":r - Set a new random pangram.\n" +
             ":q - Quit the program.\n")
 
+def print_curr_sentence():
+    global match_sentence
+    print("======== " + match_sentence + " ========")
+
 # Sets a custom pangram as current matching sentence.
 def set_custom_pangram(custom):
     global match_sentence, total_score
 
     match_sentence = custom
     total_score = len(match_sentence)
-    print("======== " + match_sentence + " ========")
+    print_curr_sentence()
 
 # Sets a random pangram as current matching sentence.
 def set_random_pangram():
@@ -53,7 +57,7 @@ def set_random_pangram():
 
     match_sentence = PANGRAMS[random.randint(0, len(PANGRAMS)-1)]
     total_score = len(match_sentence)
-    print("======== " + match_sentence + " ========")
+    print_curr_sentence()
 
 # Parse the current arguments and assign them to the global variables.
 def parse_arguments():
