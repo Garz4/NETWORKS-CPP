@@ -34,6 +34,11 @@ def usage():
             "[-c <pangram> | --custom <pangram>] [-h | --help]")
     exit(0)
 
+def commands():
+    print("commands: \n" +
+            ":r - Set a new random pangram.\n" +
+            ":q - Quit the program.\n")
+
 # Sets a custom pangram as current matching sentence.
 def set_custom_pangram(custom):
     global match_sentence, total_score
