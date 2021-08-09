@@ -136,7 +136,7 @@ def main():
 
         if curr_sentence == "":
             continue
-        elif curr_sentence[0] == ":":
+        elif curr_sentence.startswith(":"):
             read_command(curr_sentence)
             continue
 
