@@ -16,6 +16,7 @@ class Colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+# To store the available pangrams to choose from.
 PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
         "Glib jocks quiz nymph to vex dwarf.",
         "Sphinx of black quartz, judge my vow.",
@@ -25,20 +26,23 @@ PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
         "Pack my box with five dozen liquor jugs.",
         "The quick brown fox jumps over a lazy dog."]
 
+# Global variables.
 match_sentence = ""
 total_score = 0
 
-# Print how to use the program and exits.
+# Print how to use the program.
 def usage():
     print("usage: " + sys.argv[0] + " [-r | --random] " + 
             "[-c <pangram> | --custom <pangram>] [-h | --help]")
 
+# Print the availables commands when executing.
 def commands():
     print("commands: \n" +
             ":r\t\t - Set a new random pangram.\n" +
             ":c <pangram>\t - Set a new custom pangram.\n" +
             ":q\t\t - Quit the program.")
 
+# Prints the current sentence.
 def print_curr_sentence():
     global match_sentence
     print("======== " + match_sentence + " ========")
@@ -130,10 +134,12 @@ def read_command(command):
 # Main function.
 def main():
     while True:
+        # Time that bad boy.
         start = time.time()
         curr_sentence = input()
         end = time.time()
 
+        # Continue with the loop whether its a command or empty line.
         if curr_sentence == "":
             continue
         elif curr_sentence.startswith(":"):
