@@ -32,12 +32,12 @@ total_score = 0
 def usage():
     print("usage: " + sys.argv[0] + " [-r | --random] " + 
             "[-c <pangram> | --custom <pangram>] [-h | --help]")
-    exit(0)
 
 def commands():
     print("commands: \n" +
-            ":r - Set a new random pangram.\n" +
-            ":q - Quit the program.\n")
+            ":r\t\t - Set a new random pangram.\n" +
+            ":c <pangram>\t - Set a new custom pangram.\n" +
+            ":q\t\t - Quit the program.")
 
 def print_curr_sentence():
     global match_sentence
@@ -55,7 +55,7 @@ def set_custom_pangram(custom):
 def set_random_pangram():
     global match_sentence, total_score
 
-    match_sentence = PANGRAMS[random.randint(0, len(PANGRAMS)-1)]
+    match_sentence = PANGRAMS[random.randint(0, len(PANGRAMS) - 1)]
     total_score = len(match_sentence)
     print_curr_sentence()
 
@@ -67,6 +67,7 @@ def parse_arguments():
         set_random_pangram()
     else:
         usage()
+        exit(0)
 
 # Matches the current sentence against the original pangram.
 def match_against(curr_sentence):
@@ -80,6 +81,7 @@ def match_against(curr_sentence):
         if j < len(curr_sentence) and c == curr_sentence[j]:
             j += 1
             curr_score += 1
+
     return curr_score
 
 # Prints the current score using colors. Kawaii!
@@ -88,6 +90,7 @@ def print_score(curr_score, time_needed):
 
     percentage = (curr_score * 100) / total_score
 
+    # Determine the color based on the current percentage score.
     if percentage < 25:
         print(Colors.FAIL, end = "")
     elif percentage < 50:
@@ -114,9 +117,15 @@ def read_command(command):
         exit(0)
     elif command == ":r":
         set_random_pangram()
-    else:
-        print("Not a recognized command!")
-        commands()
+        return
+    elif command.startswith(":c"):
+        curr_command = command.split(" ")
+        if len(curr_command) == 2:
+            set_custom_pangram(curr_command[1])
+            return
+
+    print("Not a recognized command!")
+    commands()
 
 # Main function.
 def main():
@@ -139,6 +148,7 @@ def main():
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         usage()
+        exit(0)
     else:
         parse_arguments()
         main()
