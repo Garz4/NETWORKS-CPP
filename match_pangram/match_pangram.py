@@ -123,9 +123,9 @@ def read_command(command):
         set_random_pangram()
         return
     elif command.startswith(":c"):
-        curr_command = command.split(" ")
-        if len(curr_command) == 2:
-            set_custom_pangram(curr_command[1])
+        if " " in command:
+            space = command.index(" ")
+            set_custom_pangram(command[space+1:len(command)])
             return
 
     print("Not a recognized command!")
