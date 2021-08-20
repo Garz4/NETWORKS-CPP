@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     cout << "--!! ERROR: Mala invocación del programa. Intente:" << endl;
     cout << "./cliente direccion_ip_del_servidor nombre_del_archivo" << endl;
     return 0;
-  } else if (strlen(argv[1])>16) {
+  } else if (strlen(argv[1]) > 16) {
     cout << "--!! ERROR: IP inválida. Inténtelo de nuevo." << endl;
     return 0;
   }
