@@ -88,7 +88,7 @@ def print_score(curr_score, time_needed):
     percentage = (curr_score * 100) / total_score
 
     # Determine the color based on the current percentage score.
-    # TODO(Garz4): Make this class methods, something like
+    # TODO(Garz4): Make these class methods, something like
     # colors.print(std::string msg, colors::COLOR)
     if percentage < 25:
         print(Colors.FAIL, end = "")
