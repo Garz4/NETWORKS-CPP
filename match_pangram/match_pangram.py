@@ -4,7 +4,6 @@ import sys
 import time
 import random
 
-# To store and use the colors when printing in terminal.
 class Colors:
     HEADER = '\033[95m'
     OK_BLUE = '\033[94m'
@@ -16,7 +15,6 @@ class Colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-# To store the available pangrams to choose from.
 PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
         "Glib jocks quiz nymph to vex dwarf.",
         "Sphinx of black quartz, judge my vow.",
@@ -26,28 +24,23 @@ PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
         "Pack my box with five dozen liquor jugs.",
         "The quick brown fox jumps over a lazy dog."]
 
-# Global variables.
 match_sentence = ""
 total_score = 0
 
-# Print how to use the program.
 def usage():
     print("usage: " + sys.argv[0] + " [-r | --random] " + 
             "[-c <pangram> | --custom <pangram>] [-h | --help]")
 
-# Print the availables commands when executing.
 def commands():
     print("commands: \n" +
             ":r\t\t - Set a new random pangram.\n" +
             ":c <pangram>\t - Set a new custom pangram.\n" +
             ":q\t\t - Quit the program.")
 
-# Prints the current sentence.
 def print_curr_sentence():
     global match_sentence
     print("======== " + match_sentence + " ========")
 
-# Sets a custom pangram as current matching sentence.
 def set_custom_pangram(custom):
     global match_sentence, total_score
 
@@ -55,7 +48,6 @@ def set_custom_pangram(custom):
     total_score = len(match_sentence)
     print_curr_sentence()
 
-# Sets a random pangram as current matching sentence.
 def set_random_pangram():
     global match_sentence, total_score
 
@@ -63,7 +55,6 @@ def set_random_pangram():
     total_score = len(match_sentence)
     print_curr_sentence()
 
-# Parse the current arguments and assign them to the global variables.
 def parse_arguments():
     if sys.argv[1] == "-c" or sys.argv[1] == "--custom" and len(sys.argv == 3):
         set_custom_pangram(sys.argv[2])
@@ -73,7 +64,7 @@ def parse_arguments():
         usage()
         exit(0)
 
-# Matches the current sentence against the original pangram.
+# Matches the current sentence against the global pangram `match_sentence`.
 def match_against(curr_sentence):
     # TODO(Garz4): Match like Source Control matches new code.
 
@@ -112,10 +103,9 @@ def print_score(curr_score, time_needed):
             str(time_needed) +
             "s.")
 
-    # Get back to original color (at least in PowerShell).
+    # Get back to original color (at least in VS Code).
     print(Colors.END, end = "")
 
-# Reads the current command.
 def read_command(command):
     if command == ":q":
         exit(0)
@@ -131,7 +121,6 @@ def read_command(command):
     print("Not a recognized command!")
     commands()
 
-# Main function.
 def main():
     while True:
         # Time that bad boy.
@@ -150,7 +139,6 @@ def main():
         curr_score = match_against(curr_sentence)
         print_score(curr_score, end - start)
 
-# Call main with current arguments or print usage and exist.
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         usage()
