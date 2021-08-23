@@ -11,9 +11,9 @@ class Colors:
     OK_GREEN = '\033[92m'
     WARNING = '\033[93m'
     FAIL = '\033[91m'
-    END = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    DEFAULT = '\033[0m'
 
 PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
         "Glib jocks quiz nymph to vex dwarf.",
@@ -107,8 +107,8 @@ def print_score(curr_score, time_needed):
             str(time_needed) +
             "s.")
 
-    # Get back to original color (at least in VS Code).
-    print(Colors.END, end = "")
+    # Get back to original color.
+    print(Colors.DEFAULT, end = "")
 
 def read_command(command):
     if command == ":q":
