@@ -58,9 +58,9 @@ def set_random_pangram():
 def parse_arguments():
     #TODO(Garz4): Add more arguments.
 
-    if (sys.argv[1] == "-c" or sys.argv[1] == "--custom") and len(sys.argv) > 2:
+    if (sys.argv[1] is "-c" or sys.argv[1] is "--custom") and len(sys.argv) > 2:
         set_custom_pangram(" ".join(sys.argv[2 : len(sys.argv)]))
-    elif sys.argv[1] == "-r" or sys.argv[1] == "--random":
+    elif sys.argv[1] is "-r" or sys.argv[1] is "--random":
         set_random_pangram()
     else:
         usage()
@@ -75,7 +75,7 @@ def match_against(curr_sentence):
     j = 0
     curr_score = 0
     for c in match_sentence:
-        if j < len(curr_sentence) and c == curr_sentence[j]:
+        if j < len(curr_sentence) and c is curr_sentence[j]:
             j += 1
             curr_score += 1
 
@@ -114,9 +114,9 @@ def print_score(curr_score, time_needed, time_diff):
     print(Colors.DEFAULT, end = "")
 
 def read_command(command):
-    if command == ":q":
+    if command is ":q":
         exit(0)
-    elif command == ":r":
+    elif command is ":r":
         set_random_pangram()
         return
     elif command.startswith(":c"):
@@ -150,7 +150,7 @@ def main():
         print_score(curr_score, curr_time, curr_time - prev_time)
         prev_time = curr_time
 
-if __name__ == '__main__':
+if __name__ is '__main__':
     if len(sys.argv) < 2:
         usage()
         exit(0)
