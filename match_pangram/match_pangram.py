@@ -104,7 +104,7 @@ def print_score(curr_score, time_needed):
             " out of " +
             str(total_score) +
             " in " +
-            str(time_needed) +
+            str(round(time_needed, 2)) +
             "s.")
 
     # Get back to original color.
