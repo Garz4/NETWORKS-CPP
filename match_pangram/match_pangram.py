@@ -119,7 +119,7 @@ def read_command(command):
     elif command.startswith(":c"):
         if " " in command:
             space = command.index(" ")
-            set_custom_pangram(command[space+1:len(command)])
+            set_custom_pangram(command[space + 1 : len(command)])
             return
 
     print("Not a recognized command!")
