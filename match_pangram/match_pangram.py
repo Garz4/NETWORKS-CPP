@@ -58,8 +58,8 @@ def set_random_pangram():
 def parse_arguments():
     #TODO(Garz4): Add more arguments.
 
-    if sys.argv[1] == "-c" or sys.argv[1] == "--custom" and len(sys.argv == 3):
-        set_custom_pangram(sys.argv[2])
+    if (sys.argv[1] == "-c" or sys.argv[1] == "--custom") and len(sys.argv) > 2:
+        set_custom_pangram(" ".join(sys.argv[2 : len(sys.argv)]))
     elif sys.argv[1] == "-r" or sys.argv[1] == "--random":
         set_random_pangram()
     else:
