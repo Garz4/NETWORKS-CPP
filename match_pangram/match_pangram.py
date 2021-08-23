@@ -82,7 +82,7 @@ def match_against(curr_sentence):
     return curr_score
 
 # Prints the current score using colors. Kawaii!
-def print_score(curr_score, time_needed):
+def print_score(curr_score, time_needed, time_diff):
     global total_score
 
     percentage = (curr_score * 100) / total_score
@@ -90,12 +90,8 @@ def print_score(curr_score, time_needed):
     # Determine the color based on the current percentage score.
     # TODO(Garz4): Make these class methods, something like
     # colors.print(std::string msg, colors::COLOR)
-    if percentage < 25:
+    if percentage < 50:
         print(Colors.FAIL, end = "")
-    elif percentage < 50:
-        print(Colors.WARNING, end = "")
-    elif percentage < 75:
-        print(Colors.OK_BLUE, end = "")
     else:
         print(Colors.OK_GREEN, end = "")
 
@@ -106,6 +102,13 @@ def print_score(curr_score, time_needed):
             " in " +
             str(round(time_needed, 2)) +
             "s.")
+
+    if time_diff < 0:
+        print(Colors.OK_BLUE + str(round(-1 * time_diff, 2)) + "s. faster!")
+    elif time_diff > 0:
+        print(Colors.WARNING + str(round(time_diff, 2)) + "s. slower!")
+    else:
+        print(Colors.BOLD + "Perfectly balanced... As all things should be...")
 
     # Get back to original color.
     print(Colors.DEFAULT, end = "")
@@ -126,6 +129,8 @@ def read_command(command):
     commands()
 
 def main():
+    prev_time = 0
+
     while True:
         # Time that bad boy.
         start = time.time()
@@ -141,7 +146,9 @@ def main():
 
         # Compute current score and print it.
         curr_score = match_against(curr_sentence)
-        print_score(curr_score, end - start)
+        curr_time = end - start
+        print_score(curr_score, curr_time, curr_time - prev_time)
+        prev_time = curr_time
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
