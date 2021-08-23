@@ -49,6 +49,6 @@ int flipBit(int bit) {
   if (bit == 0) {
     return 1;
   }
-  
+
   return 0;
 }

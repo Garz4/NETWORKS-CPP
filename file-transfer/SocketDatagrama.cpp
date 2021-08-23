@@ -75,7 +75,7 @@ int SocketDatagrama::recibeTimeout(
 
   char dat[p.obtieneLongitud()];
   unsigned int clileng = sizeof(direccionForanea);
-  
+
   if (
       recvfrom(
           s,

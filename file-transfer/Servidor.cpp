@@ -46,6 +46,6 @@ int main(void) {
 
     r.sendReply((char *)&mensajeEnvio);
   }
-  
+
   return 0;
 }

@@ -10,7 +10,7 @@ class Solicitud {
     Solicitud();
     char* doOperation(char *IP, int puerto, char* solicitud);
     char* getIP();
-    
+
   private:
     SocketDatagrama *socketLocal;
     struct mensaje Recibido;

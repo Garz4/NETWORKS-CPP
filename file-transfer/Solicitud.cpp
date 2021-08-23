@@ -59,7 +59,7 @@ char* Solicitud::doOperation(char *IP, int puerto, char* solicitud) {
       break;
     }
   }
-  
+
   return (char*)&Recibido;
 }
 
