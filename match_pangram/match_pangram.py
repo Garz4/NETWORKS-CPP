@@ -28,11 +28,11 @@ match_sentence = ""
 total_score = 0
 
 def usage():
-    print("usage: " + sys.argv[0] + " [-r | --random] " + 
+    print("Usage: " + sys.argv[0] + " [-r | --random] " + 
             "[-c <pangram> | --custom <pangram>] [-h | --help]")
 
 def commands():
-    print("commands: \n" +
+    print("Commands: \n" +
             ":r\t\t - Set a new random pangram.\n" +
             ":c <pangram>\t - Set a new custom pangram.\n" +
             ":q\t\t - Quit the program.")
