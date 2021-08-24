@@ -41,17 +41,10 @@ def print_curr_sentence():
     global match_sentence
     print("======== " + match_sentence + " ========")
 
-def set_custom_pangram(custom):
+def set_pangram(pangram):
     global match_sentence, total_score
 
-    match_sentence = custom
-    total_score = len(match_sentence)
-    print_curr_sentence()
-
-def set_random_pangram():
-    global match_sentence, total_score
-
-    match_sentence = PANGRAMS[random.randint(0, len(PANGRAMS) - 1)]
+    match_sentence = pangram
     total_score = len(match_sentence)
     print_curr_sentence()
 
@@ -59,9 +52,9 @@ def parse_arguments():
     #TODO(Garz4): Add more arguments.
 
     if (sys.argv[1] == "-c" or sys.argv[1] == "--custom") and len(sys.argv) > 2:
-        set_custom_pangram(" ".join(sys.argv[2 : len(sys.argv)]))
+        set_pangram(" ".join(sys.argv[2 : len(sys.argv)]))
     elif sys.argv[1] == "-r" or sys.argv[1] == "--random":
-        set_random_pangram()
+        set_pangram(PANGRAMS[random.randint(0, len(PANGRAMS) - 1)])
     else:
         usage()
         exit(0)
@@ -117,12 +110,12 @@ def read_command(command):
     if command == ":q":
         exit(0)
     elif command == ":r":
-        set_random_pangram()
+        set_pangram(PANGRAMS[random.randint(0, len(PANGRAMS) - 1)])
         return
     elif command.startswith(":c"):
         if " " in command:
             space = command.index(" ")
-            set_custom_pangram(command[space + 1 : len(command)])
+            set_pangram(command[space + 1 : len(command)])
             return
 
     print("Not a recognized command!")
