@@ -1,8 +1,8 @@
 # Python3.9
 
+import random
 import sys
 import time
-import random
 
 class Colors:
     HEADER = '\033[95m'
