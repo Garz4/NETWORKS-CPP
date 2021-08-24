@@ -28,17 +28,22 @@ match_sentence = ""
 total_score = 0
 
 def usage():
-    print("Usage: " + sys.argv[0] + 
-            "[-c <pangram> | --custom <pangram>] [-h | --help]")
+    print(
+        "Usage: " + sys.argv[0] +
+        "[-c <pangram> | --custom <pangram>] [-h | --help]"
+    )
 
 def commands():
-    print("Commands: \n" +
-            ":r\t\t - Set a new random pangram.\n" +
-            ":c <pangram>\t - Set a new custom pangram.\n" +
-            ":q\t\t - Quit the program.")
+    print(
+        "Commands: \n" +
+        ":r\t\t - Set a new random pangram.\n" +
+        ":c <pangram>\t - Set a new custom pangram.\n" +
+        ":q\t\t - Quit the program."
+    )
 
 def print_curr_sentence():
     global match_sentence
+
     print("======== " + match_sentence + " ========")
 
 def set_pangram(pangram):
@@ -55,7 +60,8 @@ def parse_arguments():
     #TODO(Garz4): Add more arguments.
 
     if len(sys.argv) >= 2:
-        if (sys.argv[1] == "-c" or sys.argv[1] == "--custom") and len(sys.argv) > 2:
+        if ((sys.argv[1] == "-c" or sys.argv[1] == "--custom") and
+                len(sys.argv) > 2):
             set_pangram(" ".join(sys.argv[2 : len(sys.argv)]))
         else:
             usage()
