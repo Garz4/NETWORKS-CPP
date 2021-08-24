@@ -28,7 +28,7 @@ match_sentence = ""
 total_score = 0
 
 def usage():
-    print("Usage: " + sys.argv[0] + " [-r | --random] " + 
+    print("Usage: " + sys.argv[0] + 
             "[-c <pangram> | --custom <pangram>] [-h | --help]")
 
 def commands():
@@ -54,13 +54,12 @@ def random_pangram():
 def parse_arguments():
     #TODO(Garz4): Add more arguments.
 
-    if (sys.argv[1] == "-c" or sys.argv[1] == "--custom") and len(sys.argv) > 2:
-        set_pangram(" ".join(sys.argv[2 : len(sys.argv)]))
-    elif sys.argv[1] == "-r" or sys.argv[1] == "--random":
-        set_pangram(random_pangram())
-    else:
-        usage()
-        exit(0)
+    if len(sys.argv) >= 2:
+        if (sys.argv[1] == "-c" or sys.argv[1] == "--custom") and len(sys.argv) > 2:
+            set_pangram(" ".join(sys.argv[2 : len(sys.argv)]))
+        else:
+            usage()
+            exit(0)
 
 # Matches the current sentence against the global pangram `match_sentence`.
 def match_against(curr_sentence):
@@ -125,6 +124,8 @@ def read_command(command):
     commands()
 
 def main():
+    parse_arguments()
+
     prev_time = 0
 
     while True:
@@ -147,9 +148,4 @@ def main():
         prev_time = curr_time
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        usage()
-        exit(0)
-    else:
-        parse_arguments()
-        main()
+    main()
