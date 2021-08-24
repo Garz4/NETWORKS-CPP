@@ -48,13 +48,16 @@ def set_pangram(pangram):
     total_score = len(match_sentence)
     print_curr_sentence()
 
+def random_pangram():
+    return PANGRAMS[random.randint(0, len(PANGRAMS) - 1)]
+
 def parse_arguments():
     #TODO(Garz4): Add more arguments.
 
     if (sys.argv[1] == "-c" or sys.argv[1] == "--custom") and len(sys.argv) > 2:
         set_pangram(" ".join(sys.argv[2 : len(sys.argv)]))
     elif sys.argv[1] == "-r" or sys.argv[1] == "--random":
-        set_pangram(PANGRAMS[random.randint(0, len(PANGRAMS) - 1)])
+        set_pangram(random_pangram())
     else:
         usage()
         exit(0)
@@ -110,7 +113,7 @@ def read_command(command):
     if command == ":q":
         exit(0)
     elif command == ":r":
-        set_pangram(PANGRAMS[random.randint(0, len(PANGRAMS) - 1)])
+        set_pangram(random_pangram())
         return
     elif command.startswith(":c"):
         if " " in command:
