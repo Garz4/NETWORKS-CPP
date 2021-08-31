@@ -18,7 +18,7 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv) {
   if (argc != 3) {
     std::printf("Modo de uso:\n");
     std::printf("./cliente direccion_ip_del_servidor nombre_del_archivo\n");
