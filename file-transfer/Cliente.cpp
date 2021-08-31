@@ -44,8 +44,8 @@ int main(int argc, char** argv) {
   }
 
   Solicitud solicitud;
-  struct mensaje mensaje_envio;
-  struct mensaje mensaje_recibo;
+  Mensaje mensaje_envio;
+  Mensaje mensaje_recibo;
   std::ifstream archivo_leer;
   std::ifstream archivo_enviar;
   char* nombre_leer;
@@ -84,18 +84,18 @@ int main(int argc, char** argv) {
           std::printf("El archivo será omitido.\n");
         } else {
           for (int k = 0; k < linea.length()+1; k++)
-            mensaje_envio.nombreArchivo[k] = nombre_leer[k];
+            mensaje_envio.nombre_archivo[k] = nombre_leer[k];
 
-          mensaje_envio.nombreArchivo[linea.length()+1] = '\0';
+          mensaje_envio.nombre_archivo[linea.length() + 1] = '\0';
           mensaje_envio.estatus = 0;
           archivo_enviar.seekg(0, std::ios::beg);
-          archivo_enviar.read(mensaje_envio.archivo, tam_archivo);
+          archivo_enviar.read(mensaje_envio.contenido_archivo, tam_archivo);
           std::memcpy(
               (char*)&mensaje_recibo,
               solicitud.envia_y_recibe(argv[1], 7200, (char*)&mensaje_envio),
-              sizeof(struct mensaje));
+              sizeof(Mensaje));
           std::printf("==================================\n");
-          std::printf("%s: ", mensaje_recibo.nombreArchivo);
+          std::printf("%s: ", mensaje_recibo.nombre_archivo);
 
           if (mensaje_recibo.estatus == '0') {
             std::printf("Recibido.\n");

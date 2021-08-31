@@ -23,15 +23,15 @@ class Respuesta {
  public:
   ~Respuesta();
   Respuesta(int pl);
-  mensaje* pide();
+  Mensaje* pide();
   void responde(const char* respuesta);
   char* ip() const;
   int puerto() const;
 
  private:
   SocketDatagrama* socket_local_;
-  mensaje recibido_;
-  mensaje enviar_;
+  Mensaje recibido_;
+  Mensaje enviar_;
   char* ip_;
   int puerto_;
   int anterior_peticion_;

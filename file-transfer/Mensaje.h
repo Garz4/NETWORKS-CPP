@@ -15,11 +15,18 @@
 
 #define LIMITE_ARCHIVO 65000
 
-struct mensaje {
-  char messageType; // 0 = Solicitud, 1 = Respuesta
-  char requestId; // Identificador del mensaje
+struct Mensaje {
+  /* 0 = Solicitud, 1 = Respuesta. */
+  char tipo;
+
+  /* Identificador del mensaje. */
+  char id;
+
   char tam[5];
-  char nombreArchivo[30];
-  char archivo[LIMITE_ARCHIVO+1];
+
+  char nombre_archivo[30];
+
+  char contenido_archivo[LIMITE_ARCHIVO + 1];
+
   char estatus;
 };

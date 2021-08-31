@@ -26,14 +26,14 @@ Solicitud::Solicitud() {
 
 char* Solicitud::envia_y_recibe(
       const char* ip, int puerto, const char* solicitud) {
-  std::memcpy((char*)&enviar_, solicitud, sizeof(mensaje));
-  enviar_.messageType = '0';
-  enviar_.requestId = peticion_;
+  std::memcpy((char*)&enviar_, solicitud, sizeof(Mensaje));
+  enviar_.tipo = '0';
+  enviar_.id = peticion_;
 
   PaqueteDatagrama paquete_envio(
-      (char*)&enviar_, sizeof(mensaje), ip, puerto);
+      (char*)&enviar_, sizeof(Mensaje), ip, puerto);
 
-  PaqueteDatagrama paquete_recibo(sizeof(mensaje));
+  PaqueteDatagrama paquete_recibo(sizeof(Mensaje));
   int n;
 
   for (int it = 0; it < 20; it++) {
@@ -42,7 +42,7 @@ char* Solicitud::envia_y_recibe(
 
     if (n == -1) {
       if (it != 19) {
-        std::printf("No se recibió ningún mensaje. Intentando de nuevo...\n");
+        std::printf("No se recibió ningún Mensaje. Intentando de nuevo...\n");
       } else {
         std::printf("--!! ADVERTENCIA: Servidor no disponible.\n");
         std::printf("Imposible contactar con el servidor."
@@ -53,19 +53,19 @@ char* Solicitud::envia_y_recibe(
       std::printf("--!! ERROR: Error en recvfrom.\n");
       std::exit(0);
     } else {
-      if (((mensaje*)(paquete_recibo.datos()))->messageType != '1') {
-        std::printf("No se recibió el tipo de mensaje adecuado.\n");
+      if (((Mensaje*)(paquete_recibo.datos()))->tipo != '1') {
+        std::printf("No se recibió el tipo de Mensaje adecuado.\n");
         std::exit(0);
       } else if (
-          ((mensaje*)(paquete_recibo.datos()))->requestId !=
-          ((mensaje*)(paquete_envio.datos()))->requestId) {
+          ((Mensaje*)(paquete_recibo.datos()))->id !=
+          ((Mensaje*)(paquete_envio.datos()))->id) {
         std::printf("No se recibió el ID adecuado.\n");
         std::exit(0);
       } else {
         std::memcpy(
             (char*)&recibido_,
             paquete_recibo.datos(),
-            sizeof(mensaje));
+            sizeof(Mensaje));
         ip_ = socket_local_->ip_foranea();
         peticion_++;
       }

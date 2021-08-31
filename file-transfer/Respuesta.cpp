@@ -25,30 +25,30 @@ Respuesta::Respuesta(int pl) {
 
 Respuesta::~Respuesta() { delete socket_local_; }
 
-mensaje* Respuesta::pide() {
-  PaqueteDatagrama paquete_recibo(sizeof(mensaje));
+Mensaje* Respuesta::pide() {
+  PaqueteDatagrama paquete_recibo(sizeof(Mensaje));
   socket_local_->recibe(paquete_recibo);
   if (anterior_peticion_ ==
-      ((mensaje*)(paquete_recibo.datos()))->requestId) {
-    recibido_.messageType = 'n';
+      ((Mensaje*)(paquete_recibo.datos()))->id) {
+    recibido_.tipo = 'n';
     return &recibido_;
   } else {
     std::memcpy((char*)&recibido_, paquete_recibo.datos(),
-        sizeof(mensaje));
+        sizeof(Mensaje));
     ip_ = socket_local_->ip_foranea();
     puerto_ = (int)(socket_local_->puerto_foranea());
-    anterior_peticion_ = recibido_.requestId;
+    anterior_peticion_ = recibido_.id;
     return &recibido_;
   }
 }
 
 void Respuesta::responde(const char* respuesta) {
-  std::memcpy((char*)&enviar_, respuesta, sizeof(mensaje));
-  enviar_.messageType = '1';
-  enviar_.requestId = recibido_.requestId;
+  std::memcpy((char*)&enviar_, respuesta, sizeof(Mensaje));
+  enviar_.tipo = '1';
+  enviar_.id = recibido_.id;
 
   PaqueteDatagrama paquete_envio(
-      (char*)&enviar_, sizeof(mensaje), ip_, htons(puerto_));
+      (char*)&enviar_, sizeof(Mensaje), ip_, htons(puerto_));
 
   socket_local_->envia(paquete_envio);
 }

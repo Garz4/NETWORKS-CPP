@@ -30,8 +30,8 @@ class Solicitud {
 
  private:
   SocketDatagrama* socket_local_;
-  mensaje recibido_;
-  mensaje enviar_;
+  Mensaje recibido_;
+  Mensaje enviar_;
   char* ip_;
   char peticion_;
 };

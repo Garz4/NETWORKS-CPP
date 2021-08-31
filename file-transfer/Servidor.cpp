@@ -21,25 +21,25 @@
 
 int main(void) {
   Respuesta respuesta(7200);
-  mensaje mensaje_envio;
-  mensaje mensaje_recibo;
+  Mensaje mensaje_envio;
+  Mensaje mensaje_recibo;
 
   std::ofstream archivo_guardar;
   char *archivo_recibo;
 
   while (1) {
     std::printf("Esperando mensaje...\n");
-    std::memcpy(&mensaje_recibo, respuesta.pide(), sizeof(struct mensaje));
+    std::memcpy(&mensaje_recibo, respuesta.pide(), sizeof(Mensaje));
 
-    if (mensaje_recibo.messageType != 'n') {
+    if (mensaje_recibo.tipo != 'n') {
       std::printf("==================================\n");
-      std::printf("%s: ", mensaje_recibo.nombreArchivo);
+      std::printf("%s: ", mensaje_recibo.nombre_archivo);
 
       archivo_recibo = new char[atoi(mensaje_recibo.tam)];
       std::memcpy(
-          archivo_recibo, mensaje_recibo.archivo, atoi(mensaje_recibo.tam));
+          archivo_recibo, mensaje_recibo.contenido_archivo, atoi(mensaje_recibo.tam));
       archivo_recibo[atoi(mensaje_recibo.tam)] = '\0';
-      archivo_guardar.open(mensaje_recibo.nombreArchivo);
+      archivo_guardar.open(mensaje_recibo.nombre_archivo);
       archivo_guardar.write(archivo_recibo, atoi(mensaje_recibo.tam));
 
       if (archivo_guardar.is_open()) {
@@ -51,9 +51,9 @@ int main(void) {
       }
 
       std::memcpy(
-        mensaje_envio.nombreArchivo,
-        mensaje_recibo.nombreArchivo,
-        sizeof(mensaje_envio.nombreArchivo));
+        mensaje_envio.nombre_archivo,
+        mensaje_recibo.nombre_archivo,
+        sizeof(mensaje_envio.nombre_archivo));
 
       archivo_guardar.close();
       delete[] archivo_recibo;
