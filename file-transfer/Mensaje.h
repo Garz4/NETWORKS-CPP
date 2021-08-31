@@ -13,6 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
+/* Limite de paquetes UDP. */
 #define LIMITE_ARCHIVO 65000
 
 struct Mensaje {

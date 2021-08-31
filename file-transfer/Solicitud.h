@@ -16,8 +16,6 @@
 #ifndef SOLICITUD_H_
 #define SOLICITUD_H_
 
-#include <string.h>
-
 #include "Mensaje.h"
 #include "SocketDatagrama.h"
 
