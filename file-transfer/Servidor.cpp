@@ -25,7 +25,6 @@ int main(void) {
   Mensaje mensaje_recibo;
 
   std::ofstream archivo_guardar;
-  char* archivo_recibo;
 
   while (true) {
     std::printf("Esperando mensaje...\n");
@@ -36,14 +35,10 @@ int main(void) {
       std::printf("%s: ", mensaje_recibo.nombre_archivo);
 
       int tam = std::atoi(mensaje_recibo.tam);
-      archivo_recibo = new char[tam];
-      std::memcpy(
-          archivo_recibo,
-          mensaje_recibo.contenido_archivo,
-          tam);
-      archivo_recibo[tam] = '\0';
+
+      /* TODO(Garz4): Consider using std::ofstream(...) << ...; instead. */
       archivo_guardar.open(mensaje_recibo.nombre_archivo);
-      archivo_guardar.write(archivo_recibo, tam);
+      archivo_guardar.write(mensaje_recibo.contenido_archivo, tam);
 
       if (archivo_guardar.is_open()) {
         mensaje_envio.estatus = 0;
@@ -59,7 +54,6 @@ int main(void) {
         sizeof(mensaje_envio.nombre_archivo));
 
       archivo_guardar.close();
-      delete[] archivo_recibo;
     }
 
     respuesta.responde(reinterpret_cast<char*>(&mensaje_envio));
