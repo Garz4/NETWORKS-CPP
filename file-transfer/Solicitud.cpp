@@ -20,7 +20,7 @@
 #include "Solicitud.h"
 
 char* Solicitud::envia_y_recibe(
-      const char* ip, int puerto, const char* solicitud) {
+      std::string ip, int puerto, const char* solicitud) {
   std::memcpy((char*)&enviar_, solicitud, sizeof(Mensaje));
   enviar_.tipo = '0';
   enviar_.id = peticion_;
@@ -58,7 +58,7 @@ char* Solicitud::envia_y_recibe(
         std::exit(0);
       } else {
         std::memcpy((char*)&recibido_, paquete_recibo.datos(), sizeof(Mensaje));
-        std::strcpy(ip_, socket_local_->ip_foranea());
+        ip_ = socket_local_->ip_foranea();
         peticion_++;
       }
 

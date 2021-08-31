@@ -93,7 +93,7 @@ int SocketDatagrama::recibe(
 }
 
 int SocketDatagrama::envia(const PaqueteDatagrama& paquete) {
-  inet_pton(AF_INET, paquete.ip(), &direccion_foranea_.sin_addr);
+  inet_pton(AF_INET, paquete.ip().c_str(), &direccion_foranea_.sin_addr);
   direccion_foranea_.sin_port = htons(paquete.puerto());
 
   sendto(

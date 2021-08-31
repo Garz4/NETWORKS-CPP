@@ -28,15 +28,15 @@ class Solicitud {
 
   ~Solicitud() { delete socket_local_; }
 
-  char* envia_y_recibe(const char* ip, int puerto, const char* solicitud);
+  char* envia_y_recibe(std::string ip, int puerto, const char* solicitud);
 
-  const char* ip() const noexcept { return ip_; }
+  const std::string& ip() const noexcept { return ip_; }
 
  private:
   SocketDatagrama* socket_local_;
   Mensaje recibido_;
   Mensaje enviar_;
-  char* ip_;
+  std::string ip_;
   char peticion_;
 };
 

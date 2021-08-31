@@ -17,6 +17,8 @@
 #define PAQUETEDATAGRAMA_H_
 
 #include <cstring>
+#include <string>
+#include <utility>
 
 class PaqueteDatagrama {
  public:
@@ -26,13 +28,12 @@ class PaqueteDatagrama {
   PaqueteDatagrama(
       const char* datos,
       unsigned int longitud,
-      const char* ip,
+      std::string ip,
       int puerto) /* noexcept */
       : /* datos_(datos), */
        longitud_(longitud),
-       /* ip_(ip), */
+       ip_(std::move(ip)),
        puerto_(puerto) {
-    std::strcpy(ip_, ip);
     datos_ = new char[longitud];
     std::memcpy(datos_, datos, longitud);
   }
@@ -43,8 +44,8 @@ class PaqueteDatagrama {
 
   ~PaqueteDatagrama() { delete[] datos_; }
 
-  const char* ip() const noexcept { return ip_; }
-  void set_ip(const char* ip) { std::strcpy(ip_, ip); }
+  const std::string& ip() const noexcept { return ip_; }
+  void set_ip(std::string ip) { ip_ = std::move(ip); }
 
   int puerto() const noexcept { return puerto_; }
   void set_puerto(int puerto) { puerto_ = puerto; }
@@ -55,7 +56,7 @@ class PaqueteDatagrama {
   unsigned int longitud() const noexcept { return longitud_; }
 
  private:
-  char ip_[16];
+  std::string ip_;
   int puerto_;
 
   /* Cadena de datos a enviar en bytes. */
