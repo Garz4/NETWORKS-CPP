@@ -32,34 +32,34 @@ SocketDatagrama::~SocketDatagrama() {
 }
 
 int SocketDatagrama::recibe(PaqueteDatagrama &p) {
-  char dat[p.obtieneLongitud()];
+  char dat[p.longitud()];
   unsigned int clileng = sizeof(direccionForanea);
 
   recvfrom(
       s,
       dat,
-      p.obtieneLongitud()*sizeof(char),
+      p.longitud()*sizeof(char),
       0,
       (struct sockaddr *) &direccionForanea,
       &clileng);
 
-  p.inicializaDatos(dat);
+  p.set_datos(dat);
   char str[16];
   inet_ntop(AF_INET, &direccionForanea.sin_addr.s_addr, str, 16);
-  p.inicializaIp(str);
-  p.inicializaPuerto(direccionForanea.sin_port);
+  p.set_ip(str);
+  p.set_puerto(direccionForanea.sin_port);
 
   return 0;
 }
 
 int SocketDatagrama::envia(PaqueteDatagrama &p) {
-  inet_pton(AF_INET, p.obtieneDireccion(), &direccionForanea.sin_addr);
-  direccionForanea.sin_port = htons(p.obtienePuerto());
+  inet_pton(AF_INET, p.ip(), &direccionForanea.sin_addr);
+  direccionForanea.sin_port = htons(p.puerto());
 
   sendto(
       s,
-      p.obtieneDatos(),
-      p.obtieneLongitud() * sizeof(char),
+      p.datos(),
+      p.longitud() * sizeof(char),
       0,
       (struct sockaddr *) &direccionForanea,
       sizeof(direccionForanea));
@@ -73,14 +73,14 @@ int SocketDatagrama::recibeTimeout(
   timeout.tv_usec = microsegundos;
   setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
 
-  char dat[p.obtieneLongitud()];
+  char dat[p.longitud()];
   unsigned int clileng = sizeof(direccionForanea);
 
   if (
       recvfrom(
           s,
           dat,
-          p.obtieneLongitud()*sizeof(char),
+          p.longitud()*sizeof(char),
           0,
           (struct sockaddr *) &direccionForanea,
           &clileng) <
@@ -93,11 +93,11 @@ int SocketDatagrama::recibeTimeout(
       return -2;
     }
   }
-  p.inicializaDatos(dat);
+  p.set_datos(dat);
   char str[16];
   inet_ntop(AF_INET, &direccionForanea.sin_addr.s_addr, str, 16);
-  p.inicializaIp(str);
-  p.inicializaPuerto(direccionForanea.sin_port);
+  p.set_ip(str);
+  p.set_puerto(direccionForanea.sin_port);
 
   return 0;
 }

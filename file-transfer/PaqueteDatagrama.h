@@ -1,24 +1,35 @@
+#pragma once
+
 #ifndef PAQUETEDATAGRAMA_H_
 #define PAQUETEDATAGRAMA_H_
 
 class PaqueteDatagrama {
   private:
-    char *datos;      //Almacena los datos
-    char ip[16];      //Almacena la IP
-    unsigned int longitud;  //Almacena la longitude de la cadena de datos
-    int puerto;        //Almacena el puerto
+    char ip_[16];
+    int puerto_;
+
+    /* Cadena de datos a enviar en bytes. */
+    char* datos_;
+
+    /* Longitud de la cadena de datos a enviar. */
+    unsigned int longitud_;
+
   public:
     PaqueteDatagrama(
-        char *data_, unsigned int longitude_, char* address_, int port_);
-    PaqueteDatagrama(unsigned int );
+        char* datos, unsigned int longitud, char* ip, int puerto);
+    PaqueteDatagrama(unsigned int longitud);
     ~PaqueteDatagrama();
-    char *obtieneDireccion();
-    unsigned int obtieneLongitud();
-    int obtienePuerto();
-    char *obtieneDatos();
-    void inicializaPuerto(int);
-    void inicializaIp(char *);
-    void inicializaDatos(char *);
+
+    char* ip();
+    void set_ip(char*);
+
+    unsigned int longitud();
+
+    int puerto();
+    void set_puerto(int);
+
+    char* datos();
+    void set_datos(char*);
 };
 
 #endif

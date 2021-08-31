@@ -15,11 +15,11 @@ struct mensaje* Respuesta::getRequest(void) {
   PaqueteDatagrama paqueteRecibo(sizeof(struct mensaje));
   socketLocal->recibe(paqueteRecibo);
   if (requestIdPrev ==
-      ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->requestId) {
+      ((struct mensaje*)(paqueteRecibo.datos()))->requestId) {
     Recibido.messageType = 'n';
     return &Recibido;
   } else {
-    memcpy((char*)&Recibido, paqueteRecibo.obtieneDatos(),
+    memcpy((char*)&Recibido, paqueteRecibo.datos(),
         sizeof(struct mensaje));
     dirIP = socketLocal->getClientIP();
     port = (int)(socketLocal->getClientPort());

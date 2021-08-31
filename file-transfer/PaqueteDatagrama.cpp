@@ -1,34 +1,35 @@
 #include "PaqueteDatagrama.h"
 #include <iostream>
 #include <string.h>
-
-using namespace std;
+#include <cstring>
 
 PaqueteDatagrama::PaqueteDatagrama(
-    char* data_, unsigned int longitude_, char* address_, int port_) {
-  strcpy(ip,address_);
-  datos = new char[longitude_];
-  memcpy(datos, data_, longitude_);
-  longitud = longitude_;
-  puerto = port_;
+    char* datos, unsigned int longitud, char* ip, int puerto) {
+  std::strcpy(ip_, ip);
+  datos_ = new char[longitud];
+  std::memcpy(datos_, datos, longitud);
+  longitud_ = longitud;
+  puerto_ = puerto;
 }
 
-PaqueteDatagrama::PaqueteDatagrama(unsigned int longitude_) {
-  longitud = longitude_;
-  datos = new char[longitude_];
+PaqueteDatagrama::PaqueteDatagrama(unsigned int longitud) {
+  longitud_ = longitud;
+  datos_ = new char[longitud];
 }
 
 PaqueteDatagrama::~PaqueteDatagrama() {
-  delete[] datos;
+  delete[] datos_;
 }
 
-char* PaqueteDatagrama::obtieneDireccion() { return ip; }
-unsigned int PaqueteDatagrama::obtieneLongitud() { return longitud; }
-char* PaqueteDatagrama::obtieneDatos() { return datos; }
-int PaqueteDatagrama::obtienePuerto() { return puerto; }
+char* PaqueteDatagrama::ip() { return ip_; }
+void PaqueteDatagrama::set_ip(char* ip) { std::strcpy(ip_, ip); }
 
-void PaqueteDatagrama::inicializaPuerto(int port_) { puerto = port_; }
-void PaqueteDatagrama::inicializaIp(char* address_) { strcpy(ip,address_); }
-void PaqueteDatagrama::inicializaDatos(char* data_) {
-  memcpy(datos, data_, longitud);
+unsigned int PaqueteDatagrama::longitud() { return longitud_; }
+
+int PaqueteDatagrama::puerto() { return puerto_; }
+void PaqueteDatagrama::set_puerto(int puerto) { puerto_ = puerto; }
+
+char* PaqueteDatagrama::datos() { return datos_; }
+void PaqueteDatagrama::set_datos(char* datos) {
+  std::memcpy(datos_, datos, longitud_);
 }

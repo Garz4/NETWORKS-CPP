@@ -38,19 +38,19 @@ char* Solicitud::doOperation(char *IP, int puerto, char* solicitud) {
       exit(0);
     } else {
       if (
-          ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->messageType !=
+          ((struct mensaje*)(paqueteRecibo.datos()))->messageType !=
           '1') {
         cout << "No se recibió el tipo de mensaje adecuado." << endl;
         exit(0);
       } else if (
-          ((struct mensaje*)(paqueteRecibo.obtieneDatos()))->requestId !=
-          ((struct mensaje*)(paqueteEnvio.obtieneDatos()))->requestId) {
+          ((struct mensaje*)(paqueteRecibo.datos()))->requestId !=
+          ((struct mensaje*)(paqueteEnvio.datos()))->requestId) {
         cout << "No se recibió el ID adecuado." << endl;
         exit(0);
       } else {
         memcpy(
             (char*)&Recibido,
-            paqueteRecibo.obtieneDatos(),
+            paqueteRecibo.datos(),
             sizeof(struct mensaje));
         dirIP = socketLocal->getClientIP();
         request++;
