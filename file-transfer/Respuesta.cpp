@@ -18,13 +18,6 @@
 #include "PaqueteDatagrama.h"
 #include "Respuesta.h"
 
-Respuesta::Respuesta(int pl) {
-  socket_local_ = new SocketDatagrama(pl);
-  anterior_peticion_ = 'n';
-}
-
-Respuesta::~Respuesta() { delete socket_local_; }
-
 Mensaje* Respuesta::pide() {
   PaqueteDatagrama paquete_recibo(sizeof(Mensaje));
   socket_local_->recibe(paquete_recibo);
@@ -35,7 +28,7 @@ Mensaje* Respuesta::pide() {
   } else {
     std::memcpy((char*)&recibido_, paquete_recibo.datos(),
         sizeof(Mensaje));
-    ip_ = socket_local_->ip_foranea();
+    std::strcpy(ip_, socket_local_->ip_foranea());
     puerto_ = (int)(socket_local_->puerto_foranea());
     anterior_peticion_ = recibido_.id;
     return &recibido_;
@@ -52,6 +45,3 @@ void Respuesta::responde(const char* respuesta) {
 
   socket_local_->envia(paquete_envio);
 }
-
-char* Respuesta::ip() const { return ip_; }
-int Respuesta::puerto() const { return puerto_; }

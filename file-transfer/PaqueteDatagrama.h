@@ -16,7 +16,36 @@
 #ifndef PAQUETEDATAGRAMA_H_
 #define PAQUETEDATAGRAMA_H_
 
+#include <cstring>
+
 class PaqueteDatagrama {
+ public:
+  PaqueteDatagrama(
+      const char* datos, unsigned int longitud, const char* ip, int puerto) {
+    std::strcpy(ip_, ip);
+    datos_ = new char[longitud];
+    std::memcpy(datos_, datos, longitud);
+    longitud_ = longitud;
+    puerto_ = puerto;
+  }
+
+  PaqueteDatagrama(unsigned int longitud) noexcept : longitud_(longitud) {
+    datos_ = new char[longitud];
+  }
+
+  ~PaqueteDatagrama() { delete[] datos_; }
+
+  const char* ip() const noexcept { return ip_; }
+  void set_ip(const char* ip) { std::strcpy(ip_, ip); }
+
+  unsigned int longitud() const noexcept { return longitud_; }
+
+  int puerto() const noexcept { return puerto_; }
+  void set_puerto(int puerto) { puerto_ = puerto; }
+
+  const char* datos() const noexcept { return datos_; }
+  void set_datos(const char* datos) { std::memcpy(datos_, datos, longitud_); }
+
  private:
   char ip_[16];
   int puerto_;
@@ -26,23 +55,6 @@ class PaqueteDatagrama {
 
   /* Longitud de la cadena de datos a enviar. */
   unsigned int longitud_;
-
- public:
-  PaqueteDatagrama(
-      const char* datos, unsigned int longitud, const char* ip, int puerto);
-  PaqueteDatagrama(unsigned int longitud);
-  ~PaqueteDatagrama();
-
-  const char* ip() const;
-  void set_ip(const char*);
-
-  const unsigned int longitud() const;
-
-  int puerto() const;
-  void set_puerto(int);
-
-  const char* datos() const;
-  void set_datos(const char*);
 };
 
 #endif

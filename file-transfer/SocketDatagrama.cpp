@@ -41,8 +41,6 @@ SocketDatagrama::SocketDatagrama(int a) {
   direccion_foranea_.sin_family = AF_INET;
 }
 
-SocketDatagrama::~SocketDatagrama() { close(socket_); }
-
 int SocketDatagrama::recibe(PaqueteDatagrama& paquete) {
   char dat[paquete.longitud()];
   unsigned int clileng = sizeof(direccion_foranea_);
@@ -114,12 +112,4 @@ int SocketDatagrama::envia(const PaqueteDatagrama& paquete) {
       sizeof(direccion_foranea_));
 
   return 0;
-}
-
-char* SocketDatagrama::ip_foranea() const {
-  return inet_ntoa(direccion_foranea_.sin_addr);
-}
-
-unsigned short SocketDatagrama::puerto_foranea() const {
-  return direccion_foranea_.sin_port;
 }

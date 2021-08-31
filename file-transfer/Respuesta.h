@@ -21,12 +21,18 @@
 
 class Respuesta {
  public:
-  ~Respuesta();
-  Respuesta(int pl);
+  Respuesta(int pl) {
+    socket_local_ = new SocketDatagrama(pl);
+    anterior_peticion_ = 'n';
+  }
+
+  ~Respuesta() { delete socket_local_; }
+
   Mensaje* pide();
   void responde(const char* respuesta);
-  char* ip() const;
-  int puerto() const;
+
+  const char* ip() const noexcept { return ip_; }
+  int puerto() const noexcept { return puerto_; }
 
  private:
   SocketDatagrama* socket_local_;

@@ -21,10 +21,16 @@
 
 class Solicitud {
  public:
-  ~Solicitud();
-  Solicitud();
+  Solicitud() {
+    socket_local_ = new SocketDatagrama(0);
+    peticion_ = 0;
+  }
+
+  ~Solicitud() { delete socket_local_; }
+
   char* envia_y_recibe(const char* ip, int puerto, const char* solicitud);
-  char* ip() const;
+
+  const char* ip() const noexcept { return ip_; }
 
  private:
   SocketDatagrama* socket_local_;

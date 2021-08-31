@@ -14,8 +14,8 @@
  */
 
 #include <cstring>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 
 #include "Solicitud.h"
@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
   archivo_leer.open(argv[2]);
 
   if (archivo_leer.is_open()) {
-    while (std::getline(archivo_leer,linea)) {
+    while (std::getline(archivo_leer, linea)) {
       nombre_leer = new char[linea.length() + 1];
       std::strcpy(nombre_leer, linea.c_str());
       archivo_enviar.open(nombre_leer);

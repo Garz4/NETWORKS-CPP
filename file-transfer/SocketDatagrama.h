@@ -27,17 +27,10 @@
 #include "PaqueteDatagrama.h"
 
 class SocketDatagrama {
- private:
-  struct sockaddr_in direccion_local_;
-  struct sockaddr_in direccion_foranea_;
-  struct timeval timeout_;
-
-  /* ID Socket. */
-  int socket_;
-
  public:
   SocketDatagrama(int a);
-  ~SocketDatagrama();
+
+  ~SocketDatagrama() { close(socket_); }
 
   /* Recibe un paquete tipo datagrama proveniente de este socket. */
   int recibe(PaqueteDatagrama& paquete);
@@ -47,8 +40,21 @@ class SocketDatagrama {
   /* Envía un paquete tipo datagrama desde este socket. */
   int envia(const PaqueteDatagrama& paquete);
 
-  char* ip_foranea() const;
-  unsigned short puerto_foranea() const;
+  const char* ip_foranea() const noexcept {
+    return inet_ntoa(direccion_foranea_.sin_addr);
+  }
+
+  unsigned short puerto_foranea() const noexcept {
+    return direccion_foranea_.sin_port;
+  }
+
+ private:
+  struct sockaddr_in direccion_local_;
+  struct sockaddr_in direccion_foranea_;
+  struct timeval timeout_;
+
+  /* ID Socket. */
+  int socket_;
 };
 
 #endif

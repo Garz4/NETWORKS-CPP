@@ -19,11 +19,6 @@
 #include "PaqueteDatagrama.h"
 #include "Solicitud.h"
 
-Solicitud::Solicitud() {
-  socket_local_ = new SocketDatagrama(0);
-  peticion_ = 0;
-}
-
 char* Solicitud::envia_y_recibe(
       const char* ip, int puerto, const char* solicitud) {
   std::memcpy((char*)&enviar_, solicitud, sizeof(Mensaje));
@@ -63,7 +58,7 @@ char* Solicitud::envia_y_recibe(
         std::exit(0);
       } else {
         std::memcpy((char*)&recibido_, paquete_recibo.datos(), sizeof(Mensaje));
-        ip_ = socket_local_->ip_foranea();
+        std::strcpy(ip_, socket_local_->ip_foranea());
         peticion_++;
       }
 
@@ -73,7 +68,3 @@ char* Solicitud::envia_y_recibe(
 
   return (char*)&recibido_;
 }
-
-Solicitud::~Solicitud() { delete socket_local_; }
-
-char* Solicitud::ip() const { return ip_; }
