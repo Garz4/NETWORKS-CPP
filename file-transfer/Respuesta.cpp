@@ -23,6 +23,8 @@ Respuesta::Respuesta(int pl) {
   anterior_peticion_ = 'n';
 }
 
+Respuesta::~Respuesta() { delete socket_local_; }
+
 mensaje* Respuesta::pide() {
   PaqueteDatagrama paquete_recibo(sizeof(mensaje));
   socket_local_->recibe(paquete_recibo);
@@ -50,8 +52,6 @@ void Respuesta::responde(const char* respuesta) {
 
   socket_local_->envia(paquete_envio);
 }
-
-Respuesta::~Respuesta() { delete socket_local_; }
 
 char* Respuesta::ip() const { return ip_; }
 int Respuesta::puerto() const { return puerto_; }
