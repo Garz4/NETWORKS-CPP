@@ -13,6 +13,9 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
+#ifndef MENSAJE_H_
+#define MENSAJE_H_
+
 /* Limite de paquetes UDP. */
 #define LIMITE_ARCHIVO 65000
 
@@ -31,3 +34,5 @@ struct Mensaje {
 
   char estatus;
 };
+
+#endif
