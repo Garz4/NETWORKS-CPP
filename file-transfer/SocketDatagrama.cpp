@@ -56,7 +56,7 @@ int SocketDatagrama::recibe(PaqueteDatagrama& paquete) {
 }
 
 int SocketDatagrama::recibe(
-    PaqueteDatagrama &paquete, time_t segundos, suseconds_t microsegundos) {
+    PaqueteDatagrama& paquete, time_t segundos, suseconds_t microsegundos) {
   timeout_.tv_sec = segundos;
   timeout_.tv_usec = microsegundos;
   setsockopt(
@@ -69,7 +69,7 @@ int SocketDatagrama::recibe(
       recvfrom(
           socket_,
           dat,
-          paquete.longitud()*sizeof(char),
+          paquete.longitud() * sizeof(char),
           0,
           (struct sockaddr *) &direccion_foranea_,
           &clileng) <

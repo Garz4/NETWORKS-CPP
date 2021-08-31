@@ -20,14 +20,14 @@
 
 class PaqueteDatagrama {
  public:
-  PaqueteDatagrama() noexcept = default;
-  PaqueteDatagrama(const PaqueteDatagrama&) noexcept = default;
+  // PaqueteDatagrama() noexcept = default;
+  // PaqueteDatagrama(const PaqueteDatagrama&) noexcept = default;
 
   PaqueteDatagrama(
       const char* datos,
       unsigned int longitud,
       const char* ip,
-      int puerto) noexcept
+      int puerto) /* noexcept */
       : /* datos_(datos), */
        longitud_(longitud),
        /* ip_(ip), */
