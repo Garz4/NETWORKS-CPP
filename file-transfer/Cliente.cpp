@@ -60,13 +60,12 @@ int main(int argc, char** argv) {
           mensaje_envio.tam[c] = (convertir.c_str())[c];
         }
 
-        mensaje_envio.tam[(int)(convertir.length())] = '\0';
+        mensaje_envio.tam[convertir.length()] = '\0';
 
         if (tam_archivo > LIMITE_ARCHIVO) {
           std::printf("==================================\n");
           std::printf("--!! ADVERTENCIA: %s pesa "
-                      "%s bytes y sobrepasa el límite de "
-                      "%d bytes.\n",
+                      "%s bytes y sobrepasa el límite de %d bytes.\n",
                       nombre_leer, mensaje_envio.tam, LIMITE_ARCHIVO);
           std::printf("El archivo será omitido.\n");
         } else {
