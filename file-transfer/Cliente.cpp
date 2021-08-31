@@ -86,7 +86,7 @@ int main(int argc, char** argv) {
           std::printf("==================================\n");
           std::printf("%s: ", mensaje_recibo.nombre_archivo);
 
-          if (mensaje_recibo.estatus == '0') {
+          if (mensaje_recibo.estatus == 0) {
             std::printf("Recibido.\n");
           } else {
             std::printf("Error al recibir.\n");

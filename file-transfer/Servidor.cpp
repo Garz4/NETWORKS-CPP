@@ -46,10 +46,10 @@ int main(void) {
       archivo_guardar.write(archivo_recibo, tam);
 
       if (archivo_guardar.is_open()) {
-        mensaje_envio.estatus = '0';
+        mensaje_envio.estatus = 0;
         std::printf("Guardado.\n");
       } else {
-        mensaje_envio.estatus = '1';
+        mensaje_envio.estatus = 1;
         std::printf("Fallo en escritura.\n");
       }
 

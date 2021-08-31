@@ -16,7 +16,7 @@
 #ifndef MENSAJE_H_
 #define MENSAJE_H_
 
-/* Limite de paquetes UDP. */
+/* Limite en bytes de los paquetes. */
 #define LIMITE_ARCHIVO 65000
 
 struct Mensaje {
@@ -26,12 +26,14 @@ struct Mensaje {
   /* Identificador del mensaje. */
   char id;
 
+  /* Tamaño en bytes del archivo a enviar. */
   char tam[5];
 
   char nombre_archivo[30];
 
   char contenido_archivo[LIMITE_ARCHIVO + 1];
 
+  /* 0 = Ok, 1 = Error. */
   char estatus;
 };
 
