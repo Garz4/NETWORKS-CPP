@@ -35,14 +35,15 @@ int main(void) {
       std::printf("==================================\n");
       std::printf("%s: ", mensaje_recibo.nombre_archivo);
 
-      archivo_recibo = new char[std::atoi(mensaje_recibo.tam)];
+      int tam = std::atoi(mensaje_recibo.tam);
+      archivo_recibo = new char[tam];
       std::memcpy(
           archivo_recibo,
           mensaje_recibo.contenido_archivo,
-          std::atoi(mensaje_recibo.tam));
-      archivo_recibo[std::atoi(mensaje_recibo.tam)] = '\0';
+          tam);
+      archivo_recibo[tam] = '\0';
       archivo_guardar.open(mensaje_recibo.nombre_archivo);
-      archivo_guardar.write(archivo_recibo, std::atoi(mensaje_recibo.tam));
+      archivo_guardar.write(archivo_recibo, tam);
 
       if (archivo_guardar.is_open()) {
         mensaje_envio.estatus = '0';
