@@ -20,13 +20,21 @@
 
 class PaqueteDatagrama {
  public:
+  PaqueteDatagrama() noexcept = default;
+  PaqueteDatagrama(const PaqueteDatagrama&) noexcept = default;
+
   PaqueteDatagrama(
-      const char* datos, unsigned int longitud, const char* ip, int puerto) {
+      const char* datos,
+      unsigned int longitud,
+      const char* ip,
+      int puerto) noexcept
+      : /* datos_(datos), */
+       longitud_(longitud),
+       /* ip_(ip), */
+       puerto_(puerto) {
     std::strcpy(ip_, ip);
     datos_ = new char[longitud];
     std::memcpy(datos_, datos, longitud);
-    longitud_ = longitud;
-    puerto_ = puerto;
   }
 
   PaqueteDatagrama(unsigned int longitud) noexcept : longitud_(longitud) {

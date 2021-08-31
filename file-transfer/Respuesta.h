@@ -28,7 +28,7 @@ class Respuesta {
 
   ~Respuesta() { delete socket_local_; }
 
-  Mensaje* pide();
+  const Mensaje& pide();
   void responde(const char* respuesta);
 
   const char* ip() const noexcept { return ip_; }

@@ -29,7 +29,7 @@ int main(void) {
 
   while (true) {
     std::printf("Esperando mensaje...\n");
-    std::memcpy(&mensaje_recibo, respuesta.pide(), sizeof(Mensaje));
+    std::memcpy(&mensaje_recibo, &respuesta.pide(), sizeof(Mensaje));
 
     if (mensaje_recibo.tipo != 'n') {
       std::printf("==================================\n");

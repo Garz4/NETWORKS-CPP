@@ -18,20 +18,20 @@
 #include "PaqueteDatagrama.h"
 #include "Respuesta.h"
 
-Mensaje* Respuesta::pide() {
+const Mensaje& Respuesta::pide() {
   PaqueteDatagrama paquete_recibo(sizeof(Mensaje));
   socket_local_->recibe(paquete_recibo);
   if (anterior_peticion_ ==
       ((Mensaje*)(paquete_recibo.datos()))->id) {
     recibido_.tipo = 'n';
-    return &recibido_;
+    return recibido_;
   } else {
     std::memcpy((char*)&recibido_, paquete_recibo.datos(),
         sizeof(Mensaje));
     std::strcpy(ip_, socket_local_->ip_foranea());
     puerto_ = socket_local_->puerto_foranea();
     anterior_peticion_ = recibido_.id;
-    return &recibido_;
+    return recibido_;
   }
 }
 
