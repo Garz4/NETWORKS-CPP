@@ -41,9 +41,7 @@ class SocketDatagrama {
 
   /* Recibe un paquete tipo datagrama proveniente de este socket. */
   int recibe(PaqueteDatagrama& p);
-
-  int recibeTimeout(
-      PaqueteDatagrama& p, time_t segundos, suseconds_t microsegundos);
+  int recibe(PaqueteDatagrama& p, time_t segundos, suseconds_t microsegundos);
 
   /* Envía un paquete tipo datagrama desde este socket. */
   int envia(const PaqueteDatagrama& p);

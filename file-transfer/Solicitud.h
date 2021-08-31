@@ -25,15 +25,15 @@ class Solicitud {
  public:
   ~Solicitud();
   Solicitud();
-  char* doOperation(char* IP, int puerto, char* solicitud);
-  char* getIP();
+  char* envia_y_recibe(const char* ip, int puerto, const char* solicitud);
+  char* ip() const;
 
  private:
-  SocketDatagrama* socketLocal;
-  struct mensaje Recibido;
-  struct mensaje Enviar;
-  char* dirIP;
-  char request;
+  SocketDatagrama* socket_local_;
+  mensaje recibido_;
+  mensaje enviar_;
+  char* ip_;
+  char peticion_;
 };
 
 #endif

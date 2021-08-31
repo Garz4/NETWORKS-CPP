@@ -64,22 +64,7 @@ int SocketDatagrama::recibe(PaqueteDatagrama& paquete) {
   return 0;
 }
 
-int SocketDatagrama::envia(const PaqueteDatagrama& paquete) {
-  inet_pton(AF_INET, paquete.ip(), &direccion_foranea_.sin_addr);
-  direccion_foranea_.sin_port = htons(paquete.puerto());
-
-  sendto(
-      socket_,
-      paquete.datos(),
-      paquete.longitud() * sizeof(char),
-      0,
-      (struct sockaddr *) &direccion_foranea_,
-      sizeof(direccion_foranea_));
-
-  return 0;
-}
-
-int SocketDatagrama::recibeTimeout(
+int SocketDatagrama::recibe(
     PaqueteDatagrama &paquete, time_t segundos, suseconds_t microsegundos) {
   timeout_.tv_sec = segundos;
   timeout_.tv_usec = microsegundos;
@@ -112,6 +97,21 @@ int SocketDatagrama::recibeTimeout(
   inet_ntop(AF_INET, &direccion_foranea_.sin_addr.s_addr, str, 16);
   paquete.set_ip(str);
   paquete.set_puerto(direccion_foranea_.sin_port);
+
+  return 0;
+}
+
+int SocketDatagrama::envia(const PaqueteDatagrama& paquete) {
+  inet_pton(AF_INET, paquete.ip(), &direccion_foranea_.sin_addr);
+  direccion_foranea_.sin_port = htons(paquete.puerto());
+
+  sendto(
+      socket_,
+      paquete.datos(),
+      paquete.longitud() * sizeof(char),
+      0,
+      (struct sockaddr *) &direccion_foranea_,
+      sizeof(direccion_foranea_));
 
   return 0;
 }

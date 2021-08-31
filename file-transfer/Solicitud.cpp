@@ -13,72 +13,70 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
+#include <cstring>
 #include <iostream>
 
 #include "PaqueteDatagrama.h"
 #include "Solicitud.h"
 
-using namespace std;
-
 Solicitud::Solicitud() {
-  socketLocal = new SocketDatagrama(0);
-  request = 0;
+  socket_local_ = new SocketDatagrama(0);
+  peticion_ = 0;
 }
 
-char* Solicitud::doOperation(char *IP, int puerto, char* solicitud) {
-  memcpy((char*)&Enviar, solicitud, sizeof(struct mensaje));
-  Enviar.messageType = '0';
-  Enviar.requestId = request;
+char* Solicitud::envia_y_recibe(
+      const char* ip, int puerto, const char* solicitud) {
+  std::memcpy((char*)&enviar_, solicitud, sizeof(mensaje));
+  enviar_.messageType = '0';
+  enviar_.requestId = peticion_;
 
-  PaqueteDatagrama paqueteEnvio(
-      (char*)&Enviar, sizeof(struct mensaje), IP, puerto);
+  PaqueteDatagrama paquete_envio(
+      (char*)&enviar_, sizeof(mensaje), ip, puerto);
 
-  PaqueteDatagrama paqueteRecibo(sizeof(struct mensaje));
+  PaqueteDatagrama paquete_recibo(sizeof(mensaje));
   int n;
 
   for (int it = 0; it < 20; it++) {
-    socketLocal->envia(paqueteEnvio);
-    n = socketLocal->recibeTimeout(paqueteRecibo, 2, 500000);
+    socket_local_->envia(paquete_envio);
+    n = socket_local_->recibe(paquete_recibo, 2, 500000);
 
     if (n == -1) {
       if (it != 19) {
-        cout << "No se recibió ningún mensaje. Intentando de nuevo..." << endl;
+        std::printf("No se recibió ningún mensaje. Intentando de nuevo...\n");
       } else {
-        cout << "--!! ADVERTENCIA: Servidor no disponible." << endl;
-        cout << "Imposible contactar con el servidor."
-             << "Inténtelo de nuevo más tarde." << endl;
-        exit(0);
+        std::printf("--!! ADVERTENCIA: Servidor no disponible.\n");
+        std::printf("Imposible contactar con el servidor."
+                    "Inténtelo de nuevo más tarde.\n");
+        std::exit(0);
       }
     } else if (n == -2) {
-      cout << "--!! ERROR: Error en recvfrom." << endl;
-      exit(0);
+      std::printf("--!! ERROR: Error en recvfrom.\n");
+      std::exit(0);
     } else {
-      if (
-          ((struct mensaje*)(paqueteRecibo.datos()))->messageType !=
-          '1') {
-        cout << "No se recibió el tipo de mensaje adecuado." << endl;
-        exit(0);
+      if (((mensaje*)(paquete_recibo.datos()))->messageType != '1') {
+        std::printf("No se recibió el tipo de mensaje adecuado.\n");
+        std::exit(0);
       } else if (
-          ((struct mensaje*)(paqueteRecibo.datos()))->requestId !=
-          ((struct mensaje*)(paqueteEnvio.datos()))->requestId) {
-        cout << "No se recibió el ID adecuado." << endl;
-        exit(0);
+          ((mensaje*)(paquete_recibo.datos()))->requestId !=
+          ((mensaje*)(paquete_envio.datos()))->requestId) {
+        std::printf("No se recibió el ID adecuado.\n");
+        std::exit(0);
       } else {
-        memcpy(
-            (char*)&Recibido,
-            paqueteRecibo.datos(),
-            sizeof(struct mensaje));
-        dirIP = socketLocal->ip_foranea();
-        request++;
+        std::memcpy(
+            (char*)&recibido_,
+            paquete_recibo.datos(),
+            sizeof(mensaje));
+        ip_ = socket_local_->ip_foranea();
+        peticion_++;
       }
 
       break;
     }
   }
 
-  return (char*)&Recibido;
+  return (char*)&recibido_;
 }
 
-Solicitud::~Solicitud() { delete socketLocal; }
+Solicitud::~Solicitud() { delete socket_local_; }
 
-char* Solicitud::getIP() { return dirIP; }
+char* Solicitud::ip() const { return ip_; }

@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
           archivoEnviar.read(mensajeEnvio.archivo, tamArchivo);
           memcpy(
               (char*)&mensajeRecibo,
-              s.doOperation(argv[1], 7200, (char*)&mensajeEnvio),
+              s.envia_y_recibe(argv[1], 7200, (char*)&mensajeEnvio),
               sizeof(struct mensaje));
           cout << "==================================" << endl;
           cout << mensajeRecibo.nombreArchivo << ": ";
