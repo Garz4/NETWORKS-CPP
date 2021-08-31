@@ -62,10 +62,7 @@ char* Solicitud::envia_y_recibe(
         std::printf("No se recibió el ID adecuado.\n");
         std::exit(0);
       } else {
-        std::memcpy(
-            (char*)&recibido_,
-            paquete_recibo.datos(),
-            sizeof(Mensaje));
+        std::memcpy((char*)&recibido_, paquete_recibo.datos(), sizeof(Mensaje));
         ip_ = socket_local_->ip_foranea();
         peticion_++;
       }
