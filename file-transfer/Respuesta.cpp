@@ -37,8 +37,8 @@ struct mensaje* Respuesta::getRequest(void) {
   } else {
     memcpy((char*)&Recibido, paqueteRecibo.datos(),
         sizeof(struct mensaje));
-    dirIP = socketLocal->getClientIP();
-    port = (int)(socketLocal->getClientPort());
+    dirIP = socketLocal->ip_foranea();
+    port = (int)(socketLocal->puerto_foranea());
     requestIdPrev = Recibido.requestId;
     return &Recibido;
   }

@@ -68,7 +68,7 @@ char* Solicitud::doOperation(char *IP, int puerto, char* solicitud) {
             (char*)&Recibido,
             paqueteRecibo.datos(),
             sizeof(struct mensaje));
-        dirIP = socketLocal->getClientIP();
+        dirIP = socketLocal->ip_foranea();
         request++;
       }
 

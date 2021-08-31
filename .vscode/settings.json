@@ -2,7 +2,8 @@
     "files.associations": {
         "xstring": "cpp",
         "istream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "functional": "cpp"
     },
     "editor.rulers": [
         80

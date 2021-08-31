@@ -19,7 +19,7 @@
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string>
 #include <strings.h>
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -29,74 +29,73 @@
 #include "SocketDatagrama.h"
 
 SocketDatagrama::SocketDatagrama(int a) {
-  s = socket(AF_INET, SOCK_DGRAM, 0);
+  socket_ = socket(AF_INET, SOCK_DGRAM, 0);
 
-  bzero((char *)&direccionLocal, sizeof(direccionLocal));
-  direccionLocal.sin_family = AF_INET;
-  direccionLocal.sin_addr.s_addr = INADDR_ANY;
-  direccionLocal.sin_port = htons(a);
-  bind(s, (struct sockaddr *)&direccionLocal, sizeof(direccionLocal));
+  bzero((char *)&direccion_local_, sizeof(direccion_local_));
+  direccion_local_.sin_family = AF_INET;
+  direccion_local_.sin_addr.s_addr = INADDR_ANY;
+  direccion_local_.sin_port = htons(a);
+  bind(socket_, (struct sockaddr *)&direccion_local_, sizeof(direccion_local_));
 
-  bzero((char *)&direccionForanea, sizeof(direccionForanea));
-  direccionForanea.sin_family = AF_INET;
+  bzero((char *)&direccion_foranea_, sizeof(direccion_foranea_));
+  direccion_foranea_.sin_family = AF_INET;
 }
 
-SocketDatagrama::~SocketDatagrama() {
-  close(s);
-}
+SocketDatagrama::~SocketDatagrama() { close(socket_); }
 
-int SocketDatagrama::recibe(PaqueteDatagrama &p) {
-  char dat[p.longitud()];
-  unsigned int clileng = sizeof(direccionForanea);
+int SocketDatagrama::recibe(PaqueteDatagrama& paquete) {
+  char dat[paquete.longitud()];
+  unsigned int clileng = sizeof(direccion_foranea_);
 
   recvfrom(
-      s,
+      socket_,
       dat,
-      p.longitud()*sizeof(char),
+      paquete.longitud()*sizeof(char),
       0,
-      (struct sockaddr *) &direccionForanea,
+      (struct sockaddr *) &direccion_foranea_,
       &clileng);
 
-  p.set_datos(dat);
+  paquete.set_datos(dat);
   char str[16];
-  inet_ntop(AF_INET, &direccionForanea.sin_addr.s_addr, str, 16);
-  p.set_ip(str);
-  p.set_puerto(direccionForanea.sin_port);
+  inet_ntop(AF_INET, &direccion_foranea_.sin_addr.s_addr, str, 16);
+  paquete.set_ip(str);
+  paquete.set_puerto(direccion_foranea_.sin_port);
 
   return 0;
 }
 
-int SocketDatagrama::envia(const PaqueteDatagrama& p) {
-  inet_pton(AF_INET, p.ip(), &direccionForanea.sin_addr);
-  direccionForanea.sin_port = htons(p.puerto());
+int SocketDatagrama::envia(const PaqueteDatagrama& paquete) {
+  inet_pton(AF_INET, paquete.ip(), &direccion_foranea_.sin_addr);
+  direccion_foranea_.sin_port = htons(paquete.puerto());
 
   sendto(
-      s,
-      p.datos(),
-      p.longitud() * sizeof(char),
+      socket_,
+      paquete.datos(),
+      paquete.longitud() * sizeof(char),
       0,
-      (struct sockaddr *) &direccionForanea,
-      sizeof(direccionForanea));
+      (struct sockaddr *) &direccion_foranea_,
+      sizeof(direccion_foranea_));
 
   return 0;
 }
 
 int SocketDatagrama::recibeTimeout(
-    PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos) {
-  timeout.tv_sec = segundos;
-  timeout.tv_usec = microsegundos;
-  setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+    PaqueteDatagrama &paquete, time_t segundos, suseconds_t microsegundos) {
+  timeout_.tv_sec = segundos;
+  timeout_.tv_usec = microsegundos;
+  setsockopt(
+      socket_, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout_, sizeof(timeout_));
 
-  char dat[p.longitud()];
-  unsigned int clileng = sizeof(direccionForanea);
+  char dat[paquete.longitud()];
+  unsigned int clileng = sizeof(direccion_foranea_);
 
   if (
       recvfrom(
-          s,
+          socket_,
           dat,
-          p.longitud()*sizeof(char),
+          paquete.longitud()*sizeof(char),
           0,
-          (struct sockaddr *) &direccionForanea,
+          (struct sockaddr *) &direccion_foranea_,
           &clileng) <
       0) {
     if (errno == EWOULDBLOCK) {
@@ -108,19 +107,19 @@ int SocketDatagrama::recibeTimeout(
     }
   }
 
-  p.set_datos(dat);
+  paquete.set_datos(dat);
   char str[16];
-  inet_ntop(AF_INET, &direccionForanea.sin_addr.s_addr, str, 16);
-  p.set_ip(str);
-  p.set_puerto(direccionForanea.sin_port);
+  inet_ntop(AF_INET, &direccion_foranea_.sin_addr.s_addr, str, 16);
+  paquete.set_ip(str);
+  paquete.set_puerto(direccion_foranea_.sin_port);
 
   return 0;
 }
 
-char* SocketDatagrama::getClientIP() {
-  return inet_ntoa(direccionForanea.sin_addr);
+char* SocketDatagrama::ip_foranea() const {
+  return inet_ntoa(direccion_foranea_.sin_addr);
 }
 
-unsigned short SocketDatagrama::getClientPort() {
-  return direccionForanea.sin_port;
+unsigned short SocketDatagrama::puerto_foranea() const {
+  return direccion_foranea_.sin_port;
 }
