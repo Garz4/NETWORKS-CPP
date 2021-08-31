@@ -13,10 +13,11 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#include "PaqueteDatagrama.h"
+#include <cstring>
 #include <iostream>
 #include <string.h>
-#include <cstring>
+
+#include "PaqueteDatagrama.h"
 
 PaqueteDatagrama::PaqueteDatagrama(
     char* datos, unsigned int longitud, char* ip, int puerto) {

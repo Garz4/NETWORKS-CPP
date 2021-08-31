@@ -15,15 +15,17 @@
 
 #ifndef SOCKETDATAGRAMA_H_
 #define SOCKETDATAGRAMA_H_
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <strings.h>
-#include <stdlib.h>
+
 #include <arpa/inet.h>
-#include <unistd.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <stdlib.h>
 #include <string.h>
+#include <strings.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
+
 #include "PaqueteDatagrama.h"
 
 class SocketDatagrama {

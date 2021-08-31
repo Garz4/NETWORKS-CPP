@@ -15,9 +15,11 @@
 
 #ifndef RESPUESTA_H_
 #define RESPUESTA_H_
-#include "SocketDatagrama.h"
+
 #include <string.h>
+
 #include "Mensaje.h"
+#include "SocketDatagrama.h"
 
 class Respuesta {
  public:

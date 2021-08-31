@@ -13,19 +13,20 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <errno.h>
 #include <netdb.h>
-#include <strings.h>
+#include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <errno.h>
 #include <string.h>
-#include "SocketDatagrama.h"
+#include <strings.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
+
 #include "PaqueteDatagrama.h"
+#include "SocketDatagrama.h"
 
 using namespace std;
 

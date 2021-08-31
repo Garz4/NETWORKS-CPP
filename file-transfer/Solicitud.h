@@ -15,9 +15,11 @@
 
 #ifndef SOLICITUD_H_
 #define SOLICITUD_H_
-#include "SocketDatagrama.h"
-#include "Mensaje.h"
+
 #include <string.h>
+
+#include "Mensaje.h"
+#include "SocketDatagrama.h"
 
 class Solicitud {
  public:
