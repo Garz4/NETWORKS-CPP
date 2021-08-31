@@ -23,7 +23,7 @@
 int main(int argc, char** argv) {
   if (argc != 3) {
     std::printf("Modo de uso:\n");
-    std::printf("./cliente direccion_ip_del_servidor nombre_del_archivo\n");
+    std::printf("%s direccion_ip_del_servidor nombre_del_archivo\n", argv[0]);
     return 1;
   } else if (std::strlen(argv[1]) > 16) {
     std::printf("--!! ERROR: IP inválida. Inténtelo de nuevo.\n");
