@@ -21,12 +21,12 @@
 
 char* Solicitud::envia_y_recibe(
       std::string ip, int puerto, const char* solicitud) {
-  std::memcpy((char*)&enviar_, solicitud, sizeof(Mensaje));
+  std::memcpy(reinterpret_cast<char*>(&enviar_), solicitud, sizeof(Mensaje));
   enviar_.tipo = '0';
   enviar_.id = peticion_;
 
   PaqueteDatagrama paquete_envio(
-      (char*)&enviar_, sizeof(Mensaje), ip, puerto);
+      reinterpret_cast<char*>(&enviar_), sizeof(Mensaje), ip, puerto);
 
   PaqueteDatagrama paquete_recibo(sizeof(Mensaje));
   int n;
@@ -48,16 +48,22 @@ char* Solicitud::envia_y_recibe(
       std::printf("--!! ERROR: Error en recvfrom.\n");
       std::exit(0);
     } else {
-      if (((Mensaje*)(paquete_recibo.datos()))->tipo != '1') {
+      const auto recibido = reinterpret_cast<Mensaje*>(
+                                const_cast<char*>(paquete_recibo.datos()));
+
+      if (recibido->tipo != '1') {
         std::printf("No se recibió el tipo de Mensaje adecuado.\n");
         std::exit(0);
       } else if (
-          ((Mensaje*)(paquete_recibo.datos()))->id !=
-          ((Mensaje*)(paquete_envio.datos()))->id) {
+          recibido->id !=
+          recibido->id) {
         std::printf("No se recibió el ID adecuado.\n");
         std::exit(0);
       } else {
-        std::memcpy((char*)&recibido_, paquete_recibo.datos(), sizeof(Mensaje));
+        std::memcpy(
+            reinterpret_cast<char*>(&recibido_),
+            paquete_recibo.datos(),
+            sizeof(Mensaje));
         ip_ = socket_local_->ip_foranea();
         peticion_++;
       }
@@ -66,5 +72,5 @@ char* Solicitud::envia_y_recibe(
     }
   }
 
-  return (char*)&recibido_;
+  return reinterpret_cast<char*>(&recibido_);
 }

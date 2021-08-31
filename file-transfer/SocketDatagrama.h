@@ -23,7 +23,7 @@
 
 class SocketDatagrama {
  public:
-  SocketDatagrama(int a);
+  SocketDatagrama(int puerto);
 
   ~SocketDatagrama() { close(socket_); }
 
@@ -44,9 +44,9 @@ class SocketDatagrama {
   }
 
  private:
-  struct sockaddr_in direccion_local_;
-  struct sockaddr_in direccion_foranea_;
-  struct timeval timeout_;
+  sockaddr_in direccion_local_;
+  sockaddr_in direccion_foranea_;
+  timeval timeout_;
 
   /* ID Socket. */
   int socket_;

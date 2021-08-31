@@ -21,10 +21,8 @@
 
 class Respuesta {
  public:
-  Respuesta(int pl) {
-    socket_local_ = new SocketDatagrama(pl);
-    anterior_peticion_ = 'n';
-  }
+  Respuesta(int pl)
+      : socket_local_(new SocketDatagrama(pl)), anterior_peticion_('n') {}
 
   ~Respuesta() { delete socket_local_; }
 

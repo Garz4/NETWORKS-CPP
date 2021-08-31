@@ -25,7 +25,7 @@ int main(void) {
   Mensaje mensaje_recibo;
 
   std::ofstream archivo_guardar;
-  char *archivo_recibo;
+  char* archivo_recibo;
 
   while (true) {
     std::printf("Esperando mensaje...\n");
@@ -62,7 +62,7 @@ int main(void) {
       delete[] archivo_recibo;
     }
 
-    respuesta.responde((char *)&mensaje_envio);
+    respuesta.responde(reinterpret_cast<char*>(&mensaje_envio));
   }
 
   return 0;

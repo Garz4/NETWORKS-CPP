@@ -21,10 +21,7 @@
 
 class Solicitud {
  public:
-  Solicitud() {
-    socket_local_ = new SocketDatagrama(0);
-    peticion_ = 0;
-  }
+  Solicitud() : socket_local_(new SocketDatagrama(0)), peticion_(0) {}
 
   ~Solicitud() { delete socket_local_; }
 

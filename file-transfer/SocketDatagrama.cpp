@@ -21,16 +21,20 @@
 #include "PaqueteDatagrama.h"
 #include "SocketDatagrama.h"
 
-SocketDatagrama::SocketDatagrama(int a) {
+SocketDatagrama::SocketDatagrama(int puerto) {
   socket_ = socket(AF_INET, SOCK_DGRAM, 0);
 
-  bzero((char *)&direccion_local_, sizeof(direccion_local_));
+  bzero(reinterpret_cast<char*>(&direccion_local_), sizeof(direccion_local_));
   direccion_local_.sin_family = AF_INET;
   direccion_local_.sin_addr.s_addr = INADDR_ANY;
-  direccion_local_.sin_port = htons(a);
-  bind(socket_, (struct sockaddr *)&direccion_local_, sizeof(direccion_local_));
+  direccion_local_.sin_port = htons(puerto);
+  bind(
+      socket_,
+      reinterpret_cast<sockaddr*>(&direccion_local_),
+      sizeof(direccion_local_));
 
-  bzero((char *)&direccion_foranea_, sizeof(direccion_foranea_));
+  bzero(
+      reinterpret_cast<char*>(&direccion_foranea_), sizeof(direccion_foranea_));
   direccion_foranea_.sin_family = AF_INET;
 }
 
@@ -41,9 +45,9 @@ int SocketDatagrama::recibe(PaqueteDatagrama& paquete) {
   recvfrom(
       socket_,
       dat,
-      paquete.longitud()*sizeof(char),
+      paquete.longitud() * sizeof(char),
       0,
-      (struct sockaddr *) &direccion_foranea_,
+      reinterpret_cast<sockaddr*>(&direccion_foranea_),
       &clileng);
 
   paquete.set_datos(dat);
@@ -60,7 +64,11 @@ int SocketDatagrama::recibe(
   timeout_.tv_sec = segundos;
   timeout_.tv_usec = microsegundos;
   setsockopt(
-      socket_, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout_, sizeof(timeout_));
+      socket_,
+      SOL_SOCKET,
+      SO_RCVTIMEO,
+      reinterpret_cast<char*>(&timeout_),
+      sizeof(timeout_));
 
   char dat[paquete.longitud()];
   unsigned int clileng = sizeof(direccion_foranea_);
@@ -71,7 +79,7 @@ int SocketDatagrama::recibe(
           dat,
           paquete.longitud() * sizeof(char),
           0,
-          (struct sockaddr *) &direccion_foranea_,
+          reinterpret_cast<sockaddr*>(&direccion_foranea_),
           &clileng) <
       0) {
     if (errno == EWOULDBLOCK) {
@@ -101,7 +109,7 @@ int SocketDatagrama::envia(const PaqueteDatagrama& paquete) {
       paquete.datos(),
       paquete.longitud() * sizeof(char),
       0,
-      (struct sockaddr *) &direccion_foranea_,
+      reinterpret_cast<sockaddr*>(&direccion_foranea_),
       sizeof(direccion_foranea_));
 
   return 0;

@@ -78,8 +78,9 @@ int main(int argc, char** argv) {
           archivo_enviar.seekg(0, std::ios::beg);
           archivo_enviar.read(mensaje_envio.contenido_archivo, tam_archivo);
           std::memcpy(
-              (char*)&mensaje_recibo,
-              solicitud.envia_y_recibe(argv[1], 7200, (char*)&mensaje_envio),
+              reinterpret_cast<char*>(&mensaje_recibo),
+              solicitud.envia_y_recibe(
+                  argv[1], 7200, reinterpret_cast<char*>(&mensaje_envio)),
               sizeof(Mensaje));
 
           std::printf("==================================\n");
