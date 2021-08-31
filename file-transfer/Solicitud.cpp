@@ -20,7 +20,7 @@
 #include "Solicitud.h"
 
 char* Solicitud::envia_y_recibe(
-      std::string ip, int puerto, const char* solicitud) {
+      const std::string& ip, int puerto, const char* solicitud) {
   std::memcpy(reinterpret_cast<char*>(&enviar_), solicitud, sizeof(Mensaje));
   enviar_.tipo = '0';
   enviar_.id = peticion_;

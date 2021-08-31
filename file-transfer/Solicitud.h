@@ -25,7 +25,8 @@ class Solicitud {
 
   ~Solicitud() { delete socket_local_; }
 
-  char* envia_y_recibe(std::string ip, int puerto, const char* solicitud);
+  char* envia_y_recibe(
+      const std::string& ip, int puerto, const char* solicitud);
 
   const std::string& ip() const noexcept { return ip_; }
 
