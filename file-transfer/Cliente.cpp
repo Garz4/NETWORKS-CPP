@@ -13,6 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
+#include <cstring>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -32,8 +33,6 @@
  *   ->Ubicación: Solicitud.h
  */
 
-using namespace std;
-
 int main(int argc, char** argv) {
   if (argc != 3) {
     std::printf("Modo de uso:\n");
@@ -44,81 +43,81 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  Solicitud s;
-  struct mensaje mensajeEnvio;
-  struct mensaje mensajeRecibo;
-  ifstream archivoLeer;
-  ifstream archivoEnviar;
-  char* nombreLeer;
-  string linea;
-  int tamArchivo;
-  int tamString;
-  string convertir;
-  stringstream strs;
+  Solicitud solicitud;
+  struct mensaje mensaje_envio;
+  struct mensaje mensaje_recibo;
+  std::ifstream archivo_leer;
+  std::ifstream archivo_enviar;
+  char* nombre_leer;
+  std::string linea;
+  int tam_archivo;
+  std::string convertir;
+  std::stringstream strs;
 
-  archivoLeer.open(argv[2]);
+  archivo_leer.open(argv[2]);
 
-  if (archivoLeer.is_open()) {
-    while (getline(archivoLeer,linea)) {
-      nombreLeer = new char[linea.length()+1];
-      strcpy(nombreLeer, linea.c_str());
-      archivoEnviar.open(nombreLeer);
+  if (archivo_leer.is_open()) {
+    while (std::getline(archivo_leer,linea)) {
+      nombre_leer = new char[linea.length()+1];
+      strcpy(nombre_leer, linea.c_str());
+      archivo_enviar.open(nombre_leer);
 
-      if (archivoEnviar.is_open()) {
-        archivoEnviar.seekg(0, ios::end);
-        tamArchivo = archivoEnviar.tellg();
-        strs << tamArchivo;
+      if (archivo_enviar.is_open()) {
+        archivo_enviar.seekg(0, std::ios::end);
+        tam_archivo = archivo_enviar.tellg();
+        strs << tam_archivo;
         convertir = strs.str();
         strs.str(std::string());
 
         for (int c = 0; c < (int)(convertir.length()); c++) {
-          mensajeEnvio.tam[c] = (convertir.c_str())[c];
+          mensaje_envio.tam[c] = (convertir.c_str())[c];
         }
         
-        mensajeEnvio.tam[(int)(convertir.length())] = '\0';
+        mensaje_envio.tam[(int)(convertir.length())] = '\0';
 
-        if (tamArchivo > LIMITE_ARCHIVO) {
-          cout << "==================================" << endl;
-          cout << "--!! ADVERTENCIA: " << nombreLeer << " pesa "
-               << mensajeEnvio.tam << " bytes y sobrepasa el límite de "
-               << LIMITE_ARCHIVO << " bytes." << endl;
-          cout << "El archivo será omitido." << endl;
+        if (tam_archivo > LIMITE_ARCHIVO) {
+          std::printf("==================================\n");
+          std::printf("--!! ADVERTENCIA: %s pesa "
+                      "%d bytes y sobrepasa el límite de "
+                      "%d bytes.\n",
+                      nombre_leer, mensaje_envio.tam, LIMITE_ARCHIVO);
+          std::printf("El archivo será omitido.\n");
         } else {
           for (int k = 0; k < linea.length()+1; k++)
-            mensajeEnvio.nombreArchivo[k] = nombreLeer[k];
+            mensaje_envio.nombreArchivo[k] = nombre_leer[k];
 
-          mensajeEnvio.nombreArchivo[linea.length()+1] = '\0';
-          mensajeEnvio.estatus = 0;
-          archivoEnviar.seekg(0, ios::beg);
-          archivoEnviar.read(mensajeEnvio.archivo, tamArchivo);
-          memcpy(
-              (char*)&mensajeRecibo,
-              s.envia_y_recibe(argv[1], 7200, (char*)&mensajeEnvio),
+          mensaje_envio.nombreArchivo[linea.length()+1] = '\0';
+          mensaje_envio.estatus = 0;
+          archivo_enviar.seekg(0, std::ios::beg);
+          archivo_enviar.read(mensaje_envio.archivo, tam_archivo);
+          std::memcpy(
+              (char*)&mensaje_recibo,
+              solicitud.envia_y_recibe(argv[1], 7200, (char*)&mensaje_envio),
               sizeof(struct mensaje));
-          cout << "==================================" << endl;
-          cout << mensajeRecibo.nombreArchivo << ": ";
+          std::printf("==================================\n");
+          std::printf("%s: ", mensaje_recibo.nombreArchivo);
 
-          if (mensajeRecibo.estatus == '0') {
-            cout << "Recibido." << endl;
+          if (mensaje_recibo.estatus == '0') {
+            std::printf("Recibido.\n");
           } else {
-            cout << "Error al recibir." << endl;
+            std::printf("Error al recibir.\n");
           }
         }
 
-        archivoEnviar.close();
+        archivo_enviar.close();
       } else {
-        cout << "==================================" << endl;
-        cout << "--!! ADVERTENCIA: " << nombreLeer
-             << " es un archivo inexistente." << endl;
-        cout << "El archivo será omitido." << endl;
+        std::printf("==================================\n");
+        std::printf(
+            "--!! ADVERTENCIA: %s es un archivo inexistente.\n", nombre_leer);
+        std::printf("El archivo será omitido.\n");
       }
 
-      delete[] nombreLeer;
+      delete[] nombre_leer;
     }
 
-    archivoLeer.close();
+    archivo_leer.close();
   } else {
-    cout << "--!! ERROR: " << argv[2] << " es un archivo inexistente." << endl;
+    std::printf("--!! ERROR: %s es un archivo inexistente.\n", argv[2]);
   }
 
   return 0;

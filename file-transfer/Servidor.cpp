@@ -16,52 +16,50 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
-#include <string>
 
 #include "Respuesta.h"
 
-using namespace std;
-
 int main(void) {
-  Respuesta r(7200);
-  mensaje mensajeEnvio;
-  mensaje mensajeRecibo;
+  Respuesta respuesta(7200);
+  mensaje mensaje_envio;
+  mensaje mensaje_recibo;
 
-  ofstream archivoGuardar;
-  char *archivoRecibo;
+  std::ofstream archivo_guardar;
+  char *archivo_recibo;
 
   while (1) {
-    cout << "Esperando mensaje..." << endl;
-    memcpy(&mensajeRecibo, r.pide(), sizeof(struct mensaje));
+    std::printf("Esperando mensaje...\n");
+    std::memcpy(&mensaje_recibo, respuesta.pide(), sizeof(struct mensaje));
 
-    if (mensajeRecibo.messageType != 'n') {
-      cout << "==================================" << endl;
-      cout << mensajeRecibo.nombreArchivo << ": ";
+    if (mensaje_recibo.messageType != 'n') {
+      std::printf("==================================\n");
+      std::printf("%s: ", mensaje_recibo.nombreArchivo);
 
-      archivoRecibo = new char[atoi(mensajeRecibo.tam)];
-      memcpy(archivoRecibo, mensajeRecibo.archivo, atoi(mensajeRecibo.tam));
-      archivoRecibo[atoi(mensajeRecibo.tam)] = '\0';
-      archivoGuardar.open(mensajeRecibo.nombreArchivo);
-      archivoGuardar.write(archivoRecibo, atoi(mensajeRecibo.tam));
+      archivo_recibo = new char[atoi(mensaje_recibo.tam)];
+      std::memcpy(
+          archivo_recibo, mensaje_recibo.archivo, atoi(mensaje_recibo.tam));
+      archivo_recibo[atoi(mensaje_recibo.tam)] = '\0';
+      archivo_guardar.open(mensaje_recibo.nombreArchivo);
+      archivo_guardar.write(archivo_recibo, atoi(mensaje_recibo.tam));
 
-      if (archivoGuardar.is_open()) {
-        mensajeEnvio.estatus = '0';
-        cout << "Guardado." << endl;
+      if (archivo_guardar.is_open()) {
+        mensaje_envio.estatus = '0';
+        std::printf("Guardado.\n");
       } else {
-        mensajeEnvio.estatus = '1';
-        cout << "Fallo en escritura." << endl;
+        mensaje_envio.estatus = '1';
+        std::printf("Fallo en escritura.\n");
       }
 
-      memcpy(
-        mensajeEnvio.nombreArchivo,
-        mensajeRecibo.nombreArchivo,
-        sizeof(mensajeEnvio.nombreArchivo));
+      std::memcpy(
+        mensaje_envio.nombreArchivo,
+        mensaje_recibo.nombreArchivo,
+        sizeof(mensaje_envio.nombreArchivo));
 
-      archivoGuardar.close();
-      delete[] archivoRecibo;
+      archivo_guardar.close();
+      delete[] archivo_recibo;
     }
 
-    r.responde((char *)&mensajeEnvio);
+    respuesta.responde((char *)&mensaje_envio);
   }
 
   return 0;
