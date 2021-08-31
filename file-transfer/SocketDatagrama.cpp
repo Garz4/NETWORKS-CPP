@@ -28,8 +28,6 @@
 #include "PaqueteDatagrama.h"
 #include "SocketDatagrama.h"
 
-using namespace std;
-
 SocketDatagrama::SocketDatagrama(int a) {
   s = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -68,7 +66,7 @@ int SocketDatagrama::recibe(PaqueteDatagrama &p) {
   return 0;
 }
 
-int SocketDatagrama::envia(PaqueteDatagrama &p) {
+int SocketDatagrama::envia(const PaqueteDatagrama& p) {
   inet_pton(AF_INET, p.ip(), &direccionForanea.sin_addr);
   direccionForanea.sin_port = htons(p.puerto());
 
@@ -109,6 +107,7 @@ int SocketDatagrama::recibeTimeout(
       return -2;
     }
   }
+
   p.set_datos(dat);
   char str[16];
   inet_ntop(AF_INET, &direccionForanea.sin_addr.s_addr, str, 16);

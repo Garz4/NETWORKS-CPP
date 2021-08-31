@@ -20,7 +20,7 @@
 #include "PaqueteDatagrama.h"
 
 PaqueteDatagrama::PaqueteDatagrama(
-    char* datos, unsigned int longitud, char* ip, int puerto) {
+    const char* datos, unsigned int longitud, const char* ip, int puerto) {
   std::strcpy(ip_, ip);
   datos_ = new char[longitud];
   std::memcpy(datos_, datos, longitud);
@@ -37,15 +37,15 @@ PaqueteDatagrama::~PaqueteDatagrama() {
   delete[] datos_;
 }
 
-char* PaqueteDatagrama::ip() { return ip_; }
-void PaqueteDatagrama::set_ip(char* ip) { std::strcpy(ip_, ip); }
+const char* PaqueteDatagrama::ip() const { return ip_; }
+void PaqueteDatagrama::set_ip(const char* ip) { std::strcpy(ip_, ip); }
 
-unsigned int PaqueteDatagrama::longitud() { return longitud_; }
+const unsigned int PaqueteDatagrama::longitud() const { return longitud_; }
 
-int PaqueteDatagrama::puerto() { return puerto_; }
+int PaqueteDatagrama::puerto() const { return puerto_; }
 void PaqueteDatagrama::set_puerto(int puerto) { puerto_ = puerto; }
 
-char* PaqueteDatagrama::datos() { return datos_; }
-void PaqueteDatagrama::set_datos(char* datos) {
+const char* PaqueteDatagrama::datos() const { return datos_; }
+void PaqueteDatagrama::set_datos(const char* datos) {
   std::memcpy(datos_, datos, longitud_);
 }

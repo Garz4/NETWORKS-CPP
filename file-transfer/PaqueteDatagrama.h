@@ -28,20 +28,21 @@ class PaqueteDatagrama {
   unsigned int longitud_;
 
  public:
-  PaqueteDatagrama(char* datos, unsigned int longitud, char* ip, int puerto);
+  PaqueteDatagrama(
+      const char* datos, unsigned int longitud, const char* ip, int puerto);
   PaqueteDatagrama(unsigned int longitud);
   ~PaqueteDatagrama();
 
-  char* ip();
-  void set_ip(char*);
+  const char* ip() const;
+  void set_ip(const char*);
 
-  unsigned int longitud();
+  const unsigned int longitud() const;
 
-  int puerto();
+  int puerto() const;
   void set_puerto(int);
 
-  char* datos();
-  void set_datos(char*);
+  const char* datos() const;
+  void set_datos(const char*);
 };
 
 #endif

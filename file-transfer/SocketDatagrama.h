@@ -33,17 +33,19 @@ class SocketDatagrama {
   struct sockaddr_in direccionLocal;
   struct sockaddr_in direccionForanea;
   struct timeval timeout;
-  int s; //ID socket
+
+  /* ID Socket. */
+  int s;
 
  public:
   SocketDatagrama(int a);
   ~SocketDatagrama();
 
-  //Recibe un paquete tipo datagrama proveniente de este socket
+  /* Recibe un paquete tipo datagrama proveniente de este socket. */
   int recibe(PaqueteDatagrama& p);
 
-  //Envía un paquete tipo datagrama desde este socket
-  int envia(PaqueteDatagrama& p);
+  /* Envía un paquete tipo datagrama desde este socket. */
+  int envia(const PaqueteDatagrama& p);
 
   char* getClientIP();
   unsigned short getClientPort();
