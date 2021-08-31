@@ -35,7 +35,6 @@ int main(int argc, char** argv) {
   Mensaje mensaje_recibo;
   std::ifstream archivo_leer;
   std::ifstream archivo_enviar;
-  char* nombre_leer;
   std::string linea;
   int tam_archivo;
   std::string convertir;
@@ -45,9 +44,7 @@ int main(int argc, char** argv) {
 
   if (archivo_leer.is_open()) {
     while (std::getline(archivo_leer, linea)) {
-      nombre_leer = new char[linea.length() + 1];
-      std::strcpy(nombre_leer, linea.c_str());
-      archivo_enviar.open(nombre_leer);
+      archivo_enviar.open(linea);
 
       if (archivo_enviar.is_open()) {
         archivo_enviar.seekg(0, std::ios::end);
@@ -66,11 +63,11 @@ int main(int argc, char** argv) {
           std::printf("==================================\n");
           std::printf("--!! ADVERTENCIA: %s pesa "
                       "%s bytes y sobrepasa el límite de %d bytes.\n",
-                      nombre_leer, mensaje_envio.tam, LIMITE_ARCHIVO);
+                      linea.c_str(), mensaje_envio.tam, LIMITE_ARCHIVO);
           std::printf("El archivo será omitido.\n");
         } else {
           for (int k = 0; k < linea.length() + 1; k++) {
-            mensaje_envio.nombre_archivo[k] = nombre_leer[k];
+            mensaje_envio.nombre_archivo[k] = linea[k];
           }
 
           mensaje_envio.nombre_archivo[linea.length() + 1] = '\0';
@@ -97,16 +94,14 @@ int main(int argc, char** argv) {
       } else {
         std::printf("==================================\n");
         std::printf(
-            "--!! ADVERTENCIA: %s es un archivo inexistente.\n", nombre_leer);
+            "--!! ADVERTENCIA: Error al abrir %s.\n", linea.c_str());
         std::printf("El archivo será omitido.\n");
       }
-
-      delete[] nombre_leer;
     }
 
     archivo_leer.close();
   } else {
-    std::printf("--!! ERROR: %s es un archivo inexistente.\n", argv[2]);
+    std::printf("--!! ERROR: Error al abrir %s.\n", argv[2]);
   }
 
   return 0;
