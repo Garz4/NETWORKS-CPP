@@ -20,11 +20,11 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
   if (argc != 3) {
-    cout << "--!! ERROR: Mala invocación del programa. Intente:" << endl;
-    cout << "./cliente direccion_ip_del_servidor nombre_del_archivo" << endl;
+    std::printf("Modo de uso:\n");
+    std::printf("./cliente direccion_ip_del_servidor nombre_del_archivo\n");
     return 0;
   } else if (strlen(argv[1]) > 16) {
-    cout << "--!! ERROR: IP inválida. Inténtelo de nuevo." << endl;
+    std::printf("--!! ERROR: IP inválida. Inténtelo de nuevo.\n");
     return 0;
   }
 
