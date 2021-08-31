@@ -13,58 +13,45 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#include <iostream>
+#include <cstring>
 
 #include "PaqueteDatagrama.h"
 #include "Respuesta.h"
 
-using namespace std;
-
-int flipBit(int bit);
-
 Respuesta::Respuesta(int pl) {
-  socketLocal = new SocketDatagrama(pl);
-  requestIdPrev = 'n';
+  socket_local_ = new SocketDatagrama(pl);
+  anterior_peticion_ = 'n';
 }
 
-struct mensaje* Respuesta::getRequest(void) {
-  PaqueteDatagrama paqueteRecibo(sizeof(struct mensaje));
-  socketLocal->recibe(paqueteRecibo);
-  if (requestIdPrev ==
-      ((struct mensaje*)(paqueteRecibo.datos()))->requestId) {
-    Recibido.messageType = 'n';
-    return &Recibido;
+mensaje* Respuesta::pide() {
+  PaqueteDatagrama paquete_recibo(sizeof(mensaje));
+  socket_local_->recibe(paquete_recibo);
+  if (anterior_peticion_ ==
+      ((mensaje*)(paquete_recibo.datos()))->requestId) {
+    recibido_.messageType = 'n';
+    return &recibido_;
   } else {
-    memcpy((char*)&Recibido, paqueteRecibo.datos(),
-        sizeof(struct mensaje));
-    dirIP = socketLocal->ip_foranea();
-    port = (int)(socketLocal->puerto_foranea());
-    requestIdPrev = Recibido.requestId;
-    return &Recibido;
+    std::memcpy((char*)&recibido_, paquete_recibo.datos(),
+        sizeof(mensaje));
+    ip_ = socket_local_->ip_foranea();
+    puerto_ = (int)(socket_local_->puerto_foranea());
+    anterior_peticion_ = recibido_.requestId;
+    return &recibido_;
   }
 }
 
-void Respuesta::sendReply(char *respuesta) {
-  memcpy((char*)&Enviar, respuesta, sizeof(struct mensaje));
-  Enviar.messageType = '1';
-  Enviar.requestId = Recibido.requestId;
+void Respuesta::responde(const char* respuesta) {
+  std::memcpy((char*)&enviar_, respuesta, sizeof(mensaje));
+  enviar_.messageType = '1';
+  enviar_.requestId = recibido_.requestId;
 
-  PaqueteDatagrama paqueteEnvio(
-      (char*)&Enviar, sizeof(struct mensaje), dirIP, htons(port));
+  PaqueteDatagrama paquete_envio(
+      (char*)&enviar_, sizeof(mensaje), ip_, htons(puerto_));
 
-  socketLocal->envia(paqueteEnvio);
-  return;
+  socket_local_->envia(paquete_envio);
 }
 
-Respuesta::~Respuesta() { delete socketLocal; }
+Respuesta::~Respuesta() { delete socket_local_; }
 
-char* Respuesta::getIP() { return dirIP; }
-int Respuesta::getPort() { return port; }
-
-int flipBit(int bit) {
-  if (bit == 0) {
-    return 1;
-  }
-
-  return 0;
-}
+char* Respuesta::ip() const { return ip_; }
+int Respuesta::puerto() const { return puerto_; }

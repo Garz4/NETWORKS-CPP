@@ -16,8 +16,6 @@
 #ifndef RESPUESTA_H_
 #define RESPUESTA_H_
 
-#include <string.h>
-
 #include "Mensaje.h"
 #include "SocketDatagrama.h"
 
@@ -25,17 +23,18 @@ class Respuesta {
  public:
   ~Respuesta();
   Respuesta(int pl);
-  struct mensaje* getRequest(void);
-  void sendReply(char *respuesta);
-  char* getIP();
-  int getPort();
+  mensaje* pide();
+  void responde(const char* respuesta);
+  char* ip() const;
+  int puerto() const;
+
  private:
-  SocketDatagrama *socketLocal;
-  struct mensaje Recibido;
-  struct mensaje Enviar;
-  char* dirIP;
-  int port;
-  int requestIdPrev;
+  SocketDatagrama* socket_local_;
+  mensaje recibido_;
+  mensaje enviar_;
+  char* ip_;
+  int puerto_;
+  int anterior_peticion_;
 };
 
 #endif

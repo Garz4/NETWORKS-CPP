@@ -3,7 +3,8 @@
         "xstring": "cpp",
         "istream": "cpp",
         "iostream": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "ostream": "cpp"
     },
     "editor.rulers": [
         80

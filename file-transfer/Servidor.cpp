@@ -13,6 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
+#include <cstring>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -23,15 +24,15 @@ using namespace std;
 
 int main(void) {
   Respuesta r(7200);
-  struct mensaje mensajeEnvio;
-  struct mensaje mensajeRecibo;
+  mensaje mensajeEnvio;
+  mensaje mensajeRecibo;
 
   ofstream archivoGuardar;
   char *archivoRecibo;
 
   while (1) {
     cout << "Esperando mensaje..." << endl;
-    memcpy(&mensajeRecibo, r.getRequest(), sizeof(struct mensaje));
+    memcpy(&mensajeRecibo, r.pide(), sizeof(struct mensaje));
 
     if (mensajeRecibo.messageType != 'n') {
       cout << "==================================" << endl;
@@ -60,7 +61,7 @@ int main(void) {
       delete[] archivoRecibo;
     }
 
-    r.sendReply((char *)&mensajeEnvio);
+    r.responde((char *)&mensajeEnvio);
   }
 
   return 0;
