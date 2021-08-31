@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
   if (archivo_leer.is_open()) {
     while (std::getline(archivo_leer,linea)) {
       nombre_leer = new char[linea.length()+1];
-      strcpy(nombre_leer, linea.c_str());
+      std::strcpy(nombre_leer, linea.c_str());
       archivo_enviar.open(nombre_leer);
 
       if (archivo_enviar.is_open()) {
