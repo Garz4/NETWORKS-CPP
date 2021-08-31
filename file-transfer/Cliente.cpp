@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
         if (tam_archivo > LIMITE_ARCHIVO) {
           std::printf("==================================\n");
           std::printf("--!! ADVERTENCIA: %s pesa "
-                      "%d bytes y sobrepasa el límite de "
+                      "%s bytes y sobrepasa el límite de "
                       "%d bytes.\n",
                       nombre_leer, mensaje_envio.tam, LIMITE_ARCHIVO);
           std::printf("El archivo será omitido.\n");
