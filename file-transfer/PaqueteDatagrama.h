@@ -13,8 +13,6 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#pragma once
-
 #ifndef PAQUETEDATAGRAMA_H_
 #define PAQUETEDATAGRAMA_H_
 
