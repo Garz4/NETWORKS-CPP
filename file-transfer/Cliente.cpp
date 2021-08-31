@@ -20,19 +20,6 @@
 
 #include "Solicitud.h"
 
-/**
- * Variables foráneas:
- *   ->LIMITE_ARCHIVO
- *   ->Ubicación: Mensaje.h
- * 
- * Entidades foráneas:
- *   ->struct mensaje
- *   ->Ubicación: Mensaje.h
- * 
- *   ->Solicitud
- *   ->Ubicación: Solicitud.h
- */
-
 int main(int argc, char** argv) {
   if (argc != 3) {
     std::printf("Modo de uso:\n");
@@ -58,7 +45,7 @@ int main(int argc, char** argv) {
 
   if (archivo_leer.is_open()) {
     while (std::getline(archivo_leer,linea)) {
-      nombre_leer = new char[linea.length()+1];
+      nombre_leer = new char[linea.length() + 1];
       std::strcpy(nombre_leer, linea.c_str());
       archivo_enviar.open(nombre_leer);
 
