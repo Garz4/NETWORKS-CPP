@@ -28,7 +28,7 @@ const Mensaje& Respuesta::pide() {
   } else {
     std::memcpy((char*)&recibido_, paquete_recibo.datos(),
         sizeof(Mensaje));
-    std::strcpy(ip_, socket_local_->ip_foranea());
+    ip_ = socket_local_->ip_foranea();
     puerto_ = socket_local_->puerto_foranea();
     anterior_peticion_ = recibido_.id;
     return recibido_;

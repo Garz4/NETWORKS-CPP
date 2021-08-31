@@ -31,14 +31,14 @@ class Respuesta {
   const Mensaje& pide();
   void responde(const char* respuesta);
 
-  const char* ip() const noexcept { return ip_; }
+  const std::string& ip() const noexcept { return ip_; }
   int puerto() const noexcept { return puerto_; }
 
  private:
   SocketDatagrama* socket_local_;
   Mensaje recibido_;
   Mensaje enviar_;
-  char* ip_;
+  std::string ip_;
   int puerto_;
   int anterior_peticion_;
 };

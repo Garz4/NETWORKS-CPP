@@ -22,8 +22,8 @@
 
 class PaqueteDatagrama {
  public:
-  // PaqueteDatagrama() noexcept = default;
-  // PaqueteDatagrama(const PaqueteDatagrama&) noexcept = default;
+  PaqueteDatagrama() noexcept = default;
+  PaqueteDatagrama(const PaqueteDatagrama&) noexcept = default;
 
   PaqueteDatagrama(
       const char* datos,
