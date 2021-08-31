@@ -56,10 +56,10 @@ int main(int argc, char** argv) {
         convertir = strs.str();
         strs.str(std::string());
 
-        for (int c = 0; c < (int)(convertir.length()); c++) {
+        for (int c = 0; c < convertir.length(); c++) {
           mensaje_envio.tam[c] = (convertir.c_str())[c];
         }
-        
+
         mensaje_envio.tam[(int)(convertir.length())] = '\0';
 
         if (tam_archivo > LIMITE_ARCHIVO) {
