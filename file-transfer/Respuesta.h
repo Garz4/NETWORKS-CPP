@@ -20,20 +20,20 @@
 #include "Mensaje.h"
 
 class Respuesta {
-  public:
-    ~Respuesta();
-    Respuesta(int pl);
-    struct mensaje* getRequest(void);
-    void sendReply(char *respuesta);
-    char* getIP();
-    int getPort();
-  private:
-    SocketDatagrama *socketLocal;
-    struct mensaje Recibido;
-    struct mensaje Enviar;
-    char* dirIP;
-    int port;
-    int requestIdPrev;
+ public:
+  ~Respuesta();
+  Respuesta(int pl);
+  struct mensaje* getRequest(void);
+  void sendReply(char *respuesta);
+  char* getIP();
+  int getPort();
+ private:
+  SocketDatagrama *socketLocal;
+  struct mensaje Recibido;
+  struct mensaje Enviar;
+  char* dirIP;
+  int port;
+  int requestIdPrev;
 };
 
 #endif

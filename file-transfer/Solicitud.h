@@ -20,18 +20,18 @@
 #include <string.h>
 
 class Solicitud {
-  public:
-    ~Solicitud();
-    Solicitud();
-    char* doOperation(char *IP, int puerto, char* solicitud);
-    char* getIP();
+ public:
+  ~Solicitud();
+  Solicitud();
+  char* doOperation(char *IP, int puerto, char* solicitud);
+  char* getIP();
 
-  private:
-    SocketDatagrama *socketLocal;
-    struct mensaje Recibido;
-    struct mensaje Enviar;
-    char* dirIP;
-    char request;
+ private:
+  SocketDatagrama *socketLocal;
+  struct mensaje Recibido;
+  struct mensaje Enviar;
+  char* dirIP;
+  char request;
 };
 
 #endif
