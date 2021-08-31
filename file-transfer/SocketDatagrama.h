@@ -40,11 +40,12 @@ class SocketDatagrama {
   ~SocketDatagrama();
 
   /* Recibe un paquete tipo datagrama proveniente de este socket. */
-  int recibe(PaqueteDatagrama& p);
-  int recibe(PaqueteDatagrama& p, time_t segundos, suseconds_t microsegundos);
+  int recibe(PaqueteDatagrama& paquete);
+  int recibe(
+      PaqueteDatagrama& paquete, time_t segundos, suseconds_t microsegundos);
 
   /* Envía un paquete tipo datagrama desde este socket. */
-  int envia(const PaqueteDatagrama& p);
+  int envia(const PaqueteDatagrama& paquete);
 
   char* ip_foranea() const;
   unsigned short puerto_foranea() const;
