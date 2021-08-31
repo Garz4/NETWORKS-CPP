@@ -28,8 +28,7 @@ class PaqueteDatagrama {
   unsigned int longitud_;
 
  public:
-  PaqueteDatagrama(
-      char* datos, unsigned int longitud, char* ip, int puerto);
+  PaqueteDatagrama(char* datos, unsigned int longitud, char* ip, int puerto);
   PaqueteDatagrama(unsigned int longitud);
   ~PaqueteDatagrama();
 

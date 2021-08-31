@@ -38,15 +38,15 @@ class SocketDatagrama {
   ~SocketDatagrama();
 
   //Recibe un paquete tipo datagrama proveniente de este socket
-  int recibe(PaqueteDatagrama &p);
+  int recibe(PaqueteDatagrama& p);
 
   //Envía un paquete tipo datagrama desde este socket
-  int envia(PaqueteDatagrama &p);
+  int envia(PaqueteDatagrama& p);
 
   char* getClientIP();
   unsigned short getClientPort();
   int recibeTimeout(
-      PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
+      PaqueteDatagrama& p, time_t segundos, suseconds_t microsegundos);
 };
 
 #endif

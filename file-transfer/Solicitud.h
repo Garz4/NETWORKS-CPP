@@ -23,11 +23,11 @@ class Solicitud {
  public:
   ~Solicitud();
   Solicitud();
-  char* doOperation(char *IP, int puerto, char* solicitud);
+  char* doOperation(char* IP, int puerto, char* solicitud);
   char* getIP();
 
  private:
-  SocketDatagrama *socketLocal;
+  SocketDatagrama* socketLocal;
   struct mensaje Recibido;
   struct mensaje Enviar;
   char* dirIP;
