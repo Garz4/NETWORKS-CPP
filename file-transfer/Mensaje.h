@@ -23,7 +23,6 @@ struct Mensaje {
   /* 0 = Solicitud, 1 = Respuesta. */
   char tipo;
 
-  /* Identificador del mensaje. */
   char id;
 
   /* Tamaño en bytes del archivo a enviar. */
@@ -31,6 +30,7 @@ struct Mensaje {
 
   char nombre_archivo[30];
 
+  /* 1 extra para... Abarcar "\0" ? */
   char contenido_archivo[LIMITE_ARCHIVO + 1];
 
   /* 0 = Ok, 1 = Error. */
