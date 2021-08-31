@@ -38,13 +38,13 @@ class PaqueteDatagrama {
   const char* ip() const noexcept { return ip_; }
   void set_ip(const char* ip) { std::strcpy(ip_, ip); }
 
-  unsigned int longitud() const noexcept { return longitud_; }
-
   int puerto() const noexcept { return puerto_; }
   void set_puerto(int puerto) { puerto_ = puerto; }
 
   const char* datos() const noexcept { return datos_; }
   void set_datos(const char* datos) { std::memcpy(datos_, datos, longitud_); }
+
+  unsigned int longitud() const noexcept { return longitud_; }
 
  private:
   char ip_[16];
