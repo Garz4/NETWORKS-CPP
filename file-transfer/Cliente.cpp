@@ -83,8 +83,9 @@ int main(int argc, char** argv) {
                       nombre_leer, mensaje_envio.tam, LIMITE_ARCHIVO);
           std::printf("El archivo será omitido.\n");
         } else {
-          for (int k = 0; k < linea.length() + 1; k++)
+          for (int k = 0; k < linea.length() + 1; k++) {
             mensaje_envio.nombre_archivo[k] = nombre_leer[k];
+          }
 
           mensaje_envio.nombre_archivo[linea.length() + 1] = '\0';
           mensaje_envio.estatus = 0;
@@ -94,6 +95,7 @@ int main(int argc, char** argv) {
               (char*)&mensaje_recibo,
               solicitud.envia_y_recibe(argv[1], 7200, (char*)&mensaje_envio),
               sizeof(Mensaje));
+
           std::printf("==================================\n");
           std::printf("%s: ", mensaje_recibo.nombre_archivo);
 
