@@ -21,7 +21,7 @@
 #include "PaqueteDatagrama.h"
 #include "SocketDatagrama.h"
 
-SocketDatagrama::SocketDatagrama(int puerto) {
+SocketDatagrama::SocketDatagrama(unsigned short puerto) {
   socket_ = socket(AF_INET, SOCK_DGRAM, 0);
 
   bzero(reinterpret_cast<char*>(&direccion_local_), sizeof(direccion_local_));

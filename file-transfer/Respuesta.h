@@ -23,7 +23,7 @@ class Respuesta final {
   explicit Respuesta() noexcept = default;
   explicit Respuesta(const Respuesta&) noexcept = default;
 
-  Respuesta(int puerto_local) noexcept
+  Respuesta(unsigned short puerto_local) noexcept
       : socket_local_(puerto_local), anterior_peticion_('n') {}
 
   const Mensaje& pide();
@@ -34,6 +34,6 @@ class Respuesta final {
   Mensaje recibido_;
   Mensaje enviar_;
   std::string ip_;
-  int puerto_;
+  unsigned short puerto_;
   int anterior_peticion_;
 };

@@ -23,7 +23,7 @@ class Solicitud final {
   explicit Solicitud() noexcept = default;
 
   const Mensaje& envia_y_recibe(
-      const std::string& ip, int puerto, const Mensaje& solicitud);
+      const std::string& ip, unsigned short puerto, const Mensaje& solicitud);
 
  private:
   SocketDatagrama socket_local_;

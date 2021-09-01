@@ -30,7 +30,7 @@ class PaqueteDatagrama final {
       Mensaje mensaje,
       size_t longitud,
       std::string ip,
-      int puerto) noexcept
+      unsigned short puerto) noexcept
       : mensaje_(std::move(mensaje)),
        longitud_(longitud),
        ip_(std::move(ip)),
@@ -41,17 +41,17 @@ class PaqueteDatagrama final {
   const std::string& ip() const noexcept { return ip_; }
   void set_ip(std::string ip) { ip_ = std::move(ip); }
 
-  int puerto() const noexcept { return puerto_; }
-  void set_puerto(int puerto) { puerto_ = puerto; }
+  unsigned short puerto() const noexcept { return puerto_; }
+  void set_puerto(unsigned short puerto) { puerto_ = puerto; }
 
   const char* datos() const {
     return reinterpret_cast<char*>(const_cast<Mensaje*>(&mensaje_));
   }
   const Mensaje& mensaje() const noexcept { return mensaje_; }
-  void set_mensaje(char* datos) {
+  void set_mensaje(const char* datos) {
     std::memcpy(
         &mensaje_,
-        reinterpret_cast<Mensaje*>(datos),
+        reinterpret_cast<Mensaje*>(const_cast<char*>(datos)),
         longitud_);
   }
 
@@ -59,7 +59,7 @@ class PaqueteDatagrama final {
 
  private:
   std::string ip_;
-  int puerto_;
+  unsigned short puerto_;
   Mensaje mensaje_;
   size_t longitud_;
 };
