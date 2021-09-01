@@ -32,9 +32,9 @@ class PaqueteDatagrama final {
       std::string ip,
       unsigned short puerto) noexcept
       : mensaje_(std::move(mensaje)),
-       longitud_(longitud),
-       ip_(std::move(ip)),
-       puerto_(puerto) {}
+        longitud_(longitud),
+        ip_(std::move(ip)),
+        puerto_(puerto) {}
 
   PaqueteDatagrama(size_t longitud) noexcept : longitud_(longitud) {}
 
