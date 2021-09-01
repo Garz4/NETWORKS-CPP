@@ -29,5 +29,5 @@ class Solicitud final {
   SocketDatagrama socket_local_;
   Mensaje recibido_;
   Mensaje enviar_;
-  int peticion_;
+  int peticion_ = 0;
 };
