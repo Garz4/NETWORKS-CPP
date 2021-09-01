@@ -13,8 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef SOCKETDATAGRAMA_H_
-#define SOCKETDATAGRAMA_H_
+#pragma once
 
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -52,5 +51,3 @@ class SocketDatagrama final {
   /* ID Socket. */
   int socket_;
 };
-
-#endif

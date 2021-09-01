@@ -13,8 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef SOLICITUD_H_
-#define SOLICITUD_H_
+#pragma once
 
 #include "Mensaje.h"
 #include "SocketDatagrama.h"
@@ -32,5 +31,3 @@ class Solicitud final {
   Mensaje enviar_;
   int peticion_;
 };
-
-#endif

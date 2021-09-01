@@ -13,8 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef PAQUETEDATAGRAMA_H_
-#define PAQUETEDATAGRAMA_H_
+#pragma once
 
 #include <cstring>
 #include <string>
@@ -64,5 +63,3 @@ class PaqueteDatagrama final {
   Mensaje mensaje_;
   size_t longitud_;
 };
-
-#endif

@@ -13,8 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef RESPUESTA_H_
-#define RESPUESTA_H_
+#pragma once
 
 #include "Mensaje.h"
 #include "SocketDatagrama.h"
@@ -38,5 +37,3 @@ class Respuesta final {
   int puerto_;
   int anterior_peticion_;
 };
-
-#endif

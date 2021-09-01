@@ -13,8 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef MENSAJE_H_
-#define MENSAJE_H_
+#pragma once
 
 /* Limite en bytes de los paquetes. */
 #define LIMITE_ARCHIVO 65000
@@ -36,5 +35,3 @@ struct Mensaje {
   /* 0 = Ok, 1 = Error. */
   char estatus;
 };
-
-#endif
