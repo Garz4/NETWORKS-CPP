@@ -26,7 +26,9 @@ class Respuesta final {
   Respuesta(unsigned short puerto_local) noexcept
       : socket_local_(puerto_local), anterior_peticion_('n') {}
 
+  /* Espera hasta que recibe mensaje, lo copia a recibido_ y lo retorna. */
   const Mensaje& pide();
+
   void responde(Mensaje respuesta);
 
  private:

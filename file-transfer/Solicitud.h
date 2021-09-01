@@ -27,7 +27,7 @@ class Solicitud final {
       const std::string& ip, unsigned short puerto, const Mensaje& solicitud);
 
  private:
-  SocketDatagrama socket_local_;
+  SocketDatagrama socket_local_{0};
   Mensaje recibido_;
   Mensaje enviar_;
   int peticion_ = 0;
