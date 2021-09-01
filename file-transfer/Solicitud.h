@@ -22,6 +22,7 @@ class Solicitud final {
  public:
   explicit Solicitud() noexcept = default;
 
+  /* Retorna el mensaje recibido. */
   const Mensaje& envia_y_recibe(
       const std::string& ip, unsigned short puerto, const Mensaje& solicitud);
 

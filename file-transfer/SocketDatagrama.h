@@ -28,12 +28,10 @@ class SocketDatagrama final {
   SocketDatagrama(unsigned short puerto);
   ~SocketDatagrama() { close(socket_); }
 
-  /* Recibe un paquete tipo datagrama proveniente de este socket. */
   int recibe(PaqueteDatagrama& paquete);
   int recibe(
       PaqueteDatagrama& paquete, time_t segundos, suseconds_t microsegundos);
 
-  /* Envía un paquete tipo datagrama desde este socket. */
   int envia(const PaqueteDatagrama& paquete);
 
   std::string ip_foranea() const noexcept {
@@ -48,7 +46,5 @@ class SocketDatagrama final {
   sockaddr_in direccion_local_;
   sockaddr_in direccion_foranea_;
   timeval timeout_;
-
-  /* ID Socket. */
   int socket_;
 };
