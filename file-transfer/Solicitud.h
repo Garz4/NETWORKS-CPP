@@ -21,13 +21,14 @@
 class Solicitud final {
  public:
   explicit Solicitud() noexcept = default;
+  explicit Solicitud(const Solicitud&) noexcept = default;
 
   /* Retorna el mensaje recibido. */
   const Mensaje& envia_y_recibe(
       const std::string& ip, unsigned short puerto, const Mensaje& solicitud);
 
  private:
-  SocketDatagrama socket_local_{0};
+  SocketDatagrama socket_local_;
   Mensaje recibido_;
   Mensaje enviar_;
   int peticion_ = 0;
