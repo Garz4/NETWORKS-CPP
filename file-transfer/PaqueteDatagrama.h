@@ -27,7 +27,7 @@ class PaqueteDatagrama final {
   explicit PaqueteDatagrama() noexcept = default;
   explicit PaqueteDatagrama(const PaqueteDatagrama&) noexcept = default;
 
-  explicit PaqueteDatagrama(
+  PaqueteDatagrama(
       Mensaje mensaje,
       size_t longitud,
       std::string ip,
@@ -37,7 +37,7 @@ class PaqueteDatagrama final {
        ip_(std::move(ip)),
        puerto_(puerto) {}
 
-  explicit PaqueteDatagrama(size_t longitud) noexcept : longitud_(longitud) {}
+  PaqueteDatagrama(size_t longitud) noexcept : longitud_(longitud) {}
 
   const std::string& ip() const noexcept { return ip_; }
   void set_ip(std::string ip) { ip_ = std::move(ip); }

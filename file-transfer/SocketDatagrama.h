@@ -24,8 +24,8 @@
 class SocketDatagrama final {
  public:
   explicit SocketDatagrama() noexcept = default;
-  SocketDatagrama(int puerto);
 
+  SocketDatagrama(int puerto);
   ~SocketDatagrama() { close(socket_); }
 
   /* Recibe un paquete tipo datagrama proveniente de este socket. */

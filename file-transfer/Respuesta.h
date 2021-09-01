@@ -23,7 +23,8 @@ class Respuesta final {
  public:
   explicit Respuesta() noexcept = default;
   explicit Respuesta(const Respuesta&) noexcept = default;
-  explicit Respuesta(int pl) noexcept
+
+  Respuesta(int pl) noexcept
       : socket_local_(SocketDatagrama(pl)), anterior_peticion_('n') {}
 
   const Mensaje& pide();
