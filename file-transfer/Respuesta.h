@@ -24,8 +24,8 @@ class Respuesta final {
   explicit Respuesta() noexcept = default;
   explicit Respuesta(const Respuesta&) noexcept = default;
 
-  Respuesta(int pl) noexcept
-      : socket_local_(SocketDatagrama(pl)), anterior_peticion_('n') {}
+  Respuesta(int puerto_local) noexcept
+      : socket_local_(puerto_local), anterior_peticion_('n') {}
 
   const Mensaje& pide();
   void responde(Mensaje respuesta);
