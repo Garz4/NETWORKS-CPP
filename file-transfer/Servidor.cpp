@@ -56,7 +56,7 @@ int main(void) {
       archivo_guardar.close();
     }
 
-    respuesta.responde(reinterpret_cast<char*>(&mensaje_envio));
+    respuesta.responde(mensaje_envio);
   }
 
   return 0;

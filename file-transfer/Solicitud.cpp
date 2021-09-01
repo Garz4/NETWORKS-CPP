@@ -19,21 +19,19 @@
 #include "PaqueteDatagrama.h"
 #include "Solicitud.h"
 
-char* Solicitud::envia_y_recibe(
-      const std::string& ip, int puerto, const char* solicitud) {
-  std::memcpy(reinterpret_cast<char*>(&enviar_), solicitud, sizeof(Mensaje));
+const Mensaje& Solicitud::envia_y_recibe(
+      const std::string& ip, int puerto, const Mensaje& solicitud) {
+  enviar_ = solicitud;
   enviar_.tipo = '0';
   enviar_.id = peticion_;
 
-  PaqueteDatagrama paquete_envio(
-      reinterpret_cast<char*>(&enviar_), sizeof(Mensaje), ip, puerto);
-
+  PaqueteDatagrama paquete_envio(enviar_, sizeof(Mensaje), ip, puerto);
   PaqueteDatagrama paquete_recibo(sizeof(Mensaje));
   int n;
 
   for (int it = 0; it < 20; it++) {
-    socket_local_->envia(paquete_envio);
-    n = socket_local_->recibe(paquete_recibo, 2, 500000);
+    socket_local_.envia(paquete_envio);
+    n = socket_local_.recibe(paquete_recibo, 2, 500000);
 
     if (n == -1) {
       if (it != 19) {
@@ -48,23 +46,14 @@ char* Solicitud::envia_y_recibe(
       std::printf("--!! ERROR: Error en recvfrom.\n");
       std::exit(0);
     } else {
-      const auto recibido = reinterpret_cast<Mensaje*>(
-                                const_cast<char*>(paquete_recibo.datos()));
-
-      if (recibido->tipo != '1') {
+      if (paquete_recibo.mensaje().tipo != '1') {
         std::printf("No se recibió el tipo de Mensaje adecuado.\n");
         std::exit(0);
-      } else if (
-          recibido->id !=
-          recibido->id) {
+      } else if (paquete_recibo.mensaje().id != paquete_envio.mensaje().id) {
         std::printf("No se recibió el ID adecuado.\n");
         std::exit(0);
       } else {
-        std::memcpy(
-            reinterpret_cast<char*>(&recibido_),
-            paquete_recibo.datos(),
-            sizeof(Mensaje));
-        ip_ = socket_local_->ip_foranea();
+        recibido_ = paquete_recibo.mensaje();
         peticion_++;
       }
 
@@ -72,5 +61,5 @@ char* Solicitud::envia_y_recibe(
     }
   }
 
-  return reinterpret_cast<char*>(&recibido_);
+  return recibido_;
 }

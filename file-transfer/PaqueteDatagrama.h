@@ -20,29 +20,24 @@
 #include <string>
 #include <utility>
 
-class PaqueteDatagrama {
- public:
-  PaqueteDatagrama() noexcept = default;
-  PaqueteDatagrama(const PaqueteDatagrama&) noexcept = default;
+#include "Mensaje.h"
 
-  PaqueteDatagrama(
-      const char* datos,
-      unsigned int longitud,
+class PaqueteDatagrama final {
+ public:
+  explicit PaqueteDatagrama() noexcept = default;
+  explicit PaqueteDatagrama(const PaqueteDatagrama&) noexcept = default;
+
+  explicit PaqueteDatagrama(
+      Mensaje mensaje,
+      size_t longitud,
       std::string ip,
-      int puerto) /* noexcept */
-      : /* datos_(datos), */
+      int puerto) noexcept
+      : mensaje_(std::move(mensaje)),
        longitud_(longitud),
        ip_(std::move(ip)),
-       puerto_(puerto) {
-    datos_ = new char[longitud];
-    std::memcpy(datos_, datos, longitud);
-  }
+       puerto_(puerto) {}
 
-  PaqueteDatagrama(unsigned int longitud) noexcept : longitud_(longitud) {
-    datos_ = new char[longitud];
-  }
-
-  ~PaqueteDatagrama() { delete[] datos_; }
+  explicit PaqueteDatagrama(size_t longitud) noexcept : longitud_(longitud) {}
 
   const std::string& ip() const noexcept { return ip_; }
   void set_ip(std::string ip) { ip_ = std::move(ip); }
@@ -50,20 +45,24 @@ class PaqueteDatagrama {
   int puerto() const noexcept { return puerto_; }
   void set_puerto(int puerto) { puerto_ = puerto; }
 
-  const char* datos() const noexcept { return datos_; }
-  void set_datos(const char* datos) { std::memcpy(datos_, datos, longitud_); }
+  const char* datos() const {
+    return reinterpret_cast<char*>(const_cast<Mensaje*>(&mensaje_));
+  }
+  const Mensaje& mensaje() const noexcept { return mensaje_; }
+  void set_mensaje(char* datos) {
+    std::memcpy(
+        &mensaje_,
+        reinterpret_cast<Mensaje*>(datos),
+        longitud_);
+  }
 
   unsigned int longitud() const noexcept { return longitud_; }
 
  private:
   std::string ip_;
   int puerto_;
-
-  /* Cadena de datos a enviar en bytes. */
-  char* datos_;
-
-  /* Longitud de la cadena de datos a enviar. */
-  unsigned int longitud_;
+  Mensaje mensaje_;
+  size_t longitud_;
 };
 
 #endif

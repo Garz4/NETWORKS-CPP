@@ -21,8 +21,9 @@
 
 #include "PaqueteDatagrama.h"
 
-class SocketDatagrama {
+class SocketDatagrama final {
  public:
+  explicit SocketDatagrama() noexcept = default;
   SocketDatagrama(int puerto);
 
   ~SocketDatagrama() { close(socket_); }
@@ -35,7 +36,7 @@ class SocketDatagrama {
   /* Envía un paquete tipo datagrama desde este socket. */
   int envia(const PaqueteDatagrama& paquete);
 
-  const char* ip_foranea() const noexcept {
+  std::string ip_foranea() const noexcept {
     return inet_ntoa(direccion_foranea_.sin_addr);
   }
 

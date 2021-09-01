@@ -19,21 +19,18 @@
 #include "Mensaje.h"
 #include "SocketDatagrama.h"
 
-class Respuesta {
+class Respuesta final {
  public:
-  Respuesta(int pl)
-      : socket_local_(new SocketDatagrama(pl)), anterior_peticion_('n') {}
-
-  ~Respuesta() { delete socket_local_; }
+  explicit Respuesta() noexcept = default;
+  explicit Respuesta(const Respuesta&) noexcept = default;
+  explicit Respuesta(int pl) noexcept
+      : socket_local_(SocketDatagrama(pl)), anterior_peticion_('n') {}
 
   const Mensaje& pide();
-  void responde(const char* respuesta);
-
-  const std::string& ip() const noexcept { return ip_; }
-  int puerto() const noexcept { return puerto_; }
+  void responde(Mensaje respuesta);
 
  private:
-  SocketDatagrama* socket_local_;
+  SocketDatagrama socket_local_;
   Mensaje recibido_;
   Mensaje enviar_;
   std::string ip_;

@@ -19,23 +19,18 @@
 #include "Mensaje.h"
 #include "SocketDatagrama.h"
 
-class Solicitud {
+class Solicitud final {
  public:
-  Solicitud() : socket_local_(new SocketDatagrama(0)), peticion_(0) {}
+  explicit Solicitud() noexcept = default;
 
-  ~Solicitud() { delete socket_local_; }
-
-  char* envia_y_recibe(
-      const std::string& ip, int puerto, const char* solicitud);
-
-  const std::string& ip() const noexcept { return ip_; }
+  const Mensaje& envia_y_recibe(
+      const std::string& ip, int puerto, const Mensaje& solicitud);
 
  private:
-  SocketDatagrama* socket_local_;
+  SocketDatagrama socket_local_;
   Mensaje recibido_;
   Mensaje enviar_;
-  std::string ip_;
-  char peticion_;
+  int peticion_;
 };
 
 #endif

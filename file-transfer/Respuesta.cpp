@@ -20,33 +20,26 @@
 
 const Mensaje& Respuesta::pide() {
   PaqueteDatagrama paquete_recibo(sizeof(Mensaje));
-  socket_local_->recibe(paquete_recibo);
+  socket_local_.recibe(paquete_recibo);
 
-  const auto recibido = reinterpret_cast<Mensaje*>(
-                            const_cast<char*>(paquete_recibo.datos()));
-
-  if (anterior_peticion_ == recibido->id) {
+  if (anterior_peticion_ == paquete_recibo.mensaje().id) {
     recibido_.tipo = 'n';
-    return recibido_;
   } else {
-    std::memcpy(
-        reinterpret_cast<char*>(&recibido_),
-        paquete_recibo.datos(),
-        sizeof(Mensaje));
-    ip_ = socket_local_->ip_foranea();
-    puerto_ = socket_local_->puerto_foranea();
+    recibido_ = paquete_recibo.mensaje();
+    ip_ = socket_local_.ip_foranea();
+    puerto_ = socket_local_.puerto_foranea();
     anterior_peticion_ = recibido_.id;
-    return recibido_;
   }
+
+  return recibido_;
 }
 
-void Respuesta::responde(const char* respuesta) {
-  std::memcpy(reinterpret_cast<char*>(&enviar_), respuesta, sizeof(Mensaje));
+void Respuesta::responde(Mensaje respuesta) {
+  enviar_ = std::move(respuesta);
   enviar_.tipo = '1';
   enviar_.id = recibido_.id;
 
-  PaqueteDatagrama paquete_envio(
-      reinterpret_cast<char*>(&enviar_), sizeof(Mensaje), ip_, htons(puerto_));
+  PaqueteDatagrama paquete_envio(enviar_, sizeof(Mensaje), ip_, htons(puerto_));
 
-  socket_local_->envia(paquete_envio);
+  socket_local_.envia(paquete_envio);
 }
