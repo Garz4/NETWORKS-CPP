@@ -56,7 +56,7 @@ class PaqueteDatagrama final {
         longitud_);
   }
 
-  unsigned int longitud() const noexcept { return longitud_; }
+  size_t longitud() const noexcept { return longitud_; }
 
  private:
   std::string ip_;

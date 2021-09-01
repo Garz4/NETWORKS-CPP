@@ -25,9 +25,11 @@ SocketDatagrama::SocketDatagrama(int puerto) {
   socket_ = socket(AF_INET, SOCK_DGRAM, 0);
 
   bzero(reinterpret_cast<char*>(&direccion_local_), sizeof(direccion_local_));
+
   direccion_local_.sin_family = AF_INET;
   direccion_local_.sin_addr.s_addr = INADDR_ANY;
   direccion_local_.sin_port = htons(puerto);
+
   bind(
       socket_,
       reinterpret_cast<sockaddr*>(&direccion_local_),
@@ -63,6 +65,7 @@ int SocketDatagrama::recibe(
     PaqueteDatagrama& paquete, time_t segundos, suseconds_t microsegundos) {
   timeout_.tv_sec = segundos;
   timeout_.tv_usec = microsegundos;
+
   setsockopt(
       socket_,
       SOL_SOCKET,
@@ -73,15 +76,13 @@ int SocketDatagrama::recibe(
   char dat[paquete.longitud()];
   unsigned int clileng = sizeof(direccion_foranea_);
 
-  if (
-      recvfrom(
+  if (recvfrom(
           socket_,
           dat,
           paquete.longitud() * sizeof(char),
           0,
           reinterpret_cast<sockaddr*>(&direccion_foranea_),
-          &clileng) <
-      0) {
+          &clileng)) {
     if (errno == EWOULDBLOCK) {
       fprintf(stderr, "Tiempo para recepción transcurrido.\n");
       return -1;
