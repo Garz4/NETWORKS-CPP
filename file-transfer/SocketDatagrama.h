@@ -34,10 +34,7 @@ class SocketDatagrama final {
 
   int envia(const PaqueteDatagrama& paquete);
 
-  std::string ip_foranea() const noexcept {
-    return inet_ntoa(direccion_foranea_.sin_addr);
-  }
-
+  const std::string& ip_foranea() const noexcept { return ip_foranea_; }
   unsigned short puerto_foranea() const noexcept {
     return direccion_foranea_.sin_port;
   }
@@ -46,5 +43,6 @@ class SocketDatagrama final {
   sockaddr_in direccion_local_;
   sockaddr_in direccion_foranea_;
   timeval timeout_;
+  std::string ip_foranea_;
   int socket_;
 };

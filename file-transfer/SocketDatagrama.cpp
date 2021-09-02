@@ -56,6 +56,7 @@ int SocketDatagrama::recibe(PaqueteDatagrama& paquete) {
   char str[16];
   inet_ntop(AF_INET, &direccion_foranea_.sin_addr.s_addr, str, 16);
   paquete.set_ip(str);
+  ip_foranea_ = paquete.ip();
   paquete.set_puerto(direccion_foranea_.sin_port);
 
   return 0;
@@ -96,6 +97,7 @@ int SocketDatagrama::recibe(
   char str[16];
   inet_ntop(AF_INET, &direccion_foranea_.sin_addr.s_addr, str, 16);
   paquete.set_ip(str);
+  ip_foranea_ = paquete.ip();
   paquete.set_puerto(direccion_foranea_.sin_port);
 
   return 0;
