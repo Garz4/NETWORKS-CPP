@@ -74,7 +74,7 @@ int main(int argc, char** argv) {
           mensaje_envio.estatus = 0;
           archivo_enviar.seekg(0, std::ios::beg);
           archivo_enviar.read(mensaje_envio.contenido_archivo, tam_archivo);
-          
+
           mensaje_recibo = solicitud.envia_y_recibe(
                                argv[1], 7200, mensaje_envio);
 
