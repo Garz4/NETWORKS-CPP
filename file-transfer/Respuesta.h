@@ -29,6 +29,7 @@ class Respuesta final {
   /* Espera hasta que recibe mensaje, lo copia a recibido_ y lo retorna. */
   const Mensaje& pide();
 
+  /* Responde a la IP que recibe en pide(). */
   void responde(Mensaje respuesta);
 
  private:
