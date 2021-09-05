@@ -23,7 +23,15 @@ class Solicitud final {
   explicit Solicitud() noexcept = default;
   explicit Solicitud(const Solicitud&) noexcept = default;
 
-  /* Retorna el mensaje recibido. */
+  /*
+   * Retorna el mensaje recibido.
+   *
+   * @exception
+   *  - runtime_error: Servidor no está disponible.
+   *  - runtime_error: recvfrom(...) retornó con errores.
+   *  - invalid_argument: Tipo de Mensaje inadecuado.
+   *  - invalid_argument: ID inadecuado.
+   */
   const Mensaje& envia_y_recibe(
       const std::string& ip, unsigned short puerto, const Mensaje& solicitud);
 
