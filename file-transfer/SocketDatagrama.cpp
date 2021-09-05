@@ -86,10 +86,10 @@ int SocketDatagrama::recibe(
           &clileng)) {
     if (errno == EWOULDBLOCK) {
       fprintf(stderr, "Tiempo para recepción transcurrido.\n");
-      return -1;
+      return 1;
     } else {
       fprintf(stderr, "Error en recvfrom.\n");
-      return -2;
+      return 2;
     }
   }
 

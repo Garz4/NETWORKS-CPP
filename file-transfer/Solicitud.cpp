@@ -14,6 +14,7 @@
  */
 
 #include <cstring>
+#include <exception>
 #include <iostream>
 
 #include "PaqueteDatagrama.h"
@@ -38,21 +39,18 @@ const Mensaje& Solicitud::envia_y_recibe(
       if (it != 19) {
         std::printf("No se recibió ningún Mensaje. Intentando de nuevo...\n");
       } else {
-        std::printf("--!! ADVERTENCIA: Servidor no disponible.\n");
-        std::printf("Imposible contactar con el servidor."
+        throw std::runtime_error("--!! ADVERTENCIA: Servidor no disponible.\n"
+                    "Imposible contactar con el servidor."
                     "Inténtelo de nuevo más tarde.\n");
-        std::exit(0);
       }
     } else if (n == -2) {
-      std::printf("--!! ERROR: Error en recvfrom.\n");
-      std::exit(0);
+      throw std::runtime_error("--!! ERROR: Error en recvfrom.\n");
     } else {
       if (paquete_recibo.mensaje().tipo != '1') {
-        std::printf("No se recibió el tipo de Mensaje adecuado.\n");
-        std::exit(0);
+        throw std::invalid_argument(
+            "No se recibió el tipo de Mensaje adecuado.\n");
       } else if (paquete_recibo.mensaje().id != paquete_envio.mensaje().id) {
-        std::printf("No se recibió el ID adecuado.\n");
-        std::exit(0);
+        throw std::invalid_argument("No se recibió el ID adecuado.\n");
       } else {
         recibido_ = paquete_recibo.mensaje();
         peticion_++;
