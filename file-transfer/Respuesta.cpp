@@ -13,8 +13,6 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#include <cstring>
-
 #include "PaqueteDatagrama.h"
 #include "Respuesta.h"
 

@@ -13,9 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#include <cstring>
-#include <exception>
-#include <iostream>
+#include <stdexcept>
 
 #include "PaqueteDatagrama.h"
 #include "Solicitud.h"

@@ -16,6 +16,7 @@
 #pragma once
 
 #include <arpa/inet.h>
+#include <string>
 #include <unistd.h>
 
 #include "PaqueteDatagrama.h"

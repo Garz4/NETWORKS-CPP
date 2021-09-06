@@ -13,8 +13,6 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#include <cstring>
-#include <iostream>
 #include <fstream>
 
 #include "Respuesta.h"

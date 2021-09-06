@@ -13,9 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#include <cstring>
 #include <fstream>
-#include <iostream>
 #include <sstream>
 
 #include "Solicitud.h"

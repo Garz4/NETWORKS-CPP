@@ -15,6 +15,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "Mensaje.h"
 #include "SocketDatagrama.h"
 
