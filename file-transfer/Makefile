@@ -27,3 +27,6 @@ Solicitud.o: Solicitud.cpp Mensaje.h
 
 SocketDatagrama.o: SocketDatagrama.cpp
 	g++ SocketDatagrama.cpp -c
+
+clean:
+	rm -f $(wildcard *.o) ENVIAR_ARCHIVOS RECIBIR_ARCHIVOS
