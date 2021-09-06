@@ -20,7 +20,6 @@
 #include "PaqueteDatagrama.h"
 #include "Solicitud.h"
 
-/* TODO(Garz4): Consider making Solicitud constexpr, moving this to header. */
 const Mensaje& Solicitud::envia_y_recibe(
       const std::string& ip, unsigned short puerto, const Mensaje& solicitud) {
   enviar_ = solicitud;
