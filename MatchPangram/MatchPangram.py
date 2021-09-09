@@ -17,6 +17,7 @@ import random
 import sys
 import time
 
+
 class Colors:
     HEADER = '\033[95m'
     OK_BLUE = '\033[94m'
@@ -28,6 +29,7 @@ class Colors:
     UNDERLINE = '\033[4m'
     DEFAULT = '\033[0m'
 
+
 PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
         "Glib jocks quiz nymph to vex dwarf.",
         "Sphinx of black quartz, judge my vow.",
@@ -37,11 +39,13 @@ PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
         "Pack my box with five dozen liquor jugs.",
         "The quick brown fox jumps over a lazy dog."]
 
+
 def usage():
     print(
         "Usage: " + sys.argv[0] +
         "[-c <pangram> | --custom <pangram>] [-h | --help]"
     )
+
 
 def commands():
     print(
@@ -51,10 +55,12 @@ def commands():
         ":q\t\t - Quit the program."
     )
 
+
 def print_curr_sentence():
     global match_sentence
 
     print("======== " + match_sentence + " ========")
+
 
 def set_pangram(pangram):
     global match_sentence, total_score
@@ -63,8 +69,10 @@ def set_pangram(pangram):
     total_score = len(match_sentence)
     print_curr_sentence()
 
+
 def random_pangram():
     return PANGRAMS[random.randint(0, len(PANGRAMS) - 1)]
+
 
 def parse_arguments():
     #TODO(Garz4): Add more arguments.
@@ -78,6 +86,7 @@ def parse_arguments():
             exit(0)
     else:
         set_pangram(random_pangram())
+
 
 # Matches the current sentence against the global pangram `match_sentence`.
 def match_against(curr_sentence):
@@ -93,6 +102,7 @@ def match_against(curr_sentence):
             curr_score += 1
 
     return curr_score
+
 
 # Prints the current score using colors. Kawaii!
 def print_score(curr_score, time_needed, time_diff):
@@ -126,6 +136,7 @@ def print_score(curr_score, time_needed, time_diff):
     # Get back to original color.
     print(Colors.DEFAULT, end = "")
 
+
 def read_command(command):
     if command == ":q":
         exit(0)
@@ -140,6 +151,7 @@ def read_command(command):
 
     print("Not a recognized command!")
     commands()
+
 
 def main():
     parse_arguments()
@@ -164,6 +176,7 @@ def main():
         curr_time = end - start
         print_score(curr_score, curr_time, curr_time - prev_time)
         prev_time = curr_time
+
 
 if __name__ == '__main__':
     main()
