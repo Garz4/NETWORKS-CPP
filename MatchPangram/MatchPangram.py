@@ -37,9 +37,6 @@ PANGRAMS = ["Waltz, bad nymph, for quick jigs vex.",
         "Pack my box with five dozen liquor jugs.",
         "The quick brown fox jumps over a lazy dog."]
 
-match_sentence = ""
-total_score = 0
-
 def usage():
     print(
         "Usage: " + sys.argv[0] +
@@ -79,6 +76,8 @@ def parse_arguments():
         else:
             usage()
             exit(0)
+    else:
+        set_pangram(random_pangram())
 
 # Matches the current sentence against the global pangram `match_sentence`.
 def match_against(curr_sentence):
