@@ -17,7 +17,7 @@
 
 #include "Respuesta.h"
 
-int main(void) {
+int main(int, char**) {
   Respuesta respuesta(7200);
   Mensaje mensaje_envio;
   Mensaje mensaje_recibo;
