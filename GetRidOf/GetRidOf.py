@@ -25,7 +25,7 @@ def usage():
 
 def parse_arguments():
     #TODO(Garz4): Add more arguments.
-    print()
+    pass
 
 
 def main():
