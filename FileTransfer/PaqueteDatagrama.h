@@ -29,7 +29,7 @@ class PaqueteDatagrama final {
       Mensaje mensaje,
       size_t longitud,
       std::string ip,
-      unsigned short puerto) noexcept
+      unsigned short puerto)
       : mensaje_(std::move(mensaje)),
         longitud_(longitud),
         ip_(std::move(ip)),
@@ -41,7 +41,7 @@ class PaqueteDatagrama final {
   void set_ip(std::string ip) { ip_ = std::move(ip); }
 
   unsigned short puerto() const noexcept { return puerto_; }
-  void set_puerto(unsigned short puerto) { puerto_ = puerto; }
+  void set_puerto(unsigned short puerto) noexcept { puerto_ = puerto; }
 
   const char* datos() const {
     return reinterpret_cast<char*>(const_cast<Mensaje*>(&mensaje_));
