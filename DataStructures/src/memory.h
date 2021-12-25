@@ -13,13 +13,19 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef TEST_H_
-#define TEST_H_
+#ifndef MEMORY_H_
+#define MEMORY_H_
 
-#define EXPECT_EQUAL(lhs, rhs) \
-  if (lhs != rhs) { \
-    fprintf(stderr, "Test error: Not equal.\n"); \
-    exit(0); \
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ALLOCATE(ptr, type) \
+  ptr = (type *) malloc(sizeof(type)); \
+  if (ptr == NULL) { \
+    fprintf(stderr, "ERROR: Out of memory.\n"); \
+    exit(1); \
   }
 
-#endif // TEST_H_
+#define DELETE(ptr) free(ptr);
+
+#endif // MEMORY_H_

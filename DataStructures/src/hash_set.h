@@ -13,13 +13,7 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef TEST_H_
-#define TEST_H_
+#ifndef HASH_SET_H_
+#define HASH_SET_H_
 
-#define EXPECT_EQUAL(lhs, rhs) \
-  if (lhs != rhs) { \
-    fprintf(stderr, "Test error: Not equal.\n"); \
-    exit(0); \
-  }
-
-#endif // TEST_H_
+#endif // HASH_SET_H_
