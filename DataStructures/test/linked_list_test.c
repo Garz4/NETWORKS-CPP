@@ -19,13 +19,29 @@
 #include "../src/linked_list.h"
 
 int main(int argc, char** argv) {
-  size_t len = 5;
-  linked_list* list = new_linked_list(0);
-  for (int i = 1; i < len; ++i) {
+  START_TEST("linked_list_test");
+
+  const size_t len = 5;
+  const int first_element = 0, last_element = 4;
+  linked_list* list = new_linked_list(first_element);
+
+  for (int i = first_element + 1; i <= last_element; ++i) {
     add_to_linked_list(list, i);
   }
-  EXPECT_EQUAL(exist_in_linked_list(list, 3), true);
-  EXPECT_EQUAL(exist_in_linked_list(list, 8), false);
+
+  EXPECT_TRUE(exist_in_linked_list(list, 3));
+  EXPECT_FALSE(exist_in_linked_list(list, 8));
+  EXPECT_EQUAL(list->size, len);
+
+  // TODO(Garz4): Create another list and actually verify it was fully reversed.
+  reverse_linked_list(list);
+
+  EXPECT_EQUAL(list->head->val, last_element);
+  EXPECT_EQUAL(list->tail->val, first_element);
+
   delete_linked_list(list);
+
+  FINISH_TEST();
+
   return 0;
 }

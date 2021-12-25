@@ -116,4 +116,24 @@ delete_linked_list(linked_list* list) {
   DELETE(list);
 }
 
+extern
+void
+reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
+  if (node == NULL) {
+    return;
+  }
+  reverse_linked_list_nodes(node, node->next);
+  node->next = parent;
+}
+
+extern
+void
+reverse_linked_list(linked_list* list) {
+  if (list == NULL) return;
+  reverse_linked_list_nodes(NULL, list->head);
+  linked_list_node* aux = list->head;
+  list->head = list->tail;
+  list->tail = aux;
+}
+
 #endif // LINKED_LIST_H_

@@ -36,9 +36,7 @@ class SocketDatagrama final {
   int envia(const PaqueteDatagrama& paquete);
 
   const std::string& ip_foranea() const noexcept { return ip_foranea_; }
-  unsigned short puerto_foranea() const noexcept {
-    return direccion_foranea_.sin_port;
-  }
+  auto puerto_foranea() const noexcept { return direccion_foranea_.sin_port; }
 
  private:
   sockaddr_in direccion_local_;

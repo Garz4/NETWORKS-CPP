@@ -11,10 +11,20 @@
 #
 # https://github.com/Garz4/zoning/blob/master/LICENSE
 
-all: test clean
+all: data test clean
 
-test: 
-	whoami
+data:
+	cd DataStructures && make
+
+# TODO(Garz4): Enable arguments to only test certain parts,
+#   e. g., "make test DataStructures FileTransfer"
+test: DataStructuresTest FileTransferTest
+
+DataStructuresTest:
+	cd DataStructures && make test
+
+FileTransferTest:
+	cd FileTransfer && make test
 
 clean:
 	whoami
