@@ -13,21 +13,17 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef MEMORY_H_
-#define MEMORY_H_
-
 #include <stdio.h>
-#include <stdlib.h>
 
-#include "../../Terminal/outputstream.h"
+#include "../../Testing/comparators.h"
+#include "../src/hash_map.h"
 
-#define ALLOCATE(ptr, type) \
-  ptr = (type *) malloc(sizeof(type)); \
-  if (ptr == NULL) { \
-    STDERR_RED("ERROR: Out of memory.\n"); \
-    EXIT(1); \
-  }
+int main(int argc, char** argv) {
+  START_TEST("hash_map_test");
 
-#define DELETE(ptr) free(ptr);
+  EXPECT_TRUE(1);
 
-#endif // MEMORY_H_
+  FINISH_TEST();
+
+  return 0;
+}

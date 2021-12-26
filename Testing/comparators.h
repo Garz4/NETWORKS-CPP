@@ -13,13 +13,29 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef TEST_H_
-#define TEST_H_
+#ifndef COMPARATORS_H_
+#define COMPARATORS_H_
+
+#include "../Terminal/outputstream.h"
+#include "results.h"
+
+#define FAIL(string) \
+  STDERR_RED("[%s]: %s\n", GET_CURRENT_TEST(), string); \
+  FINISH_TEST_FAILED()
 
 #define EXPECT_EQUAL(lhs, rhs) \
   if (lhs != rhs) { \
-    fprintf(stderr, "Test error: Not equal.\n"); \
-    exit(0); \
+    FAIL("Arguments should be equal.") \
   }
 
-#endif // TEST_H_
+#define EXPECT_TRUE(boolean) \
+  if (!boolean) { \
+    FAIL("Argument should be true.") \
+  }
+
+#define EXPECT_FALSE(boolean) \
+  if (boolean) { \
+    FAIL("Argument should be false.") \
+  }
+
+#endif // COMPARATORS_H_

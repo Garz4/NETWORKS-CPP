@@ -13,21 +13,29 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#ifndef MEMORY_H_
-#define MEMORY_H_
-
 #include <stdio.h>
-#include <stdlib.h>
 
-#include "../../Terminal/outputstream.h"
+#include "../../Testing/comparators.h"
+#include "../src/sort_set.h"
 
-#define ALLOCATE(ptr, type) \
-  ptr = (type *) malloc(sizeof(type)); \
-  if (ptr == NULL) { \
-    STDERR_RED("ERROR: Out of memory.\n"); \
-    EXIT(1); \
+int main(int argc, char** argv) {
+  START_TEST("sort_set_test");
+
+  const size_t len = 5;
+  const int first_element = 0, last_element = 4;
+  sort_set* set = new_sort_set(first_element);
+
+  for (int i = first_element + 1; i <= last_element; ++i) {
+    add_to_sort_set(set, i);
   }
 
-#define DELETE(ptr) free(ptr);
+  EXPECT_EQUAL(set->size, 1);
+  EXPECT_TRUE(exist_in_sort_set(set, 0));
+  EXPECT_FALSE(exist_in_sort_set(set, 6782));
 
-#endif // MEMORY_H_
+  delete_sort_set(set);
+
+  FINISH_TEST();
+
+  return 0;
+}

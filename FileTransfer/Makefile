@@ -28,5 +28,11 @@ Solicitud.o: Solicitud.cpp Mensaje.h
 SocketDatagrama.o: SocketDatagrama.cpp
 	g++ SocketDatagrama.cpp -c
 
+test: PaqueteDatagrama_test
+	./PaqueteDatagrama_test ; rm PaqueteDatagrama_test
+
+PaqueteDatagrama_test: test/PaqueteDatagrama_test.cpp
+	g++ test/PaqueteDatagrama_test.cpp -o PaqueteDatagrama_test
+
 clean:
 	rm -f $(wildcard *.o) ENVIAR_ARCHIVOS RECIBIR_ARCHIVOS
