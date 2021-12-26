@@ -18,12 +18,10 @@
 #include "../../Testing/comparators.h"
 #include "../src/sort_map.h"
 
-int main(int argc, char** argv) {
+void main(void) {
   START_TEST("sort_map_test");
 
   EXPECT_TRUE(1);
 
   FINISH_TEST();
-
-  return 0;
 }
