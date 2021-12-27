@@ -21,34 +21,34 @@
 
 #ifdef __cplusplus
 
-static std::string __CURRENT_TEST;
+static std::string __CURRENT_TEST_;
 
-static const char* GET_CURRENT_TEST() {
-  return __CURRENT_TEST.c_str();
+static const char* __CURRENT_TEST() {
+  return __CURRENT_TEST_.c_str();
 }
 
 # define START_TEST(string) \
-  __CURRENT_TEST = string;
+  __CURRENT_TEST_ = string;
 
 #else
 
-static char* __CURRENT_TEST;
+static char* __CURRENT_TEST_;
 
-static const char* GET_CURRENT_TEST() {
-  return __CURRENT_TEST;
+static const char* __CURRENT_TEST() {
+  return __CURRENT_TEST_;
 }
 
 # define START_TEST(string) \
-  DELETE(__CURRENT_TEST); \
-  __CURRENT_TEST = string;
+  DELETE(__CURRENT_TEST_); \
+  __CURRENT_TEST_ = string;
 
 #endif // __cplusplus
 
 #define FINISH_TEST() \
-  STDERR_GREEN("[%s]: Passed.\n", GET_CURRENT_TEST());
+  STDERR_GREEN("[%s]: Passed.\n", __CURRENT_TEST());
 
 #define FINISH_TEST_FAILED() \
-  STDERR_RED("[%s]: Failed.\n", GET_CURRENT_TEST()); \
+  STDERR_RED("[%s]: Failed.\n", __CURRENT_TEST()); \
   EXIT(1);
 
 #endif // RESULTS_H_

@@ -20,7 +20,7 @@
 #include "results.h"
 
 #define FAIL(string) \
-  STDERR_RED("[%s]: %s\n", GET_CURRENT_TEST(), string); \
+  STDERR_RED("[%s]: %s\n", __CURRENT_TEST(), string); \
   FINISH_TEST_FAILED()
 
 #define EXPECT_EQUAL(lhs, rhs) \
