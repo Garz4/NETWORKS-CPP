@@ -44,10 +44,10 @@ static const char* GET_CURRENT_TEST() {
 
 #endif // __cplusplus
 
-# define FINISH_TEST() \
+#define FINISH_TEST() \
   STDERR_GREEN("[%s]: Passed.\n", GET_CURRENT_TEST());
 
-# define FINISH_TEST_FAILED() \
+#define FINISH_TEST_FAILED() \
   STDERR_RED("[%s]: Failed.\n", GET_CURRENT_TEST()); \
   EXIT(1);
 
