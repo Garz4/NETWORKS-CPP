@@ -22,10 +22,7 @@
 #ifdef __cplusplus
 
 static std::string __CURRENT_TEST_;
-
-static const char* __CURRENT_TEST() {
-  return __CURRENT_TEST_.c_str();
-}
+static const char* __CURRENT_TEST() { return __CURRENT_TEST_.c_str(); }
 
 # define START_TEST(string) \
   __CURRENT_TEST_ = string;
@@ -33,10 +30,7 @@ static const char* __CURRENT_TEST() {
 #else
 
 static char* __CURRENT_TEST_;
-
-static const char* __CURRENT_TEST() {
-  return __CURRENT_TEST_;
-}
+static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
 
 # define START_TEST(string) \
   DELETE(__CURRENT_TEST_); \
