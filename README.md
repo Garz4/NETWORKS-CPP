@@ -1,7 +1,6 @@
-<h1 align="center">zoning</h1>
+# <img src="docs/imgs/zoning.png" alt="zoning" height="70px" align="center" >
 
 <p align="center">
-  <br>
   <i>Seeking simplicity, flowing relentlessly, forging greatness.</i>
   <br>
 </p>
