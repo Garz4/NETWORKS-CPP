@@ -1,8 +1,8 @@
-# <img src="docs/imgs/zoning.png" alt="zoning" height="70px" align="center" >
-
 <p align="center">
+  <img src="docs/imgs/zoning.png" alt="zoning" height="70px" ><br /><br />
   <i>Seeking simplicity, flowing relentlessly, forging greatness.</i>
-  <br>
+  <hr />
+  <br />
 </p>
 
 zoning are a list of tools to help anyone enter the --so called-- zone.
