@@ -18,7 +18,7 @@
 #include "../../Testing/comparators.h"
 #include "../src/sort_set.h"
 
-int main(int argc, char** argv) {
+void main(void) {
   START_TEST("sort_set_test");
 
   const size_t len = 5;
@@ -36,6 +36,4 @@ int main(int argc, char** argv) {
   delete_sort_set(set);
 
   FINISH_TEST();
-
-  return 0;
 }

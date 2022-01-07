@@ -35,6 +35,7 @@ struct ll {
   linked_list_node* tail;
 };
 
+// Every new linked list needs to be deleted using delete_linked_list(...).
 extern
 linked_list*
 new_linked_list(int val) {
@@ -46,6 +47,7 @@ new_linked_list(int val) {
   return response;
 }
 
+// Example: "list = {1, 2, 3, ...};"
 extern
 void
 print_linked_list(const linked_list* list) {
@@ -59,6 +61,7 @@ print_linked_list(const linked_list* list) {
   printf("};\n");
 }
 
+// Linear time, stops when finding the first occurence.
 extern
 bool
 exist_in_linked_list(const linked_list* list, int val) {
@@ -70,17 +73,6 @@ exist_in_linked_list(const linked_list* list, int val) {
     head = head->next;
   }
   return false;
-}
-
-extern
-void
-add_head_linked_list(linked_list* list) {
-  if (list == NULL) return;
-  linked_list_node* head;
-  ALLOCATE(head, linked_list_node);
-  head->next = list->head;
-  list->head = head;
-  list->size++;
 }
 
 extern
@@ -126,6 +118,7 @@ reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
   node->next = parent;
 }
 
+// Linear time.
 extern
 void
 reverse_linked_list(linked_list* list) {
@@ -135,5 +128,14 @@ reverse_linked_list(linked_list* list) {
   list->head = list->tail;
   list->tail = aux;
 }
+
+// By making a copy, deleting that copy is also necessary.
+extern
+linked_list*
+copy_of_linked_list(const linked_list* list) {}
+
+extern
+bool
+equal_linked_list(const linked_list* lhs, const linked_list* rhs) {}
 
 #endif // LINKED_LIST_H_

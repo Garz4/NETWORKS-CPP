@@ -13,35 +13,46 @@
  * https://github.com/Garz4/zoning/blob/master/LICENSE
  */
 
-#include <stdio.h>
-
 #include "../../Testing/comparators.h"
 #include "../src/linked_list.h"
 
-int main(int argc, char** argv) {
+void main(void) {
   START_TEST("linked_list_test");
 
   const size_t len = 5;
-  const int first_element = 0, last_element = 4;
+  const int first_element = 0;
+
+  // Should not be >= INT_MAX.
+  const int last_element = 4;
+
   linked_list* list = new_linked_list(first_element);
 
   for (int i = first_element + 1; i <= last_element; ++i) {
     add_to_linked_list(list, i);
   }
 
-  EXPECT_TRUE(exist_in_linked_list(list, 3));
-  EXPECT_FALSE(exist_in_linked_list(list, 8));
+  EXPECT_TRUE(exist_in_linked_list(list, first_element + 2));
+  EXPECT_FALSE(exist_in_linked_list(list, last_element + 1));
   EXPECT_EQUAL(list->size, len);
 
-  // TODO(Garz4): Create another list and actually verify it was fully reversed.
+  // TODO(Garz4): Add following API to linked_list:
+  // auto list2 = copy_of_linked_list(list);
+  // EXPECT_TRUE(equal_linked_list(list, list2));
+  // reverse_linked_list(list2);
+  // reverse_linked_list(list2);
+  // EXPECT_TRUE(are_equal_linked_list(list, list2));
   reverse_linked_list(list);
 
-  EXPECT_EQUAL(list->head->val, last_element);
-  EXPECT_EQUAL(list->tail->val, first_element);
+  linked_list_node* node;
+  int curr_element = last_element;
+
+  for (node = list->head; node != NULL; node = node->next) {
+    EXPECT_EQUAL(node->val, curr_element--);
+  }
+
+  EXPECT_EQUAL(first_element, curr_element + 1);
 
   delete_linked_list(list);
 
   FINISH_TEST();
-
-  return 0;
 }
