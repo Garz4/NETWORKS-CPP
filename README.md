@@ -1,8 +1,13 @@
 <p align="center">
-  <img src="docs/imgs/zoning.png" alt="zoning" height="70px" ><br /><br />
-  <i>Seeking simplicity, flowing relentlessly, forging greatness.</i>
+  <img src="docs/imgs/zoning-logo.png" alt="zoning" height="70px" ><br /><br />
+  <a href="https://github.com/Garz4/zoning/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Garz4/zoning" alt="MIT license">
+  </a>
+  <a href="https://github.com/Garz4/zoning/actions">
+    <img src="https://img.shields.io/github/stars/Garz4/zoning?style=social" alt="Stars">
+  </a>
+  <br /><i>Seeking simplicity, flowing relentlessly, forging greatness.</i>
   <hr />
-  <br />
 </p>
 
 zoning are a list of tools to help anyone enter the --so called-- zone.
