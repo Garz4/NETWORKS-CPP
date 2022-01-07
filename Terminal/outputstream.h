@@ -6,6 +6,8 @@
 
 #define EXIT(code) exit(code);
 
+// To make it bold, e. g., red: "\033[01;91m"
+
 #define STDERR_RED(...) \
   fprintf(stderr, "\033[91m"); \
   fprintf(stderr, __VA_ARGS__); \
