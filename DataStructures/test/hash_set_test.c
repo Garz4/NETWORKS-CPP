@@ -18,10 +18,12 @@
 #include "../../Testing/comparators.h"
 #include "../src/hash_set.h"
 
-void main(void) {
+int main(void) {
   START_TEST("hash_set_test");
 
   EXPECT_TRUE(1);
 
   FINISH_TEST();
+
+  return 0;
 }

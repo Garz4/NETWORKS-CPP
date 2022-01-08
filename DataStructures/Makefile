@@ -15,7 +15,7 @@ all: test
 	./linked_list_test ; make clean
 
 test: hash_map_test hash_set_test linked_list_test sort_map_test sort_set_test
-	./hash_map_test ; ./hash_set_test ; ./linked_list_test ; ./sort_map_test ; ./sort_set_test ; make clean
+	(./hash_map_test && ./hash_set_test && ./linked_list_test && ./sort_map_test && ./sort_set_test) ; make clean
 
 linked_list_test: test/linked_list_test.c
 	gcc test/linked_list_test.c -o linked_list_test

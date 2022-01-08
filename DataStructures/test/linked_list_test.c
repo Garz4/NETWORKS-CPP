@@ -16,7 +16,7 @@
 #include "../../Testing/comparators.h"
 #include "../src/linked_list.h"
 
-void main(void) {
+int main(void) {
   START_TEST("linked_list_test");
 
   const size_t len = 5;
@@ -55,4 +55,6 @@ void main(void) {
   delete_linked_list(list);
 
   FINISH_TEST();
+
+  return 0;
 }
