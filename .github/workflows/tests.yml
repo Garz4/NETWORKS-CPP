@@ -12,3 +12,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: test
       run: cd DataStructures && make test
+
+  FileTransfer_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: test
+      run: cd FileTransfer && make test
