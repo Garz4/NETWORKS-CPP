@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  DataStructures_tests:
+  tests:
     runs-on: ubuntu-latest
     steps:
     - name: test
-      run: cd DataStructures && make test
+      run: make test
