@@ -1,5 +1,8 @@
 <p align="center">
   <img src="docs/imgs/zoning-logo.png" alt="zoning" height="70px" ><br /><br />
+  <a href="https://github.com/Garz4/zoning/actions/workflows/c-cpp.yml">
+    <img src="https://github.com/Garz4/zoning/actions/workflows/c-cpp.yml/badge.svg" alt="C/C++ CI">
+  </a>
   <a href="https://github.com/Garz4/zoning/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Garz4/zoning" alt="MIT license">
   </a>
