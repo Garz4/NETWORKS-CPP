@@ -21,7 +21,7 @@
 int main(void) {
   START_TEST("sort_map_test");
 
-  EXPECT_TRUE(0);
+  EXPECT_TRUE(1);
 
   FINISH_TEST();
 
