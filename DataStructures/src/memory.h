@@ -31,4 +31,3 @@
 #define DELETE(ptr) free(ptr);
 
 #endif // MEMORY_H_
-
