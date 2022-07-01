@@ -22,6 +22,10 @@
 
 #include "memory.h"
 
+/**
+ * linked_list
+ */
+
 typedef struct ll_node linked_list_node;
 struct ll_node {
   int val;
@@ -40,24 +44,31 @@ extern
 linked_list*
 new_linked_list(int val) {
   linked_list* response;
+
   ALLOCATE(response, linked_list);
   ALLOCATE(response->head, linked_list_node);
   response->size = 1;
   response->tail = response->head;
+
   return response;
 }
 
-// Example: "list = {1, 2, 3, ...};"
+// Example output to screen: "list = {1, 2, 3, 4, 5};"
 extern
 void
 print_linked_list(const linked_list* list) {
   linked_list_node* head = list->head;
   printf("list = {");
+
   while (head != NULL) {
     printf("%d", head->val);
     head = head->next;
-    if (head != NULL) printf(", ");
+
+    if (head != NULL) {
+      printf(", ");
+    }
   }
+
   printf("};\n");
 }
 
@@ -66,19 +77,25 @@ extern
 bool
 exist_in_linked_list(const linked_list* list, int val) {
   linked_list_node* head = list->head;
+
   while (head != NULL) {
     if (head->val == val) {
       return true;
     }
+
     head = head->next;
   }
+
   return false;
 }
 
 extern
 void
 add_tail_linked_list(linked_list* list, int val) {
-  if (list == NULL) return;
+  if (list == NULL) {
+    return;
+  }
+
   ALLOCATE(list->tail->next, linked_list_node);
   list->tail = list->tail->next;
   list->tail->val = val;
@@ -88,14 +105,20 @@ add_tail_linked_list(linked_list* list, int val) {
 extern
 void
 add_to_linked_list(linked_list* list, int val) {
-  if (list == NULL) return;
+  if (list == NULL) {
+    return;
+  }
+
   add_tail_linked_list(list, val);
 }
 
 extern
 void
 delete_linked_list_nodes(linked_list_node* node) {
-  if (node == NULL) return;
+  if (node == NULL) {
+    return;
+  }
+
   delete_linked_list_nodes(node->next);
   DELETE(node);
 }
@@ -103,7 +126,10 @@ delete_linked_list_nodes(linked_list_node* node) {
 extern
 void
 delete_linked_list(linked_list* list) {
-  if (list == NULL) return;
+  if (list == NULL) {
+    return;
+  }
+
   delete_linked_list_nodes(list->head);
   DELETE(list);
 }
@@ -114,6 +140,7 @@ reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
   if (node == NULL) {
     return;
   }
+
   reverse_linked_list_nodes(node, node->next);
   node->next = parent;
 }
@@ -122,7 +149,10 @@ reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
 extern
 void
 reverse_linked_list(linked_list* list) {
-  if (list == NULL) return;
+  if (list == NULL) {
+    return;
+  }
+
   reverse_linked_list_nodes(NULL, list->head);
   linked_list_node* aux = list->head;
   list->head = list->tail;
@@ -132,10 +162,12 @@ reverse_linked_list(linked_list* list) {
 // By making a copy, deleting that copy is also necessary.
 extern
 linked_list*
-copy_of_linked_list(const linked_list* list) {}
+copy_of_linked_list(const linked_list* list) { return NULL; }
 
 extern
 bool
-equal_linked_list(const linked_list* lhs, const linked_list* rhs) {}
+equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
+  return false;
+}
 
 #endif // LINKED_LIST_H_
