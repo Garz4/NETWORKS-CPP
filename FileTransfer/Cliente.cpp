@@ -34,9 +34,9 @@ int main(int argc, char** argv) {
   std::ifstream archivo_leer;
   std::ifstream archivo_enviar;
   std::string linea;
-  int tam_archivo;
   std::string convertir;
   std::stringstream strs;
+  int tam_archivo;
 
   archivo_leer.open(argv[2]);
 
