@@ -39,7 +39,7 @@ static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
 #endif // __cplusplus
 
 #define FINISH_TEST() \
-  STDERR_GREEN("[%s]: Passed.\n", __CURRENT_TEST());
+  STDOUT_GREEN("[%s]: Passed.\n", __CURRENT_TEST());
 
 #define FINISH_TEST_FAILED() \
   STDERR_RED("[%s]: Failed.\n", __CURRENT_TEST()); \

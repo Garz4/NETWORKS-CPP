@@ -28,9 +28,9 @@
   fprintf(stderr, __VA_ARGS__); \
   fprintf(stderr, "\033[0m");
 
-#define STDERR_GREEN(...) \
-  fprintf(stderr, "\033[92m"); \
-  fprintf(stderr, __VA_ARGS__); \
-  fprintf(stderr, "\033[0m");
+#define STDOUT_GREEN(...) \
+  fprintf(stdout, "\033[92m"); \
+  fprintf(stdout, __VA_ARGS__); \
+  fprintf(stdout, "\033[0m");
 
 #endif // OUTPUTSTREAM_H_
