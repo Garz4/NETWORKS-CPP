@@ -28,6 +28,8 @@
     EXIT(1); \
   }
 
-#define DELETE(pointer) free(pointer);
+#define DEALLOCATE(pointer) \
+  free(pointer); \
+  pointer = NULL;
 
 #endif // MEMORY_H_

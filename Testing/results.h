@@ -33,7 +33,7 @@ static char* __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
 
 # define START_TEST(string) \
-  DELETE(__CURRENT_TEST_); \
+  DEALLOCATE(__CURRENT_TEST_); \
   __CURRENT_TEST_ = string;
 
 #endif // __cplusplus

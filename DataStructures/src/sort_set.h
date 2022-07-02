@@ -77,8 +77,8 @@ exist_in_sort_set(const sort_set* set, int val) {
 extern
 void
 delete_sort_set(sort_set* set) {
-    DELETE(set->root);
-    DELETE(set);
+    DEALLOCATE(set->root);
+    DEALLOCATE(set);
 }
 
 #endif // SORT_SET_H_

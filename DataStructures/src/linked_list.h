@@ -116,7 +116,7 @@ delete_linked_list_nodes(linked_list_node* node) {
   }
 
   delete_linked_list_nodes(node->next);
-  DELETE(node);
+  DEALLOCATE(node);
 }
 
 extern
@@ -127,7 +127,7 @@ delete_linked_list(linked_list* list) {
   }
 
   delete_linked_list_nodes(list->head);
-  DELETE(list);
+  DEALLOCATE(list);
 }
 
 // PENDING: Deletes first occurence of 'target' in the linked list. It frees its memory.
@@ -143,7 +143,7 @@ delete_in_linked_list(linked_list* list, int target) {
   if (node->val == target) {
     list->head = node->next;
     node = node->next;
-    // DELETE(aux);
+    // DEALLOCATE(aux);
     list->size--;
     return;
   }
@@ -157,7 +157,7 @@ delete_in_linked_list(linked_list* list, int target) {
       //aux = node;
       node = node->next;
       list->head = node;
-      //DELETE(aux);
+      // DEALLOCATE(aux);
       list->size--;
       // delete
       return;
