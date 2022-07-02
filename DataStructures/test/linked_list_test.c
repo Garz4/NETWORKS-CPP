@@ -19,12 +19,10 @@
 int main(void) {
   START_TEST("linked_list_test");
 
-  const size_t len = 5;
-  const int first_element = 0;
-
   // Should not be >= INT_MAX.
-  const int last_element = 4;
-
+  const size_t len = 5;
+  const int last_element = len - 1;
+  const int first_element = 0;
   linked_list* list = new_linked_list(first_element);
 
   for (int i = first_element + 1; i <= last_element; ++i) {
