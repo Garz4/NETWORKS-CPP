@@ -19,10 +19,6 @@
 #include "../Terminal/outputstream.h"
 #include "results.h"
 
-#define FAIL(string) \
-  STDERR_RED("[%s]: %s\n", __CURRENT_TEST(), string); \
-  FINISH_TEST_FAILED()
-
 #define EXPECT_EQUAL(lhs, rhs) \
   if (lhs != rhs) { \
     FAIL("Arguments should be equal.") \

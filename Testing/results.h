@@ -45,4 +45,8 @@ static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
   STDERR_RED("[%s]: Failed.\n", __CURRENT_TEST()); \
   EXIT(1);
 
+#define FAIL(string) \
+  STDERR_RED("[%s]: %s\n", __CURRENT_TEST(), string); \
+  FINISH_TEST_FAILED()
+
 #endif // RESULTS_H_
