@@ -41,8 +41,8 @@ extern
 sort_set*
 new_sort_set(int val) {
   sort_set* response;
-  ALLOCATE(response, sort_set);
-  ALLOCATE(response->root, sort_set_node);
+  ALLOCATE(sort_set, response);
+  ALLOCATE(sort_set_node, response->root);
   response->size = 1;
   response->root->val = val;
   return response;

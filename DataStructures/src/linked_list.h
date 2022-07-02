@@ -22,10 +22,6 @@
 
 #include "memory.h"
 
-/**
- * linked_list
- */
-
 typedef struct ll_node linked_list_node;
 struct ll_node {
   int val;
@@ -45,8 +41,8 @@ linked_list*
 new_linked_list(int val) {
   linked_list* response;
 
-  ALLOCATE(response, linked_list);
-  ALLOCATE(response->head, linked_list_node);
+  ALLOCATE(linked_list, response);
+  ALLOCATE(linked_list_node, response->head);
   response->size = 1;
   response->tail = response->head;
 
@@ -96,7 +92,7 @@ add_tail_linked_list(linked_list* list, int val) {
     return;
   }
 
-  ALLOCATE(list->tail->next, linked_list_node);
+  ALLOCATE(linked_list_node, list->tail->next);
   list->tail = list->tail->next;
   list->tail->val = val;
   list->size++;
@@ -134,6 +130,43 @@ delete_linked_list(linked_list* list) {
   DELETE(list);
 }
 
+// PENDING: Deletes first occurence of 'target' in the linked list. It frees its memory.
+extern
+void
+delete_in_linked_list(linked_list* list, int target) {
+  if (list == NULL || list->head == NULL) {
+    return;
+  }
+
+  linked_list_node* node = list->head;
+
+  if (node->val == target) {
+    list->head = node->next;
+    node = node->next;
+    // DELETE(aux);
+    list->size--;
+    return;
+  }
+
+  while (node->next != NULL) {
+    if (node->next->val == target) {
+      if (node->next == list->tail) {
+        list->tail = node;
+      }
+
+      //aux = node;
+      node = node->next;
+      list->head = node;
+      //DELETE(aux);
+      list->size--;
+      // delete
+      return;
+    }
+
+    node = node->next;
+  }
+}
+
 extern
 void
 reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
@@ -162,12 +195,32 @@ reverse_linked_list(linked_list* list) {
 // By making a copy, deleting that copy is also necessary.
 extern
 linked_list*
-copy_of_linked_list(const linked_list* list) { return NULL; }
+copy_of_linked_list(const linked_list* list) {
+  return NULL;
+}
 
 extern
 bool
 equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
-  return false;
+  if (lhs == NULL && rhs == NULL) {
+    return true;
+  } else if (lhs == NULL || rhs == NULL || lhs->size != rhs->size) {
+    return false;
+  }
+
+  linked_list_node* lhs_node = lhs->head;
+  linked_list_node* rhs_node = rhs->head;
+
+  while (lhs_node != NULL && rhs_node != NULL) {
+    if (lhs_node->val != rhs_node->val) {
+      return false;
+    }
+
+    lhs_node = lhs_node->next;
+    rhs_node = rhs_node->next;
+  }
+
+  return lhs_node == NULL && rhs_node == NULL;
 }
 
 #endif // LINKED_LIST_H_

@@ -21,13 +21,13 @@
 
 #include "../../Terminal/outputstream.h"
 
-#define ALLOCATE(ptr, type) \
-  ptr = (type *) malloc(sizeof(type)); \
-  if (ptr == NULL) { \
+#define ALLOCATE(type, pointer) \
+  pointer = (type *) malloc(sizeof(type)); \
+  if (pointer == NULL) { \
     STDERR_RED("ERROR: Out of memory.\n"); \
     EXIT(1); \
   }
 
-#define DELETE(ptr) free(ptr);
+#define DELETE(pointer) free(pointer);
 
 #endif // MEMORY_H_
