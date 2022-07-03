@@ -21,7 +21,7 @@
 
 #define EXIT(code) exit(code);
 
-// To make it bold, e. g., red: "\033[01;91m"
+// To make it bold, add 01; between the brace and the number 
 
 #define STDERR_RED(...) \
   fprintf(stderr, "\033[91m"); \

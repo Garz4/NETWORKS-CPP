@@ -44,6 +44,8 @@ new_linked_list(int val) {
   ALLOCATE(linked_list, response);
   ALLOCATE(linked_list_node, response->head);
   response->size = 1;
+  response->head->val = val;
+  response->head->next = NULL;
   response->tail = response->head;
 
   return response;
@@ -87,7 +89,7 @@ exist_in_linked_list(const linked_list* list, int val) {
 
 extern
 void
-add_tail_linked_list(linked_list* list, int val) {
+add_to_linked_list(linked_list* list, int val) {
   if (list == NULL) {
     return;
   }
@@ -95,20 +97,10 @@ add_tail_linked_list(linked_list* list, int val) {
   ALLOCATE(linked_list_node, list->tail->next);
   list->tail = list->tail->next;
   list->tail->val = val;
+  list->tail->next = NULL;
   list->size++;
 }
 
-extern
-void
-add_to_linked_list(linked_list* list, int val) {
-  if (list == NULL) {
-    return;
-  }
-
-  add_tail_linked_list(list, val);
-}
-
-extern
 void
 delete_linked_list_nodes(linked_list_node* node) {
   if (node == NULL) {
@@ -167,7 +159,6 @@ delete_in_linked_list(linked_list* list, int target) {
   }
 }
 
-extern
 void
 reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
   if (node == NULL) {
