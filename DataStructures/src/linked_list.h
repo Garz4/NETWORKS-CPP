@@ -186,7 +186,7 @@ reverse_linked_list(linked_list* list) {
 // By making a copy, deleting that copy is also necessary.
 extern
 linked_list*
-copy_of_linked_list(const linked_list* list) {
+copy_linked_list(const linked_list* list) {
   if (list == NULL || list->head == NULL) {
     return NULL;
   }

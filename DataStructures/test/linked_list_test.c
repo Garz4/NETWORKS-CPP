@@ -33,7 +33,7 @@ int main(void) {
   EXPECT_FALSE(exist_in_linked_list(list, last_element + 1));
   EXPECT_EQUAL(list->size, len);
 
-  linked_list* list_copy = copy_of_linked_list(list);
+  linked_list* list_copy = copy_linked_list(list);
 
   EXPECT_TRUE(equal_linked_list(list, list));
   EXPECT_TRUE(equal_linked_list(list, list_copy));
