@@ -35,11 +35,13 @@ int main(void) {
 
   linked_list* list_copy = copy_of_linked_list(list);
 
+  EXPECT_TRUE(equal_linked_list(list, list));
   EXPECT_TRUE(equal_linked_list(list, list_copy));
   reverse_linked_list(list);
   EXPECT_FALSE(equal_linked_list(list, list_copy));
   reverse_linked_list(list_copy);
   EXPECT_TRUE(equal_linked_list(list, list_copy));
+  EXPECT_TRUE(equal_linked_list(list_copy, list_copy));
 
   linked_list_node* node;
   int curr_element = last_element;
