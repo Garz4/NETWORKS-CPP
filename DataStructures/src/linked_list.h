@@ -226,4 +226,8 @@ equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
   return lhs_node == NULL && rhs_node == NULL;
 }
 
+extern
+void
+sort_linked_list(linked_list* list) {}
+
 #endif // LINKED_LIST_H_

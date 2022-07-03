@@ -50,7 +50,6 @@ int main(void) {
     EXPECT_EQUAL(node->value, curr_element--);
   }
 
-  EXPECT_EQUAL(first_element, curr_element + 1);
   delete_linked_list(list);
   delete_linked_list(list_copy);
 
