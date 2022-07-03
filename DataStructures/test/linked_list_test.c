@@ -53,7 +53,7 @@ int main(void) {
   EXPECT_EQUAL(first_element, curr_element + 1);
   delete_linked_list(list);
   delete_linked_list(list_copy);
-if (list != NULL && list->size == 0) printf("WHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAT");
+
   FINISH_TEST();
 
   return 0;
