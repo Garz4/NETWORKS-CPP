@@ -108,8 +108,8 @@ delete_linked_list(linked_list* list) {
     return;
   }
 
-  linked_list_node* node = NULL;
-  linked_list_node* next = NULL;
+  linked_list_node* node;
+  linked_list_node* next;
 
   for (node = list->head; node != NULL; node = next) {
     next = node->next;
