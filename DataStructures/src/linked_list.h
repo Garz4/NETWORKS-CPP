@@ -101,25 +101,24 @@ add_to_linked_list(linked_list* list, int val) {
   list->size++;
 }
 
-void
-delete_linked_list_nodes(linked_list_node* node) {
-  if (node == NULL) {
-    return;
-  }
-
-  delete_linked_list_nodes(node->next);
-  DEALLOCATE(node);
-}
-
 extern
 void
 delete_linked_list(linked_list* list) {
-  if (list == NULL) {
+  if (list == NULL || list->head == NULL) {
     return;
   }
 
-  delete_linked_list_nodes(list->head);
+  linked_list_node* node = NULL;
+  linked_list_node* next = NULL;
+
+  for (node = list->head; node != NULL; node = next) {
+    next = node->next;
+    DEALLOCATE(node);
+  }
+
+  list->head = NULL;
   list->tail = NULL;
+  list->size = 0;
   DEALLOCATE(list);
 }
 
