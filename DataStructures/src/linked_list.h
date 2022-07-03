@@ -24,7 +24,7 @@
 
 typedef struct ll_node linked_list_node;
 struct ll_node {
-  int val;
+  int value;
   linked_list_node* next;
 };
 
@@ -38,13 +38,13 @@ struct ll {
 // Every new linked list needs to be deleted using delete_linked_list(...).
 extern
 linked_list*
-new_linked_list(int val) {
+new_linked_list(int value) {
   linked_list* response;
 
   ALLOCATE(linked_list, response);
   ALLOCATE(linked_list_node, response->head);
   response->size = 1;
-  response->head->val = val;
+  response->head->value = value;
   response->head->next = NULL;
   response->tail = response->head;
 
@@ -59,7 +59,7 @@ print_linked_list(const linked_list* list) {
   printf("list = {");
 
   while (head != NULL) {
-    printf("%d", head->val);
+    printf("%d", head->value);
     head = head->next;
 
     if (head != NULL) {
@@ -73,11 +73,11 @@ print_linked_list(const linked_list* list) {
 // Linear time, stops when finding the first occurence.
 extern
 bool
-exist_in_linked_list(const linked_list* list, int val) {
+exist_in_linked_list(const linked_list* list, int value) {
   linked_list_node* head = list->head;
 
   while (head != NULL) {
-    if (head->val == val) {
+    if (head->value == value) {
       return true;
     }
 
@@ -89,14 +89,14 @@ exist_in_linked_list(const linked_list* list, int val) {
 
 extern
 void
-add_to_linked_list(linked_list* list, int val) {
+add_to_linked_list(linked_list* list, int value) {
   if (list == NULL) {
     return;
   }
 
   ALLOCATE(linked_list_node, list->tail->next);
   list->tail = list->tail->next;
-  list->tail->val = val;
+  list->tail->value = value;
   list->tail->next = NULL;
   list->size++;
 }
@@ -132,7 +132,7 @@ delete_in_linked_list(linked_list* list, int target) {
 
   linked_list_node* node = list->head;
 
-  if (node->val == target) {
+  if (node->value == target) {
     list->head = node->next;
     node = node->next;
     // DEALLOCATE(aux);
@@ -141,7 +141,7 @@ delete_in_linked_list(linked_list* list, int target) {
   }
 
   while (node->next != NULL) {
-    if (node->next->val == target) {
+    if (node->next->value == target) {
       if (node->next == list->tail) {
         list->tail = node;
       }
@@ -191,11 +191,11 @@ copy_linked_list(const linked_list* list) {
     return NULL;
   }
 
-  linked_list* copy = new_linked_list(list->head->val);
+  linked_list* copy = new_linked_list(list->head->value);
   linked_list_node* node = list->head->next;
 
   while (node != NULL) {
-    add_to_linked_list(copy, node->val);
+    add_to_linked_list(copy, node->value);
     node = node->next;
   }
 
@@ -215,7 +215,7 @@ equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
   linked_list_node* rhs_node = rhs->head;
 
   while (lhs_node != NULL && rhs_node != NULL) {
-    if (lhs_node->val != rhs_node->val) {
+    if (lhs_node->value != rhs_node->value) {
       return false;
     }
 

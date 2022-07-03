@@ -47,7 +47,7 @@ int main(void) {
   int curr_element = last_element;
 
   for (node = list->head; node != NULL; node = node->next) {
-    EXPECT_EQUAL(node->val, curr_element--);
+    EXPECT_EQUAL(node->value, curr_element--);
   }
 
   EXPECT_EQUAL(first_element, curr_element + 1);
