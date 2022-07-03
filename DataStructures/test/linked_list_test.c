@@ -33,13 +33,13 @@ int main(void) {
   EXPECT_FALSE(exist_in_linked_list(list, last_element + 1));
   EXPECT_EQUAL(list->size, len);
 
-  // TODO(Garz4): Add following API to linked_list:
-  // auto list2 = copy_of_linked_list(list);
-  // EXPECT_TRUE(equal_linked_list(list, list2));
-  // reverse_linked_list(list2);
-  // reverse_linked_list(list2);
-  // EXPECT_TRUE(are_equal_linked_list(list, list2));
+  linked_list* list_copy = copy_of_linked_list(list);
+
+  EXPECT_TRUE(equal_linked_list(list, list_copy));
   reverse_linked_list(list);
+  EXPECT_FALSE(equal_linked_list(list, list_copy));
+  reverse_linked_list(list_copy);
+  EXPECT_TRUE(equal_linked_list(list, list_copy));
 
   linked_list_node* node;
   int curr_element = last_element;
@@ -50,6 +50,10 @@ int main(void) {
 
   EXPECT_EQUAL(first_element, curr_element + 1);
   delete_linked_list(list);
+  delete_linked_list(list_copy);
+  //printf("%d", list == NULL);
+  //EXPECT_EQUAL(list, NULL);
+  //EXPECT_EQUAL(list_copy, NULL);
 
   FINISH_TEST();
 

@@ -119,6 +119,7 @@ delete_linked_list(linked_list* list) {
   }
 
   delete_linked_list_nodes(list->head);
+  list->tail = NULL;
   DEALLOCATE(list);
 }
 
@@ -187,7 +188,19 @@ reverse_linked_list(linked_list* list) {
 extern
 linked_list*
 copy_of_linked_list(const linked_list* list) {
-  return NULL;
+  if (list == NULL || list->head == NULL) {
+    return NULL;
+  }
+
+  linked_list* copy = new_linked_list(list->head->val);
+  linked_list_node* node = list->head->next;
+
+  while (node != NULL) {
+    add_to_linked_list(copy, node->val);
+    node = node->next;
+  }
+
+  return copy;
 }
 
 extern
