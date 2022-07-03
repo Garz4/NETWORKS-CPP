@@ -51,9 +51,6 @@ int main(void) {
   EXPECT_EQUAL(first_element, curr_element + 1);
   delete_linked_list(list);
   delete_linked_list(list_copy);
-  //printf("%d", list == NULL);
-  //EXPECT_EQUAL(list, NULL);
-  //EXPECT_EQUAL(list_copy, NULL);
 
   FINISH_TEST();
 
