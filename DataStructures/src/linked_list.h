@@ -122,10 +122,10 @@ delete_linked_list(linked_list* list) {
   DEALLOCATE(list);
 }
 
-// PENDING: Deletes first occurence of 'target' in the linked list. It frees its memory.
+// PENDING: Erases first occurence of 'target' in the linked list. It frees its memory.
 extern
 void
-delete_in_linked_list(linked_list* list, int target) {
+erase_single_linked_list(linked_list* list, int target) {
   if (list == NULL || list->head == NULL) {
     return;
   }
@@ -158,6 +158,10 @@ delete_in_linked_list(linked_list* list, int target) {
     node = node->next;
   }
 }
+
+extern
+void
+erase_all_linked_list(linked_list* list, int target) {}
 
 void
 reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
