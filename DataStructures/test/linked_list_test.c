@@ -19,7 +19,7 @@
 int main(void) {
   START_TEST("linked_list_test");
 
-  // Should not be >= INT_MAX.
+  // len should not be >= INT_MAX.
   const size_t len = 5;
   const int last_element = len - 1;
   const int first_element = 0;

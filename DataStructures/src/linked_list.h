@@ -122,10 +122,11 @@ delete_linked_list(linked_list* list) {
   DEALLOCATE(list);
 }
 
-// PENDING: Erases first occurence of 'target' in the linked list. It frees its memory.
+// Erases first occurence of 'target' in the linked list.
+// It frees its memory.
 extern
 void
-erase_single_linked_list(linked_list* list, int target) {
+erase_single_match_linked_list(linked_list* list, int target) {
   if (list == NULL || list->head == NULL) {
     return;
   }
@@ -133,9 +134,13 @@ erase_single_linked_list(linked_list* list, int target) {
   linked_list_node* node = list->head;
 
   if (node->value == target) {
+    if (list->size == 1) {
+      delete_linked_list(list);
+      return;
+    }
+
     list->head = node->next;
-    node = node->next;
-    // DEALLOCATE(aux);
+    DEALLOCATE(node);
     list->size--;
     return;
   }
@@ -146,12 +151,8 @@ erase_single_linked_list(linked_list* list, int target) {
         list->tail = node;
       }
 
-      //aux = node;
-      node = node->next;
-      list->head = node;
-      // DEALLOCATE(aux);
+      DEALLOCATE(node->next);
       list->size--;
-      // delete
       return;
     }
 
@@ -161,7 +162,9 @@ erase_single_linked_list(linked_list* list, int target) {
 
 extern
 void
-erase_all_linked_list(linked_list* list, int target) {}
+erase_all_match_linked_list(linked_list* list, int target) {
+
+}
 
 void
 reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
