@@ -38,13 +38,13 @@ struct ss {
 
 extern
 sort_set*
-new_sort_set(int val) {
+new_sort_set(int value) {
   sort_set* response;
 
   ALLOCATE(sort_set, response);
   ALLOCATE(sort_set_node, response->root);
   response->size = 1;
-  response->root->val = val;
+  response->root->value = value;
   response->root->left_depth = 0;
   response->root->right_depth = 0;
   response->root->left = NULL;
