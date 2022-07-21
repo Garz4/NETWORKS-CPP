@@ -87,6 +87,7 @@ exist_in_linked_list(const linked_list* list, int value) {
   return false;
 }
 
+// TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
 extern
 void
 add_to_linked_list(linked_list* list, int value) {
