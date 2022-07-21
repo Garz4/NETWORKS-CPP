@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2021 Uriel Rivas
+ * Copyright (c) 2022 Uriel Rivas
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -10,7 +10,10 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * https://github.com/Garz4/zoning/blob/master/LICENSE
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
 #ifndef OUTPUTSTREAM_H_
