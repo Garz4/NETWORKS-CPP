@@ -16,7 +16,6 @@
 #ifndef SORT_SET_H_
 #define SORT_SET_H_
 
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,7 +23,7 @@
 
 typedef struct ss_node sort_set_node;
 struct ss_node {
-  int val;
+  int value;
   int left_depth;
   int right_depth;
   sort_set_node* left;
@@ -41,44 +40,21 @@ extern
 sort_set*
 new_sort_set(int val) {
   sort_set* response;
+
   ALLOCATE(sort_set, response);
   ALLOCATE(sort_set_node, response->root);
   response->size = 1;
   response->root->val = val;
+  response->root->left_depth = 0;
+  response->root->right_depth = 0;
+  response->root->left = NULL;
+  response->root->right = NULL;
+
   return response;
 }
 
 extern
 void
 add_to_sort_set(sort_set* set, int val) {}
-
-extern
-bool
-exist_in_sort_set_nodes(const sort_set_node* node, int val) {
-  if (node == NULL) {
-    return false;
-  }
-
-  if (node->val == val) {
-    return true;
-  } else if (node->val > val) {
-    return exist_in_sort_set_nodes(node->left, val);
-  }
-
-  return exist_in_sort_set_nodes(node->right, val);
-}
-
-extern
-bool
-exist_in_sort_set(const sort_set* set, int val) {
-  return exist_in_sort_set_nodes(set->root, val);
-}
-
-extern
-void
-delete_sort_set(sort_set* set) {
-    DEALLOCATE(set->root);
-    DEALLOCATE(set);
-}
 
 #endif // SORT_SET_H_
