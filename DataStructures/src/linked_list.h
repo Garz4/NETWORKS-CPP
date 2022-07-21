@@ -166,16 +166,6 @@ erase_all_match_linked_list(linked_list* list, int target) {
 
 }
 
-void
-reverse_linked_list_nodes(linked_list_node* parent, linked_list_node* node) {
-  if (node == NULL) {
-    return;
-  }
-
-  reverse_linked_list_nodes(node, node->next);
-  node->next = parent;
-}
-
 // Linear time.
 extern
 void
@@ -184,10 +174,20 @@ reverse_linked_list(linked_list* list) {
     return;
   }
 
-  reverse_linked_list_nodes(NULL, list->head);
-  linked_list_node* aux = list->head;
+  linked_list_node* current = list->head;
+  linked_list_node* previous = NULL;       
+  linked_list_node* next = NULL;
+
+  while (current != NULL) {
+    next = current->next;
+    current->next = previous;
+    previous = current;
+    current = next;
+  }
+
+  current = list->head;
   list->head = list->tail;
-  list->tail = aux;
+  list->tail = current;
 }
 
 // By making a copy, deleting that copy is also necessary.
