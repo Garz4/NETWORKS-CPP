@@ -23,17 +23,17 @@
 #include "results.h"
 
 #define EXPECT_EQUAL(lhs, rhs) \
-  if (lhs != rhs) { \
+  if ((lhs) != (rhs)) { \
     FAIL("Arguments should be equal.") \
   }
 
 #define EXPECT_TRUE(boolean) \
-  if (!boolean) { \
+  if (!(boolean)) { \
     FAIL("Argument should be true.") \
   }
 
 #define EXPECT_FALSE(boolean) \
-  if (boolean) { \
+  if ((boolean)) { \
     FAIL("Argument should be false.") \
   }
 

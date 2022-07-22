@@ -26,13 +26,13 @@
 
 #define ALLOCATE(type, pointer) \
   pointer = (type *) malloc(sizeof(type)); \
-  if (pointer == NULL) { \
+  if ((pointer) == NULL) { \
     STDERR_RED("ERROR: Out of memory.\n"); \
     EXIT(1); \
   }
 
 #define DEALLOCATE(pointer) \
-  free(pointer); \
+  free((pointer)); \
   pointer = NULL;
 
 #endif // MEMORY_H_

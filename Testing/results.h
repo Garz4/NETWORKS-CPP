@@ -28,7 +28,7 @@ static std::string __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_.c_str(); }
 
 # define START_TEST(string) \
-  __CURRENT_TEST_ = string;
+  __CURRENT_TEST_ = (string);
 
 #else
 
@@ -37,7 +37,7 @@ static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
 
 # define START_TEST(string) \
   DEALLOCATE(__CURRENT_TEST_); \
-  __CURRENT_TEST_ = string;
+  __CURRENT_TEST_ = (string);
 
 #endif // __cplusplus
 
@@ -49,7 +49,7 @@ static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
   EXIT(1);
 
 #define FAIL(string) \
-  STDERR_RED("[%s]: %s\n", __CURRENT_TEST(), string); \
+  STDERR_RED("[%s]: %s\n", __CURRENT_TEST(), (string)); \
   FINISH_TEST_FAILED()
 
 #endif // RESULTS_H_
