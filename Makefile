@@ -14,7 +14,7 @@
 #
 # https://github.com/zoningorg/zoning/blob/main/LICENSE
 
-all: data test clean
+all: test clean
 
 data:
 	cd DataStructures && make
