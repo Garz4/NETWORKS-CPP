@@ -39,12 +39,12 @@ const Mensaje& Solicitud::envia_y_recibe(
       if (it != 19) {
         std::printf("No se recibió ningún Mensaje. Intentando de nuevo...\n");
       } else {
-        throw std::runtime_error("--!! ADVERTENCIA: Servidor no disponible.\n"
+        throw std::runtime_error("ADVERTENCIA: Servidor no disponible.\n"
                     "Imposible contactar con el servidor."
                     "Inténtelo de nuevo más tarde.\n");
       }
     } else if (n == -2) {
-      throw std::runtime_error("--!! ERROR: Error en recvfrom.\n");
+      throw std::runtime_error("ERROR: Error en recvfrom.\n");
     } else {
       if (paquete_recibo.mensaje().tipo != '1') {
         throw std::invalid_argument(

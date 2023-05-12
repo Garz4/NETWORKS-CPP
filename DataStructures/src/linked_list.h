@@ -39,7 +39,6 @@ struct ll {
 };
 
 // Every new linked list needs to be deleted using delete_linked_list(...).
-inline
 linked_list*
 new_linked_list(int value) {
   linked_list* response;
@@ -89,7 +88,6 @@ exist_in_linked_list(const linked_list* list, int value) {
 }
 
 // TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
-inline
 void
 add_to_linked_list(linked_list* list, int value) {
   if (list == NULL) {
@@ -103,7 +101,6 @@ add_to_linked_list(linked_list* list, int value) {
   list->size++;
 }
 
-inline
 void
 delete_linked_list(linked_list* list) {
   if (list == NULL || list->head == NULL) {
