@@ -16,7 +16,7 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef HASH_SET_H_
-#define HASH_SET_H_
+#ifndef __ZNG_HASH_SET_H__
+#define __ZNG_HASH_SET_H__
 
-#endif // HASH_SET_H_
+#endif // __ZNG_HASH_SET_H__

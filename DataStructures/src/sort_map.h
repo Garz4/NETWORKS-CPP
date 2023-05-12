@@ -16,7 +16,7 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef SORT_MAP_H_
-#define SORT_MAP_H_
+#ifndef __ZNG_SORT_MAP_H__
+#define __ZNG_SORT_MAP_H__
 
-#endif // SORT_MAP_H_
+#endif // __ZNG_SORT_MAP_H__

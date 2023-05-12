@@ -16,9 +16,10 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef SORT_SET_H_
-#define SORT_SET_H_
+#ifndef __ZNG_SORT_SET_H__
+#define __ZNG_SORT_SET_H__
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -39,7 +40,7 @@ struct ss {
   sort_set_node* root;
 };
 
-extern
+inline
 sort_set*
 new_sort_set(int value) {
   sort_set* response;
@@ -56,8 +57,31 @@ new_sort_set(int value) {
   return response;
 }
 
-extern
+inline
 void
-add_to_sort_set(sort_set* set, int val) {}
+add_to_sort_set(sort_set* set, int value) {}
 
-#endif // SORT_SET_H_
+// Time: O(log(n))
+// Space: O(1)
+bool
+exist_in_sort_set(const sort_set* set, int target) {
+  if (set == NULL || set->size == 0) {
+    return false;
+  }
+
+  sort_set_node* node = set->root;
+
+  while (node != NULL) {
+    if (node->value == target) {
+      return true;
+    } else if (node->value < target) {
+      node = node->right;
+    } else {
+      node = node->left;
+    }
+  }
+
+  return false;
+}
+
+#endif // __ZNG_SORT_SET_H__

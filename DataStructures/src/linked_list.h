@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef LINKED_LIST_H_
-#define LINKED_LIST_H_
+#ifndef __ZNG_LINKED_LIST_H__
+#define __ZNG_LINKED_LIST_H__
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -39,7 +39,7 @@ struct ll {
 };
 
 // Every new linked list needs to be deleted using delete_linked_list(...).
-extern
+inline
 linked_list*
 new_linked_list(int value) {
   linked_list* response;
@@ -55,7 +55,6 @@ new_linked_list(int value) {
 }
 
 // Example output to screen: "list = {1, 2, 3, 4, 5};"
-extern
 void
 print_linked_list(const linked_list* list) {
   linked_list_node* head = list->head;
@@ -74,7 +73,6 @@ print_linked_list(const linked_list* list) {
 }
 
 // Linear time, stops when finding the first occurence.
-extern
 bool
 exist_in_linked_list(const linked_list* list, int value) {
   linked_list_node* head = list->head;
@@ -91,7 +89,7 @@ exist_in_linked_list(const linked_list* list, int value) {
 }
 
 // TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
-extern
+inline
 void
 add_to_linked_list(linked_list* list, int value) {
   if (list == NULL) {
@@ -105,7 +103,7 @@ add_to_linked_list(linked_list* list, int value) {
   list->size++;
 }
 
-extern
+inline
 void
 delete_linked_list(linked_list* list) {
   if (list == NULL || list->head == NULL) {
@@ -128,7 +126,6 @@ delete_linked_list(linked_list* list) {
 
 // Erases first occurence of 'target' in the linked list.
 // It frees its memory.
-extern
 void
 erase_single_match_linked_list(linked_list* list, int target) {
   if (list == NULL || list->head == NULL) {
@@ -164,14 +161,12 @@ erase_single_match_linked_list(linked_list* list, int target) {
   }
 }
 
-extern
 void
 erase_all_match_linked_list(linked_list* list, int target) {
 
 }
 
 // Linear time.
-extern
 void
 reverse_linked_list(linked_list* list) {
   if (list == NULL) {
@@ -195,7 +190,6 @@ reverse_linked_list(linked_list* list) {
 }
 
 // By making a copy, deleting that copy is also necessary.
-extern
 linked_list*
 copy_linked_list(const linked_list* list) {
   if (list == NULL || list->head == NULL) {
@@ -213,7 +207,6 @@ copy_linked_list(const linked_list* list) {
   return copy;
 }
 
-extern
 bool
 equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
   if (lhs == NULL && rhs == NULL) {
@@ -237,8 +230,7 @@ equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
   return lhs_node == NULL && rhs_node == NULL;
 }
 
-extern
 void
 sort_linked_list(linked_list* list) {}
 
-#endif // LINKED_LIST_H_
+#endif // __ZNG_LINKED_LIST_H__

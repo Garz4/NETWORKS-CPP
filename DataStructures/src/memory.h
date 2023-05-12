@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef MEMORY_H_
-#define MEMORY_H_
+#ifndef __ZNG_MEMORY_H__
+#define __ZNG_MEMORY_H__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,4 +35,4 @@
   free((pointer)); \
   pointer = NULL;
 
-#endif // MEMORY_H_
+#endif // __ZNG_MEMORY_H__
