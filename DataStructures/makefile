@@ -23,7 +23,7 @@ test: hash_map_test hash_set_test linked_list_test sort_map_test sort_set_test
 		&& ./sort_map_test && ./sort_set_test ) ; make clean
 
 linked_list_test: test/linked_list_test.c linked_list.o
-	$(CC) test/linked_list_test.c -o linked_list_test src/linked_list.o
+	$(CC) $(CFLAGS) test/linked_list_test.c -o linked_list_test src/linked_list.o
 
 linked_list.o: src/linked_list.c src/linked_list.h
 	$(CC) $(CFLAGS) -c src/linked_list.c -o src/linked_list.o
@@ -42,6 +42,6 @@ sort_set_test: test/sort_set_test.c
 
 clean:
 	rm linked_list_test hash_map_test hash_set_test sort_map_test \
-		sort_set_test
+		sort_set_test src/linked_list.o
 
 #  $(wildcard *.o)
