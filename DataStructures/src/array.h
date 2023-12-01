@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Uriel Rivas
+ * Copyright (c) 2023 Uriel Rivas
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -16,27 +16,11 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#pragma once
+#ifndef __ZNG_ARRAY_H__
+#define __ZNG_ARRAY_H__
 
-#include <cstddef>
+struct array {
 
-/* Limite en bytes de los paquetes. */
-constexpr std::size_t LIMITE_ARCHIVO = 65000;
-
-struct Mensaje {
-  /* 0 = Solicitud, 1 = Respuesta. */
-  char tipo;
-
-  char id;
-
-  /* Tamaño en bytes del archivo a enviar. */
-  char tam[5];
-
-  char nombre_archivo[30];
-
-  /* 1 extra para... Abarcar "\0" ? */
-  char contenido_archivo[LIMITE_ARCHIVO + 1];
-
-  /* 0 = Ok, 1 = Error. */
-  char estatus;
 };
+
+#endif // __ZNG_ARRAY_H__
