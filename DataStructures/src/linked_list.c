@@ -23,7 +23,7 @@
 #include "linked_list.h"
 #include "memory.h"
 
-linked_list*
+inline linked_list*
 new_linked_list(int value) {
   linked_list* response;
 
@@ -70,7 +70,7 @@ exist_in_linked_list(const linked_list*const list, int value) {
 }
 
 // TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
-void
+inline void
 add_to_linked_list(linked_list*const list, int value) {
   if (list == NULL) {
     return;
@@ -208,7 +208,7 @@ equal_linked_list(const linked_list*const lhs, const linked_list*const rhs) {
 void
 sort_linked_list(linked_list*const list) {}
 
-bool
+inline bool
 empty_linked_list(const linked_list*const list) {
   return list == NULL
       || list->head == NULL
