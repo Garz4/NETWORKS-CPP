@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Uriel Rivas
+ * Copyright (c) 2024 Uriel Rivas
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -15,6 +15,7 @@
  *
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
