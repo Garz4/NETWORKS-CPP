@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2022 Uriel Rivas
+# Copyright (c) 2024 Uriel Rivas
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -14,28 +14,34 @@
 #
 # https://github.com/zoningorg/zoning/blob/main/LICENSE
 
+CC = gcc
+CFLAGS = -Wall -Werror -Wpedantic
+
 all: test
-	./linked_list_test ; make clean
-
 test: hash_map_test hash_set_test linked_list_test sort_map_test sort_set_test
-	(./hash_map_test && ./hash_set_test && ./linked_list_test && ./sort_map_test && ./sort_set_test) ; make clean
+	( ./hash_map_test && ./hash_set_test && ./linked_list_test \
+		&& ./sort_map_test && ./sort_set_test ) ; make clean
 
-linked_list_test: test/linked_list_test.c
-	gcc test/linked_list_test.c -o linked_list_test
+linked_list_test: test/linked_list_test.c linked_list.o
+	$(CC) $(CFLAGS) test/linked_list_test.c -o linked_list_test src/linked_list.o
+
+linked_list.o: src/linked_list.c src/linked_list.h
+	$(CC) $(CFLAGS) -c src/linked_list.c -o src/linked_list.o
 
 hash_map_test: test/hash_map_test.c
-	gcc test/hash_map_test.c -o hash_map_test
+	$(CC) $(CFLAGS) test/hash_map_test.c -o hash_map_test
 
 hash_set_test: test/hash_set_test.c
-	gcc test/hash_set_test.c -o hash_set_test
+	$(CC) $(CFLAGS) test/hash_set_test.c -o hash_set_test
 
 sort_map_test: test/sort_map_test.c
-	gcc test/sort_map_test.c -o sort_map_test
+	$(CC) $(CFLAGS) test/sort_map_test.c -o sort_map_test
 
 sort_set_test: test/sort_set_test.c
-	gcc test/sort_set_test.c -o sort_set_test
+	$(CC) $(CFLAGS) test/sort_set_test.c -o sort_set_test
 
 clean:
-	rm linked_list_test hash_map_test hash_set_test sort_map_test sort_set_test
+	rm linked_list_test hash_map_test hash_set_test sort_map_test \
+		sort_set_test src/linked_list.o
 
 #  $(wildcard *.o)

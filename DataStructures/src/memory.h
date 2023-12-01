@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Uriel Rivas
+ * Copyright (c) 2024 Uriel Rivas
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef MEMORY_H_
-#define MEMORY_H_
+#ifndef __ZNG_MEMORY_H__
+#define __ZNG_MEMORY_H__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,4 +35,4 @@
   free((pointer)); \
   pointer = NULL;
 
-#endif // MEMORY_H_
+#endif // __ZNG_MEMORY_H__

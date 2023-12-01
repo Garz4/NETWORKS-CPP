@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Uriel Rivas
+ * Copyright (c) 2024 Uriel Rivas
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -18,8 +18,10 @@
 
 #pragma once
 
+#include <cstddef>
+
 /* Limite en bytes de los paquetes. */
-#define LIMITE_ARCHIVO 65000
+constexpr std::size_t LIMITE_ARCHIVO = 65000;
 
 struct Mensaje {
   /* 0 = Solicitud, 1 = Respuesta. */

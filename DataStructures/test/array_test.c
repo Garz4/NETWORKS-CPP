@@ -17,11 +17,14 @@
  */
 
 #include "../../Testing/comparators.h"
-#include "../src/linked_list.h"
+#include "../src/array.h"
 
 int main(void) {
-  START_TEST("linked_list_test");
+  START_TEST("array_test");
 
+  array arr = new_array();
+
+  delete_array(arr);
   // len should not be >= INT_MAX.
   const size_t len = 5;
   const int last_element = len - 1;

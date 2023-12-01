@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Uriel Rivas
+ * Copyright (c) 2024 Uriel Rivas
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef LINKED_LIST_H_
-#define LINKED_LIST_H_
+#ifndef __ZNG_LINKED_LIST_H__
+#define __ZNG_LINKED_LIST_H__
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -25,220 +25,45 @@
 
 #include "memory.h"
 
-typedef struct ll_node linked_list_node;
-struct ll_node {
+typedef struct __zng_ll_node {
   int value;
-  linked_list_node* next;
-};
+  struct __zng_ll_node* next;
+} linked_list_node;
 
-typedef struct ll linked_list;
-struct ll {
+typedef struct __zng_ll {
   size_t size;
   linked_list_node* head;
   linked_list_node* tail;
-};
+} linked_list;
 
 // Every new linked list needs to be deleted using delete_linked_list(...).
-extern
-linked_list*
-new_linked_list(int value) {
-  linked_list* response;
-
-  ALLOCATE(linked_list, response);
-  ALLOCATE(linked_list_node, response->head);
-  response->size = 1;
-  response->head->value = value;
-  response->head->next = NULL;
-  response->tail = response->head;
-
-  return response;
-}
+extern linked_list* new_linked_list(int value);
 
 // Example output to screen: "list = {1, 2, 3, 4, 5};"
-extern
-void
-print_linked_list(const linked_list* list) {
-  linked_list_node* head = list->head;
-  printf("list = {");
-
-  while (head != NULL) {
-    printf("%d", head->value);
-    head = head->next;
-
-    if (head != NULL) {
-      printf(", ");
-    }
-  }
-
-  printf("};\n");
-}
+extern void print_linked_list(const linked_list* list);
 
 // Linear time, stops when finding the first occurence.
-extern
-bool
-exist_in_linked_list(const linked_list* list, int value) {
-  linked_list_node* head = list->head;
-
-  while (head != NULL) {
-    if (head->value == value) {
-      return true;
-    }
-
-    head = head->next;
-  }
-
-  return false;
-}
+extern bool exist_in_linked_list(const linked_list* list, int value);
 
 // TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
-extern
-void
-add_to_linked_list(linked_list* list, int value) {
-  if (list == NULL) {
-    return;
-  }
+extern void add_to_linked_list(linked_list* list, int value);
 
-  ALLOCATE(linked_list_node, list->tail->next);
-  list->tail = list->tail->next;
-  list->tail->value = value;
-  list->tail->next = NULL;
-  list->size++;
-}
-
-extern
-void
-delete_linked_list(linked_list* list) {
-  if (list == NULL || list->head == NULL) {
-    return;
-  }
-
-  linked_list_node* node;
-  linked_list_node* next;
-
-  for (node = list->head; node != NULL; node = next) {
-    next = node->next;
-    DEALLOCATE(node);
-  }
-
-  list->head = NULL;
-  list->tail = NULL;
-  list->size = 0;
-  DEALLOCATE(list);
-}
+extern void delete_linked_list(linked_list* list);
 
 // Erases first occurence of 'target' in the linked list.
 // It frees its memory.
-extern
-void
-erase_single_match_linked_list(linked_list* list, int target) {
-  if (list == NULL || list->head == NULL) {
-    return;
-  }
+extern void erase_single_match_linked_list(linked_list* list, int target);
 
-  linked_list_node* node = list->head;
-
-  if (node->value == target) {
-    if (list->size == 1) {
-      delete_linked_list(list);
-      return;
-    }
-
-    list->head = node->next;
-    DEALLOCATE(node);
-    list->size--;
-    return;
-  }
-
-  while (node->next != NULL) {
-    if (node->next->value == target) {
-      if (node->next == list->tail) {
-        list->tail = node;
-      }
-
-      DEALLOCATE(node->next);
-      list->size--;
-      return;
-    }
-
-    node = node->next;
-  }
-}
-
-extern
-void
-erase_all_match_linked_list(linked_list* list, int target) {
-
-}
+extern void erase_all_match_linked_list(linked_list* list, int target);
 
 // Linear time.
-extern
-void
-reverse_linked_list(linked_list* list) {
-  if (list == NULL) {
-    return;
-  }
-
-  linked_list_node* current = list->head;
-  linked_list_node* previous = NULL;       
-  linked_list_node* next = NULL;
-
-  while (current != NULL) {
-    next = current->next;
-    current->next = previous;
-    previous = current;
-    current = next;
-  }
-
-  current = list->head;
-  list->head = list->tail;
-  list->tail = current;
-}
+extern void reverse_linked_list(linked_list* list);
 
 // By making a copy, deleting that copy is also necessary.
-extern
-linked_list*
-copy_linked_list(const linked_list* list) {
-  if (list == NULL || list->head == NULL) {
-    return NULL;
-  }
+extern linked_list* copy_linked_list(const linked_list* list);
 
-  linked_list* copy = new_linked_list(list->head->value);
-  linked_list_node* node = list->head->next;
+extern bool equal_linked_list(const linked_list* lhs, const linked_list* rhs);
 
-  while (node != NULL) {
-    add_to_linked_list(copy, node->value);
-    node = node->next;
-  }
+extern void sort_linked_list(linked_list* list);
 
-  return copy;
-}
-
-extern
-bool
-equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
-  if (lhs == NULL && rhs == NULL) {
-    return true;
-  } else if (lhs == NULL || rhs == NULL || lhs->size != rhs->size) {
-    return false;
-  }
-
-  linked_list_node* lhs_node = lhs->head;
-  linked_list_node* rhs_node = rhs->head;
-
-  while (lhs_node != NULL && rhs_node != NULL) {
-    if (lhs_node->value != rhs_node->value) {
-      return false;
-    }
-
-    lhs_node = lhs_node->next;
-    rhs_node = rhs_node->next;
-  }
-
-  return lhs_node == NULL && rhs_node == NULL;
-}
-
-extern
-void
-sort_linked_list(linked_list* list) {}
-
-#endif // LINKED_LIST_H_
+#endif // __ZNG_LINKED_LIST_H__

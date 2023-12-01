@@ -16,25 +16,11 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef COMPARATORS_H_
-#define COMPARATORS_H_
+#ifndef __ZNG_ARRAY_H__
+#define __ZNG_ARRAY_H__
 
-#include "../Terminal/outputstream.h"
-#include "results.h"
+struct array {
 
-#define EXPECT_EQUAL(lhs, rhs) \
-  if ((lhs) != (rhs)) { \
-    FAIL("Arguments should be equal.") \
-  }
+};
 
-#define EXPECT_TRUE(boolean) \
-  if (!(boolean)) { \
-    FAIL("Argument should be true.") \
-  }
-
-#define EXPECT_FALSE(boolean) \
-  if ((boolean)) { \
-    FAIL("Argument should be false.") \
-  }
-
-#endif // COMPARATORS_H_
+#endif // __ZNG_ARRAY_H__
