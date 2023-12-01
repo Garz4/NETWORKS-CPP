@@ -19,7 +19,6 @@
 #ifndef __ZNG_MEMORY_H__
 #define __ZNG_MEMORY_H__
 
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "../../Terminal/outputstream.h"
