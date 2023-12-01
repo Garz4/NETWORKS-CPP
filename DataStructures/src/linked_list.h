@@ -20,10 +20,7 @@
 #define __ZNG_LINKED_LIST_H__
 
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
-
-#include "memory.h"
 
 typedef struct __zng_ll_node {
   int value;
