@@ -23,7 +23,6 @@
 #include "linked_list.h"
 #include "memory.h"
 
-// Every new linked list needs to be deleted using delete_linked_list(...).
 linked_list*
 new_linked_list(int value) {
   linked_list* response;
@@ -38,7 +37,6 @@ new_linked_list(int value) {
   return response;
 }
 
-// Example output to screen: "list = {1, 2, 3, 4, 5};"
 void
 print_linked_list(const linked_list*const list) {
   linked_list_node* head = list->head;
@@ -56,7 +54,6 @@ print_linked_list(const linked_list*const list) {
   printf("};\n");
 }
 
-// Linear time, stops when finding the first occurence.
 bool
 exist_in_linked_list(const linked_list*const list, int value) {
   linked_list_node* head = list->head;
@@ -106,8 +103,6 @@ delete_linked_list(linked_list* list) {
   DEALLOCATE(list);
 }
 
-// Erases first occurence of 'target' in the linked list.
-// It frees its memory.
 void
 erase_single_match_linked_list(linked_list* list, int target) {
   if (list == NULL || list->head == NULL) {
@@ -148,7 +143,6 @@ erase_all_match_linked_list(linked_list* list, int target) {
 
 }
 
-// Linear time.
 void
 reverse_linked_list(linked_list*const list) {
   if (list == NULL) {
@@ -171,7 +165,6 @@ reverse_linked_list(linked_list*const list) {
   list->tail = current;
 }
 
-// By making a copy, deleting that copy is also necessary.
 linked_list*
 copy_linked_list(const linked_list*const list) {
   if (list == NULL || list->head == NULL) {

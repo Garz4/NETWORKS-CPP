@@ -42,7 +42,6 @@ extern void print_linked_list(const linked_list*const list);
 // Linear time, stops when finding the first occurence.
 extern bool exist_in_linked_list(const linked_list*const list, int value);
 
-// TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
 extern void add_to_linked_list(linked_list*const list, int value);
 
 extern void delete_linked_list(linked_list* list);
