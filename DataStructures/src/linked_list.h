@@ -63,4 +63,6 @@ extern bool equal_linked_list(const linked_list* lhs, const linked_list* rhs);
 
 extern void sort_linked_list(linked_list* list);
 
+extern bool empty_linked_list(const linked_list*const list);
+
 #endif // __ZNG_LINKED_LIST_H__

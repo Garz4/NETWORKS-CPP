@@ -214,3 +214,11 @@ equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
 
 void
 sort_linked_list(linked_list* list) {}
+
+bool
+empty_linked_list(const linked_list*const list) {
+  return list == NULL
+      || list->head == NULL
+      || list->tail == NULL
+      || list->size == 0;
+}
