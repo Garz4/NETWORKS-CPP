@@ -40,7 +40,7 @@ new_linked_list(int value) {
 
 // Example output to screen: "list = {1, 2, 3, 4, 5};"
 void
-print_linked_list(const linked_list* list) {
+print_linked_list(const linked_list*const list) {
   linked_list_node* head = list->head;
   printf("list = {");
 
@@ -58,7 +58,7 @@ print_linked_list(const linked_list* list) {
 
 // Linear time, stops when finding the first occurence.
 bool
-exist_in_linked_list(const linked_list* list, int value) {
+exist_in_linked_list(const linked_list*const list, int value) {
   linked_list_node* head = list->head;
 
   while (head != NULL) {
@@ -74,7 +74,7 @@ exist_in_linked_list(const linked_list* list, int value) {
 
 // TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
 void
-add_to_linked_list(linked_list* list, int value) {
+add_to_linked_list(linked_list*const list, int value) {
   if (list == NULL) {
     return;
   }
@@ -150,7 +150,7 @@ erase_all_match_linked_list(linked_list* list, int target) {
 
 // Linear time.
 void
-reverse_linked_list(linked_list* list) {
+reverse_linked_list(linked_list*const list) {
   if (list == NULL) {
     return;
   }
@@ -173,7 +173,7 @@ reverse_linked_list(linked_list* list) {
 
 // By making a copy, deleting that copy is also necessary.
 linked_list*
-copy_linked_list(const linked_list* list) {
+copy_linked_list(const linked_list*const list) {
   if (list == NULL || list->head == NULL) {
     return NULL;
   }
@@ -190,7 +190,7 @@ copy_linked_list(const linked_list* list) {
 }
 
 bool
-equal_linked_list(const linked_list* lhs, const linked_list* rhs) {
+equal_linked_list(const linked_list*const lhs, const linked_list*const rhs) {
   if (lhs == NULL && rhs == NULL) {
     return true;
   } else if (lhs == NULL || rhs == NULL || lhs->size != rhs->size) {
