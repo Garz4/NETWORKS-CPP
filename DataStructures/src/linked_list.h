@@ -62,7 +62,7 @@ extern linked_list* copy_linked_list(const linked_list*const list);
 extern bool equal_linked_list(
     const linked_list*const lhs, const linked_list*const rhs);
 
-extern void sort_linked_list(linked_list* list);
+extern void sort_linked_list(linked_list*const list);
 
 extern bool empty_linked_list(const linked_list*const list);
 

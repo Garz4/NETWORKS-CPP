@@ -213,7 +213,7 @@ equal_linked_list(const linked_list*const lhs, const linked_list*const rhs) {
 }
 
 void
-sort_linked_list(linked_list* list) {}
+sort_linked_list(linked_list*const list) {}
 
 bool
 empty_linked_list(const linked_list*const list) {
