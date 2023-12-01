@@ -16,34 +16,51 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef __ZNG_SORT_SET_H__
-#define __ZNG_SORT_SET_H__
-
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "memory.h"
+#include "sort_set.h"
 
-typedef struct __zng_ss_node {
-  int value;
-  int left_depth;
-  int right_depth;
-  struct __zng_ss_node* left;
-  struct __zng_ss_node* right;
-} sort_set_node;
+inline sort_set*
+new_sort_set(int value) {
+  sort_set* response;
 
-typedef struct ss {
-  size_t size;
-  sort_set_node* root;
-} sort_set;
+  ALLOCATE(sort_set, response);
+  ALLOCATE(sort_set_node, response->root);
+  response->size = 1;
+  response->root->value = value;
+  response->root->left_depth = 0;
+  response->root->right_depth = 0;
+  response->root->left = NULL;
+  response->root->right = NULL;
 
-extern sort_set* new_sort_set(int value);
+  return response;
+}
 
-extern void add_to_sort_set(sort_set*const set, int value);
+inline void
+add_to_sort_set(sort_set*const set, int value) {}
 
 // Time: O(log(n))
 // Space: O(1)
-extern bool exist_in_sort_set(const sort_set*const set, int target);
+bool
+exist_in_sort_set(const sort_set*const set, int target) {
+  if (set == NULL || set->size == 0) {
+    return false;
+  }
 
-#endif // __ZNG_SORT_SET_H__
+  sort_set_node* node = set->root;
+
+  while (node != NULL) {
+    if (node->value == target) {
+      return true;
+    } else if (node->value < target) {
+      node = node->right;
+    } else {
+      node = node->left;
+    }
+  }
+
+  return false;
+}

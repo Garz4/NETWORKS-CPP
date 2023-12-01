@@ -19,20 +19,19 @@
 #ifndef __ZNG_MEMORY_H__
 #define __ZNG_MEMORY_H__
 
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "../../Terminal/outputstream.h"
 
-#define ALLOCATE(type, pointer) \
+#define ALLOCATE(type, pointer)            \
   pointer = (type *) malloc(sizeof(type)); \
-  if ((pointer) == NULL) { \
+  if ((pointer) == NULL) {                 \
     STDERR_RED("ERROR: Out of memory.\n"); \
-    EXIT(1); \
+    EXIT(1);                               \
   }
 
 #define DEALLOCATE(pointer) \
-  free((pointer)); \
+  free((pointer));          \
   pointer = NULL;
 
 #endif // __ZNG_MEMORY_H__

@@ -26,13 +26,13 @@
 
 // To make it bold, add 01; between the brace and the number 
 
-#define STDERR_RED(...) \
-  fprintf(stderr, "\033[91m"); \
+#define STDERR_RED(...)         \
+  fprintf(stderr, "\033[91m");  \
   fprintf(stderr, __VA_ARGS__); \
   fprintf(stderr, "\033[0m");
 
-#define STDOUT_GREEN(...) \
-  fprintf(stdout, "\033[92m"); \
+#define STDOUT_GREEN(...)       \
+  fprintf(stdout, "\033[92m");  \
   fprintf(stdout, __VA_ARGS__); \
   fprintf(stdout, "\033[0m");
 
