@@ -24,6 +24,8 @@
 
 #ifdef __cplusplus
 
+#include <string>
+
 static std::string __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_.c_str(); }
 
