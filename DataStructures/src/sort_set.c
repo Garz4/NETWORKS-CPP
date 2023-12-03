@@ -20,8 +20,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "memory.h"
-#include "sort_set.h"
+#include "../inc/memory.h"
+#include "../inc/sort_set.h"
 
 inline sort_set*
 new_sort_set(int value) {
@@ -68,10 +68,10 @@ delete_sort_set(sort_set* set) {
   if (set == NULL || set->root == NULL) {
     return;
   }
-
+/*
   sort_set_node* node;
   sort_set_node* left;
   sort_set_node* right;
-
+*/
   DEALLOCATE(set);
 }

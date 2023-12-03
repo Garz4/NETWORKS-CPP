@@ -19,7 +19,7 @@
 #include <stdio.h>
 
 #include "../../Testing/comparators.h"
-#include "../src/hash_map.h"
+#include "../inc/hash_map.h"
 
 int main(void) {
   START_TEST("hash_map_test");

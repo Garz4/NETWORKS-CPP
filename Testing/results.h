@@ -19,7 +19,7 @@
 #ifndef RESULTS_H_
 #define RESULTS_H_
 
-#include "../DataStructures/src/memory.h"
+#include "../DataStructures/inc/memory.h"
 #include "../Terminal/outputstream.h"
 
 #ifdef __cplusplus

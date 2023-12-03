@@ -17,7 +17,7 @@
  */
 
 #include "../../Testing/comparators.h"
-#include "../src/array.h"
+#include "../inc/array.h"
 
 int main(void) {
   START_TEST("array_test");

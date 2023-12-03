@@ -15,33 +15,33 @@
 # https://github.com/zoningorg/zoning/blob/main/LICENSE
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wpedantic
-INC = ./src/linked_list.h ./src/sort_set.h
-SRC = $(INC:.h=.c)
-OBJ = $(INC:.h=.o)
+CFLAGS = -Wall -Werror -Wpedantic -I./inc/
+INC = ./inc/linked_list.h ./inc/sort_set.h
+SRC = $(patsubst ./inc/%.h,./src/%.c,$(INC))
+OBJ = $(patsubst ./inc/%.h,./obj/%.o,$(INC))
 
 all: test
 test: hash_map_test hash_set_test linked_list_test sort_map_test sort_set_test
 	( ./hash_map_test && ./hash_set_test && ./linked_list_test \
 		&& ./sort_map_test && ./sort_set_test ) ; make clean
 
-./src/%.o: ./src/%.c
-	gcc -c $< -o $@
+./obj/%.o: ./src/%.c
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 linked_list_test: test/linked_list_test.c $(OBJ)
-	$(CC) $(CFLAGS) $(INC) test/linked_list_test.c -o linked_list_test $(OBJ)
+	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 hash_map_test: test/hash_map_test.c $(OBJ)
-	$(CC) $(CFLAGS) $(INC) test/hash_map_test.c -o hash_map_test $(OBJ)
+	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 hash_set_test: test/hash_set_test.c $(OBJ)
-	$(CC) $(CFLAGS) $(INC) test/hash_set_test.c -o hash_set_test $(OBJ)
+	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 sort_map_test: test/sort_map_test.c $(OBJ)
-	$(CC) $(CFLAGS) $(INC) test/sort_map_test.c -o sort_map_test $(OBJ)
+	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 sort_set_test: test/sort_set_test.c $(OBJ)
-	$(CC) $(CFLAGS) $(INC) test/sort_set_test.c -o sort_set_test $(OBJ)
+	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 clean:
 	rm linked_list_test hash_map_test hash_set_test sort_map_test \
