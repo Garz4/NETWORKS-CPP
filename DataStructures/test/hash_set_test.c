@@ -19,7 +19,7 @@
 #include <stdio.h>
 
 #include "../../Testing/comparators.h"
-#include "../src/hash_set.h"
+#include "../inc/hash_set.h"
 
 int main(void) {
   START_TEST("hash_set_test");

@@ -17,7 +17,7 @@
  */
 
 #include "../../Testing/comparators.h"
-#include "../src/linked_list.h"
+#include "../inc/linked_list.h"
 
 int main(void) {
   START_TEST("linked_list_test");

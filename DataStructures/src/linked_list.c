@@ -20,8 +20,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "linked_list.h"
-#include "memory.h"
+#include "../inc/linked_list.h"
+#include "../inc/memory.h"
 
 inline linked_list*
 new_linked_list(int value) {

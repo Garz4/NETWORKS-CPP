@@ -19,7 +19,7 @@
 #include <stdio.h>
 
 #include "../../Testing/comparators.h"
-#include "../src/sort_set.h"
+#include "../inc/sort_set.h"
 
 int main(void) {
   START_TEST("sort_set_test");
