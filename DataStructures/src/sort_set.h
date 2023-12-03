@@ -33,7 +33,7 @@ typedef struct __zng_ss_node {
   struct __zng_ss_node* right;
 } sort_set_node;
 
-typedef struct ss {
+typedef struct __zng_ss {
   size_t size;
   sort_set_node* root;
 } sort_set;
@@ -45,5 +45,7 @@ extern void add_to_sort_set(sort_set*const set, int value);
 // Time: O(log(n))
 // Space: O(1)
 extern bool exist_in_sort_set(const sort_set*const set, int target);
+
+extern void delete_sort_set(sort_set* list);
 
 #endif // __ZNG_SORT_SET_H__

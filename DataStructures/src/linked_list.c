@@ -39,6 +39,11 @@ new_linked_list(int value) {
 
 void
 print_linked_list(const linked_list*const list) {
+  if (list == NULL) {
+    printf("list = {};\n");
+    return;
+  }
+
   linked_list_node* head = list->head;
   printf("list = {");
 
@@ -56,6 +61,10 @@ print_linked_list(const linked_list*const list) {
 
 bool
 exist_in_linked_list(const linked_list*const list, int value) {
+  if (list == NULL) {
+    return false;
+  }
+
   linked_list_node* head = list->head;
 
   while (head != NULL) {
