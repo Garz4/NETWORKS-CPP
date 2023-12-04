@@ -65,13 +65,13 @@ exist_in_sort_set(const sort_set*const set, int target) {
 
 void
 delete_sort_set(sort_set* set) {
-  if (set == NULL || set->root == NULL) {
+  if (set == NULL) {
     return;
   }
-/*
-  sort_set_node* node;
-  sort_set_node* left;
-  sort_set_node* right;
-*/
+
+  if (set->root != NULL) {
+    DEALLOCATE(set->root);
+  }
+
   DEALLOCATE(set);
 }
