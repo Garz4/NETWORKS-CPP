@@ -19,4 +19,6 @@
 #ifndef __ZNG_HASH_SET_H__
 #define __ZNG_HASH_SET_H__
 
+#include <stdio.h>
+
 #endif // __ZNG_HASH_SET_H__

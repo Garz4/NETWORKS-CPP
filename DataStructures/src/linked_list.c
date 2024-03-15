@@ -23,8 +23,7 @@
 #include "../inc/linked_list.h"
 #include "../inc/memory.h"
 
-inline linked_list*
-new_linked_list(int value) {
+inline linked_list* new_linked_list(int value) {
   linked_list* response;
 
   ALLOCATE(linked_list, response);
@@ -37,8 +36,7 @@ new_linked_list(int value) {
   return response;
 }
 
-void
-print_linked_list(const linked_list*const list) {
+void print_linked_list(const linked_list*const list) {
   if (list == NULL) {
     printf("list = {};\n");
     return;
@@ -59,8 +57,7 @@ print_linked_list(const linked_list*const list) {
   printf("};\n");
 }
 
-bool
-exist_in_linked_list(const linked_list*const list, int value) {
+bool exist_in_linked_list(const linked_list*const list, int value) {
   if (list == NULL) {
     return false;
   }
@@ -79,8 +76,7 @@ exist_in_linked_list(const linked_list*const list, int value) {
 }
 
 // TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
-inline void
-add_to_linked_list(linked_list*const list, int value) {
+inline void add_to_linked_list(linked_list*const list, int value) {
   if (list == NULL) {
     return;
   }
@@ -92,8 +88,7 @@ add_to_linked_list(linked_list*const list, int value) {
   list->size++;
 }
 
-void
-delete_linked_list(linked_list* list) {
+void delete_linked_list(linked_list* list) {
   if (list == NULL || list->head == NULL) {
     return;
   }
@@ -112,8 +107,7 @@ delete_linked_list(linked_list* list) {
   DEALLOCATE(list);
 }
 
-void
-erase_single_match_linked_list(linked_list* list, int target) {
+void erase_single_match_linked_list(linked_list* list, int target) {
   if (list == NULL || list->head == NULL) {
     return;
   }
@@ -147,13 +141,9 @@ erase_single_match_linked_list(linked_list* list, int target) {
   }
 }
 
-void
-erase_all_match_linked_list(linked_list* list, int target) {
+void erase_all_match_linked_list(linked_list* list, int target) {}
 
-}
-
-void
-reverse_linked_list(linked_list*const list) {
+void reverse_linked_list(linked_list*const list) {
   if (list == NULL) {
     return;
   }
@@ -174,8 +164,7 @@ reverse_linked_list(linked_list*const list) {
   list->tail = current;
 }
 
-linked_list*
-copy_linked_list(const linked_list*const list) {
+linked_list* copy_linked_list(const linked_list*const list) {
   if (list == NULL || list->head == NULL) {
     return NULL;
   }
@@ -191,8 +180,8 @@ copy_linked_list(const linked_list*const list) {
   return copy;
 }
 
-bool
-equal_linked_list(const linked_list*const lhs, const linked_list*const rhs) {
+bool equal_linked_list(
+    const linked_list*const lhs, const linked_list*const rhs) {
   if (lhs == NULL && rhs == NULL) {
     return true;
   } else if (lhs == NULL || rhs == NULL || lhs->size != rhs->size) {
@@ -214,11 +203,9 @@ equal_linked_list(const linked_list*const lhs, const linked_list*const rhs) {
   return lhs_node == NULL && rhs_node == NULL;
 }
 
-void
-sort_linked_list(linked_list*const list) {}
+void sort_linked_list(linked_list*const list) {}
 
-inline bool
-empty_linked_list(const linked_list*const list) {
+inline bool empty_linked_list(const linked_list*const list) {
   return list == NULL
       || list->head == NULL
       || list->tail == NULL

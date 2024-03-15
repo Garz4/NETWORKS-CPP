@@ -19,4 +19,6 @@
 #ifndef __ZNG_SORT_MAP_H__
 #define __ZNG_SORT_MAP_H__
 
+#include <stdio.h>
+
 #endif // __ZNG_SORT_MAP_H__
