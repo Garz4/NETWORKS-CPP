@@ -14,7 +14,7 @@
 #
 # https://github.com/zoningorg/zoning/blob/main/LICENSE
 
-all: test clean
+all: test
 
 data:
 	cd DataStructures && make
@@ -30,4 +30,4 @@ FileTransferTest:
 	cd FileTransfer && make test
 
 clean:
-	whoami
+	cd DataStructures && make clean && cd ../FileTransfer && make clean

@@ -19,8 +19,15 @@
 #ifndef __ZNG_ARRAY_H__
 #define __ZNG_ARRAY_H__
 
-struct array {
+#include <stddef.h>
 
-};
+typedef struct __zng_array {
+  int* data;
+  size_t size;
+} array;
+
+extern array* new_array(int value);
+
+extern void delete_array(array* arr);
 
 #endif // __ZNG_ARRAY_H__

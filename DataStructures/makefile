@@ -16,25 +16,28 @@
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wpedantic -I./inc/
-INC = ./inc/linked_list.h ./inc/sort_set.h
+INC = ./inc/array.h ./inc/hash_map.h ./inc/hash_set.h ./inc/linked_list.h ./inc/sort_map.h ./inc/sort_set.h
 SRC = $(patsubst ./inc/%.h,./src/%.c,$(INC))
 OBJ = $(patsubst ./inc/%.h,./obj/%.o,$(INC))
 
 all: test
-test: hash_map_test hash_set_test linked_list_test sort_map_test sort_set_test
-	( ./hash_map_test && ./hash_set_test && ./linked_list_test \
+test: array_test hash_map_test hash_set_test linked_list_test sort_map_test sort_set_test
+	( ./array_test && ./hash_map_test && ./hash_set_test && ./linked_list_test \
 		&& ./sort_map_test && ./sort_set_test ) ; make clean
 
 ./obj/%.o: ./src/%.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-linked_list_test: test/linked_list_test.c $(OBJ)
+array_test: test/array_test.c $(OBJ)
 	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 hash_map_test: test/hash_map_test.c $(OBJ)
 	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 hash_set_test: test/hash_set_test.c $(OBJ)
+	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
+
+linked_list_test: test/linked_list_test.c $(OBJ)
 	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 sort_map_test: test/sort_map_test.c $(OBJ)
@@ -44,7 +47,7 @@ sort_set_test: test/sort_set_test.c $(OBJ)
 	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
 
 clean:
-	rm linked_list_test hash_map_test hash_set_test sort_map_test \
+	rm array_test hash_map_test hash_set_test linked_list_test sort_map_test \
 		sort_set_test $(OBJ)
 
 #  $(wildcard *.o)

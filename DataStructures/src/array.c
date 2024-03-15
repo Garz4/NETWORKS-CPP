@@ -16,9 +16,5 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef __ZNG_HASH_MAP_H__
-#define __ZNG_HASH_MAP_H__
+#include "../inc/array.h"
 
-#include <stdio.h>
-
-#endif // __ZNG_HASH_MAP_H__

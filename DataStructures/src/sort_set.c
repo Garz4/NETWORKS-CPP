@@ -23,8 +23,7 @@
 #include "../inc/memory.h"
 #include "../inc/sort_set.h"
 
-inline sort_set*
-new_sort_set(int value) {
+inline sort_set* new_sort_set(int value) {
   sort_set* response;
 
   ALLOCATE(sort_set, response);
@@ -39,11 +38,9 @@ new_sort_set(int value) {
   return response;
 }
 
-inline void
-add_to_sort_set(sort_set*const set, int value) {}
+inline void add_to_sort_set(sort_set*const set, int value) {}
 
-bool
-exist_in_sort_set(const sort_set*const set, int target) {
+bool exist_in_sort_set(const sort_set*const set, int target) {
   if (set == NULL || set->size == 0) {
     return false;
   }
@@ -63,8 +60,7 @@ exist_in_sort_set(const sort_set*const set, int target) {
   return false;
 }
 
-void
-delete_sort_set(sort_set* set) {
+void delete_sort_set(sort_set* set) {
   if (set == NULL) {
     return;
   }
