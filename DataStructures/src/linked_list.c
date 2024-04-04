@@ -205,7 +205,7 @@ bool equal_linked_list(
 
 void sort_linked_list(linked_list*const list) {}
 
-inline bool empty_linked_list(const linked_list*const list) {
+inline bool is_empty_linked_list(const linked_list*const list) {
   return list == NULL
       || list->head == NULL
       || list->tail == NULL
