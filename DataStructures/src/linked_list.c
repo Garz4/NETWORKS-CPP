@@ -180,7 +180,7 @@ linked_list* copy_linked_list(const linked_list*const list) {
   return copy;
 }
 
-bool equal_linked_list(
+bool are_equal_linked_list(
     const linked_list*const lhs, const linked_list*const rhs) {
   if (lhs == NULL && rhs == NULL) {
     return true;

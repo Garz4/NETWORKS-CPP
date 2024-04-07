@@ -38,17 +38,17 @@ int main(void) {
 
   linked_list* list_copy = copy_linked_list(list);
 
-  EXPECT_TRUE(equal_linked_list(list, list));
-  EXPECT_TRUE(equal_linked_list(list, list_copy));
+  EXPECT_TRUE(are_equal_linked_list(list, list));
+  EXPECT_TRUE(are_equal_linked_list(list, list_copy));
   reverse_linked_list(list);
-  EXPECT_FALSE(equal_linked_list(list, list_copy));
+  EXPECT_FALSE(are_equal_linked_list(list, list_copy));
   reverse_linked_list(list_copy);
-  EXPECT_TRUE(equal_linked_list(list, list_copy));
-  EXPECT_TRUE(equal_linked_list(list_copy, list_copy));
+  EXPECT_TRUE(are_equal_linked_list(list, list_copy));
+  EXPECT_TRUE(are_equal_linked_list(list_copy, list_copy));
 
   erase_single_match_linked_list(list_copy, 3);
   EXPECT_FALSE(exist_in_linked_list(list_copy, 3));
-  EXPECT_FALSE(equal_linked_list(list, list_copy));
+  EXPECT_FALSE(are_equal_linked_list(list, list_copy));
 
   linked_list_node* node;
   int curr_element = last_element;
