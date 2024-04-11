@@ -16,10 +16,6 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "../inc/memory.h"
 #include "../inc/sort_set.h"
 

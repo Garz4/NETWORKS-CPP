@@ -20,7 +20,6 @@
 #define __ZNG_SORT_SET_H__
 
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "memory.h"

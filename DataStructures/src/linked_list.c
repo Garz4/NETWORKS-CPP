@@ -16,9 +16,7 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "../inc/linked_list.h"
 #include "../inc/memory.h"
