@@ -16,10 +16,6 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "../inc/memory.h"
 #include "../inc/sort_set.h"
 
@@ -70,4 +66,10 @@ void delete_sort_set(sort_set* set) {
   }
 
   DEALLOCATE(set);
+}
+
+inline bool is_empty_sort_set(const sort_set*const set) {
+  return set == NULL ||
+         set->root == NULL ||
+         set->size == 0;
 }

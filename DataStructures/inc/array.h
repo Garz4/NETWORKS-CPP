@@ -26,7 +26,10 @@ typedef struct __zng_array {
   size_t size;
 } array;
 
+// Every new array needs to be deleted using delete_array(...).
 extern array* new_array(int value);
+
+extern void add_to_array(array*const arr, int value);
 
 extern void delete_array(array* arr);
 

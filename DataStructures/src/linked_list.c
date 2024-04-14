@@ -16,9 +16,7 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "../inc/linked_list.h"
 #include "../inc/memory.h"
@@ -180,7 +178,7 @@ linked_list* copy_linked_list(const linked_list*const list) {
   return copy;
 }
 
-bool equal_linked_list(
+bool are_equal_linked_list(
     const linked_list*const lhs, const linked_list*const rhs) {
   if (lhs == NULL && rhs == NULL) {
     return true;
@@ -205,7 +203,7 @@ bool equal_linked_list(
 
 void sort_linked_list(linked_list*const list) {}
 
-inline bool empty_linked_list(const linked_list*const list) {
+inline bool is_empty_linked_list(const linked_list*const list) {
   return list == NULL
       || list->head == NULL
       || list->tail == NULL

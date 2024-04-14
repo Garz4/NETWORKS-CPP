@@ -20,7 +20,6 @@
 #define __ZNG_SORT_SET_H__
 
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "memory.h"
@@ -47,5 +46,7 @@ extern void add_to_sort_set(sort_set*const set, int value);
 extern bool exist_in_sort_set(const sort_set*const set, int target);
 
 extern void delete_sort_set(sort_set* list);
+
+extern bool is_empty_sort_set(const sort_set*const set);
 
 #endif // __ZNG_SORT_SET_H__
