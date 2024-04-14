@@ -29,7 +29,7 @@ typedef struct __zng_array {
 // Every new array needs to be deleted using delete_array(...).
 extern array* new_array(int value);
 
-extern void add_to_array(const array*const arr, int value);
+extern void add_to_array(array*const arr, int value);
 
 extern void delete_array(array* arr);
 
