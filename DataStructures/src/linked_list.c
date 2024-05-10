@@ -139,7 +139,7 @@ void erase_single_match_linked_list(linked_list* list, int target) {
   }
 }
 
-void erase_all_match_linked_list(linked_list* list, int target) {}
+//void erase_all_match_linked_list(linked_list* list, int target) {}
 
 void reverse_linked_list(linked_list*const list) {
   if (list == NULL) {
@@ -201,7 +201,7 @@ bool are_equal_linked_list(
   return lhs_node == NULL && rhs_node == NULL;
 }
 
-void sort_linked_list(linked_list*const list) {}
+//void sort_linked_list(linked_list*const list) {}
 
 inline bool is_empty_linked_list(const linked_list*const list) {
   return list == NULL

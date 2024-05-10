@@ -16,12 +16,10 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include <iostream>
-
 #include "../../Testing/comparators.h"
 #include "../PaqueteDatagrama.h"
 
-int main(int argc, char** argv) {
+int main(void) {
   START_TEST("PaqueteDatagrama_test");
 
   Mensaje mensaje;
