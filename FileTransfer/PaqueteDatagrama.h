@@ -60,8 +60,8 @@ class PaqueteDatagrama final {
   size_t longitud() const noexcept { return longitud_; }
 
  private:
-  std::string ip_;
-  unsigned short puerto_;
   Mensaje mensaje_;
   size_t longitud_;
+  std::string ip_;
+  unsigned short puerto_;
 };

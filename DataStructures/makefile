@@ -15,7 +15,7 @@
 # https://github.com/zoningorg/zoning/blob/main/LICENSE
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wpedantic -I./inc/
+CFLAGS = -Wall -Wextra -Werror -Wpedantic -I./inc/
 INC = ./inc/array.h ./inc/hash_map.h ./inc/hash_set.h ./inc/linked_list.h ./inc/sort_map.h ./inc/sort_set.h
 SRC = $(patsubst ./inc/%.h,./src/%.c,$(INC))
 OBJ = $(patsubst ./inc/%.h,./obj/%.o,$(INC))

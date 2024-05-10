@@ -34,7 +34,7 @@ inline sort_set* new_sort_set(int value) {
   return response;
 }
 
-inline void add_to_sort_set(sort_set*const set, int value) {}
+//inline void add_to_sort_set(sort_set*const set, int value) { set; }
 
 bool exist_in_sort_set(const sort_set*const set, int target) {
   if (set == NULL || set->size == 0) {

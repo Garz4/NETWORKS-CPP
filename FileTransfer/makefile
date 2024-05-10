@@ -14,28 +14,31 @@
 #
 # https://github.com/zoningorg/zoning/blob/main/LICENSE
 
+CXX = g++
+CXXFLAGS = -Wall -Wextra -Werror -Wpedantic
+
 all: ENVIAR_ARCHIVOS RECIBIR_ARCHIVOS
 
 ENVIAR_ARCHIVOS: Cliente.cpp Solicitud.o SocketDatagrama.o
-	g++ Cliente.cpp Solicitud.o SocketDatagrama.o -o ENVIAR_ARCHIVOS
+	$(CXX) $(CXXFLAGS) Cliente.cpp Solicitud.o SocketDatagrama.o -o ENVIAR_ARCHIVOS
 
 RECIBIR_ARCHIVOS: Servidor.cpp Respuesta.o SocketDatagrama.o
-	g++ Servidor.cpp Respuesta.o SocketDatagrama.o -o RECIBIR_ARCHIVOS
+	$(CXX) $(CXXFLAGS) Servidor.cpp Respuesta.o SocketDatagrama.o -o RECIBIR_ARCHIVOS
 
 Respuesta.o: Respuesta.cpp Mensaje.h
-	g++ Respuesta.cpp -c
+	$(CXX) $(CXXFLAGS) Respuesta.cpp -c
 
 Solicitud.o: Solicitud.cpp Mensaje.h
-	g++ Solicitud.cpp -c
+	$(CXX) $(CXXFLAGS) Solicitud.cpp -c
 
 SocketDatagrama.o: SocketDatagrama.cpp
-	g++ SocketDatagrama.cpp -c
+	$(CXX) $(CXXFLAGS) SocketDatagrama.cpp -c
 
 test: PaqueteDatagrama_test
 	./PaqueteDatagrama_test ; rm PaqueteDatagrama_test
 
 PaqueteDatagrama_test: test/PaqueteDatagrama_test.cpp
-	g++ test/PaqueteDatagrama_test.cpp -o PaqueteDatagrama_test
+	$(CXX) $(CXXFLAGS) test/PaqueteDatagrama_test.cpp -o PaqueteDatagrama_test
 
 clean:
 	rm -f $(wildcard *.o) ENVIAR_ARCHIVOS RECIBIR_ARCHIVOS

@@ -30,7 +30,7 @@ int main(void) {
   sort_set* set = new_sort_set(1);
 
   for (int i = first_element + 1; i <= last_element; ++i) {
-    add_to_sort_set(set, i);
+    //add_to_sort_set(set, i);
   }
 
   delete_sort_set(set);
