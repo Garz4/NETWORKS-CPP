@@ -27,8 +27,9 @@ all: test
 
 test: $(TESTS)
 	for TEST in $(TESTS); do \
-		./$$TEST;            \
-	done;                    \
+		./$$TEST; \
+		[[ $$? -ne 0 ]] && break; \
+	done; \
 	make clean
 
 ./obj/%.o: ./src/%.c
