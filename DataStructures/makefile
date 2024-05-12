@@ -31,11 +31,11 @@ test: $(TESTS)
     done; \
 	make clean
 
-obj/%.o: src/%.c
+./obj/%.o: ./src/%.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-$(TESTS): % : test/%.c $(OBJ)
-	$(CC) $(CFLAGS) $(INC) $< -o $@ $(OBJ)
+$(TESTS): % : ./test/%.c $(OBJ)
+	$(CC) $(CFLAGS) $< -o $@ $(OBJ)
 
 clean:
 	rm $(TESTS) $(OBJ)
