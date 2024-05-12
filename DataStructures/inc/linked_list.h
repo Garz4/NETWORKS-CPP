@@ -46,11 +46,15 @@ extern void add_to_linked_list(linked_list*const list, int value);
 
 extern void delete_linked_list(linked_list* list);
 
-// Erases first occurence of 'target' in the linked list.
+// Deletes first occurence of 'target' in the linked list.
 // It frees its memory.
-extern void erase_single_match_linked_list(linked_list* list, int target);
+extern void delete_single_match_linked_list(linked_list* list, int target);
 
-extern void erase_all_match_linked_list(linked_list* list, int target);
+extern void delete_all_match_linked_list(linked_list* list, int target);
+
+extern void delete_head_linked_list(linked_list* list);
+
+extern void delete_tail_linked_list(linked_list* list);
 
 // Linear time.
 extern void reverse_linked_list(linked_list*const list);

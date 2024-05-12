@@ -22,17 +22,15 @@
 int main(void) {
   START_TEST("array_test");
 
-  EXPECT_TRUE(1);
-/*
-  array arr = new_array();
+  const size_t length = 1;
+  const int first_element = length - 1;
+  array* arr = new_array(first_element);
+
+  EXPECT_EQUAL(arr->data[0], first_element);
+  EXPECT_EQUAL(length, arr->size);
 
   delete_array(arr);
-  // len should not be >= INT_MAX.
-  const size_t len = 5;
-  const int last_element = len - 1;
-  const int first_element = 0;
-  linked_list* list = new_linked_list(first_element);
-
+/*
   for (int i = first_element + 1; i <= last_element; ++i) {
     add_to_linked_list(list, i);
   }

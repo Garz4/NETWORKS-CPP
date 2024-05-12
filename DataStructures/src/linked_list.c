@@ -87,7 +87,7 @@ inline void add_to_linked_list(linked_list*const list, int value) {
 }
 
 void delete_linked_list(linked_list* list) {
-  if (list == NULL || list->head == NULL) {
+  if (list == NULL) {
     return;
   }
 
@@ -105,7 +105,7 @@ void delete_linked_list(linked_list* list) {
   DEALLOCATE(list);
 }
 
-void erase_single_match_linked_list(linked_list* list, int target) {
+void delete_single_match_linked_list(linked_list* list, int target) {
   if (list == NULL || list->head == NULL) {
     return;
   }
