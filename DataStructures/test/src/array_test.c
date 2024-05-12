@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include "../../Testing/comparators.h"
-#include "../inc/array.h"
+#include "../../../Testing/comparators.h"
+#include "../../inc/array.h"
 
 int main(void) {
   START_TEST("array_test");

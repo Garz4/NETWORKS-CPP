@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include "../../Testing/comparators.h"
-#include "../inc/linked_list.h"
+#include "../../../Testing/comparators.h"
+#include "../../inc/linked_list.h"
 
 int main(void) {
   START_TEST("linked_list_test");

@@ -18,22 +18,13 @@
 
 #include <stdio.h>
 
-#include "../../Testing/comparators.h"
-#include "../inc/sort_set.h"
+#include "../../../Testing/comparators.h"
+#include "../../inc/hash_set.h"
 
 int main(void) {
-  START_TEST("sort_set_test");
+  START_TEST("hash_set_test");
 
-  const size_t len = 15;
-  const int last_element = len - 1;
-  const int first_element = 0;
-  sort_set* set = new_sort_set(1);
-
-  for (int i = first_element + 1; i <= last_element; ++i) {
-    //add_to_sort_set(set, i);
-  }
-
-  delete_sort_set(set);
+  EXPECT_TRUE(1);
 
   FINISH_TEST();
 

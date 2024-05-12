@@ -18,8 +18,8 @@
 
 #include <stdio.h>
 
-#include "../../Testing/comparators.h"
-#include "../inc/hash_map.h"
+#include "../../../Testing/comparators.h"
+#include "../../inc/hash_map.h"
 
 int main(void) {
   START_TEST("hash_map_test");

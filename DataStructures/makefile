@@ -18,10 +18,10 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Wpedantic -I./inc/
 INC = ./inc/array.h ./inc/hash_map.h ./inc/hash_set.h ./inc/linked_list.h \
 	./inc/sort_map.h ./inc/sort_set.h
-SRC = $(patsubst ./inc/%.h,./src/%.c,$(INC))
 OBJ = $(patsubst ./inc/%.h,./obj/%.o,$(INC))
-TESTS = array_test hash_map_test hash_set_test linked_list_test sort_map_test \
-	sort_set_test
+TEST_DIR = ./test/bin
+TEST_SRCS = $(wildcard ./test/src/*.c)
+TESTS = $(patsubst ./test/src/%.c,$(TEST_DIR)/%,$(TEST_SRCS))
 
 all: test
 
@@ -32,13 +32,14 @@ test: $(TESTS)
 	done; \
 	make clean
 
-./obj/%.o: ./src/%.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+$(TEST_DIR)/%: ./test/src/%.c $(OBJ)
+	mkdir -p $(TEST_DIR)
+	$(CC) $(CFLAGS) $< -o $@ $(filter %.o,$^)
 
-$(TESTS): % : ./test/%.c $(OBJ)
-	$(CC) $(CFLAGS) $< -o $@ $(OBJ)
+./obj/%.o: ./src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm $(TESTS) $(OBJ)
+	rm -rf $(TEST_DIR)/* $(OBJ)
 
 #  $(wildcard *.o)

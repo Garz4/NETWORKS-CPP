@@ -18,8 +18,8 @@
 
 #include <stdio.h>
 
-#include "../../Testing/comparators.h"
-#include "../inc/sort_map.h"
+#include "../../../Testing/comparators.h"
+#include "../../inc/sort_map.h"
 
 int main(void) {
   START_TEST("sort_map_test");
