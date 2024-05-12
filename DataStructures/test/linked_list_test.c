@@ -22,9 +22,9 @@
 int main(void) {
   START_TEST("linked_list_test");
 
-  // len should not be >= INT_MAX.
-  const size_t len = 5;
-  const int last_element = len - 1;
+  // length should not be >= INT_MAX.
+  const size_t length = 5;
+  const int last_element = length - 1;
   const int first_element = 0;
   linked_list* list = new_linked_list(first_element);
 
@@ -34,7 +34,7 @@ int main(void) {
 
   EXPECT_TRUE(exist_in_linked_list(list, first_element + 2));
   EXPECT_FALSE(exist_in_linked_list(list, last_element + 1));
-  EXPECT_EQUAL(list->size, len);
+  EXPECT_EQUAL(list->size, length);
 
   linked_list* list_copy = copy_linked_list(list);
 
@@ -46,7 +46,7 @@ int main(void) {
   EXPECT_TRUE(are_equal_linked_list(list, list_copy));
   EXPECT_TRUE(are_equal_linked_list(list_copy, list_copy));
 
-  erase_single_match_linked_list(list_copy, 3);
+  delete_single_match_linked_list(list_copy, 3);
   EXPECT_FALSE(exist_in_linked_list(list_copy, 3));
   EXPECT_FALSE(are_equal_linked_list(list, list_copy));
 

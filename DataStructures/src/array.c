@@ -17,4 +17,27 @@
  */
 
 #include "../inc/array.h"
+#include "../inc/memory.h"
 
+array* new_array(int value) {
+  array* response;
+
+  ALLOCATE(array, response);
+  ALLOCATE(int, response->data);
+  response->size = 1;
+  *(response->data) = value;
+
+  return response;
+}
+
+inline void delete_array(array* arr) {
+  if (arr == NULL) {
+    return;
+  }
+
+  if (arr->data != NULL) {
+    DEALLOCATE(arr->data);
+  }
+
+  DEALLOCATE(arr);
+}
