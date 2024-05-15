@@ -29,8 +29,10 @@
 static std::string __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_.c_str(); }
 
-# define START_TEST(string)  \
-  __CURRENT_TEST_ = (string);
+# define START_TEST(string)   \
+do {                          \
+  __CURRENT_TEST_ = (string); \
+} while (0);
 
 #else
 
@@ -38,20 +40,28 @@ static char* __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
 
 # define START_TEST(string)    \
+do {                           \
   DEALLOCATE(__CURRENT_TEST_); \
-  __CURRENT_TEST_ = (string);
+  __CURRENT_TEST_ = (string);  \
+} while (0);
 
 #endif // __cplusplus
 
 #define FINISH_TEST()                                \
-  STDOUT_GREEN("[%s]: Passed.\n", __CURRENT_TEST());
+do {                                                 \
+  STDOUT_GREEN("[%s]: Passed.\n", __CURRENT_TEST()); \
+} while (0);
 
 #define FINISH_TEST_FAILED()                       \
+do {                                               \
   STDERR_RED("[%s]: Failed.\n", __CURRENT_TEST()); \
-  EXIT(1);
+  EXIT(1);                                         \
+} while (0);
 
 #define FAIL(string)                                    \
+do {                                                    \
   STDERR_RED("[%s]: %s\n", __CURRENT_TEST(), (string)); \
-  FINISH_TEST_FAILED()
+  FINISH_TEST_FAILED();                                 \
+} while (0);
 
 #endif // RESULTS_H_

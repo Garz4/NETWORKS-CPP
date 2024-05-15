@@ -22,8 +22,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "memory.h"
-
 typedef struct __zng_ss_node {
   int value;
   int left_depth;
@@ -37,15 +35,15 @@ typedef struct __zng_ss {
   sort_set_node* root;
 } sort_set;
 
-extern sort_set* new_sort_set(int value);
+extern sort_set* allocate_sort_set(int value);
+extern sort_set* allocate_empty_sort_set();
+extern void deallocate_sort_set(sort_set* list);
 
 extern void add_to_sort_set(sort_set*const set, int value);
 
 // Time: O(log(n))
 // Space: O(1)
 extern bool exist_in_sort_set(const sort_set*const set, int target);
-
-extern void delete_sort_set(sort_set* list);
 
 extern bool is_empty_sort_set(const sort_set*const set);
 

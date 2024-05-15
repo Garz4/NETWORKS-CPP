@@ -27,13 +27,17 @@
 // To make it bold, add 01; between the brace and the number 
 
 #define STDERR_RED(...)         \
+do {                            \
   fprintf(stderr, "\033[91m");  \
   fprintf(stderr, __VA_ARGS__); \
-  fprintf(stderr, "\033[0m");
+  fprintf(stderr, "\033[0m");   \
+} while (0);
 
 #define STDOUT_GREEN(...)       \
+do {                            \
   fprintf(stdout, "\033[92m");  \
   fprintf(stdout, __VA_ARGS__); \
-  fprintf(stdout, "\033[0m");
+  fprintf(stdout, "\033[0m");   \
+} while (0);
 
 #endif // OUTPUTSTREAM_H_

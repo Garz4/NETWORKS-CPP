@@ -14,31 +14,47 @@
 #
 # https://github.com/zoningorg/zoning/blob/main/LICENSE
 
+# Compilation.
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Wpedantic -I./inc/
-INC = ./inc/array.h ./inc/hash_map.h ./inc/hash_set.h ./inc/linked_list.h \
-	./inc/sort_map.h ./inc/sort_set.h
-SRC = $(patsubst ./inc/%.h,./src/%.c,$(INC))
-OBJ = $(patsubst ./inc/%.h,./obj/%.o,$(INC))
-TESTS = array_test hash_map_test hash_set_test linked_list_test sort_map_test \
-	sort_set_test
 
+# All targets. This assumes there exists a .h, .c, and _test.c per target.
+TARGETS = array \
+	hash_map \
+	hash_set \
+	linked_list \
+	sort_map \
+	sort_set
+
+# Object files.
+OBJ_DIR = ./obj
+OBJ = $(patsubst %,$(OBJ_DIR)/%.o,$(TARGETS))
+
+# Binary files.
+SRC_DIR = ./test/src
+BIN_DIR = ./test/bin
+BIN = $(patsubst %,$(BIN_DIR)/%_test,$(TARGETS))
+
+# Top-level rule.
 all: test
 
-test: $(TESTS)
-	for TEST in $(TESTS); do \
-		./$$TEST; \
+# General rule for every object file.
+$(OBJ_DIR)/%.o: ./src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# General rule for every test binary.
+$(BIN_DIR)/%_test: $(SRC_DIR)/%_test.c $(OBJ_DIR)/%.o
+	$(CC) $(CFLAGS) $^ -o $@
+
+# Automatic rule to run all tests in BIN.
+# Stop if one test fails.
+test: $(BIN)
+	for test_binary in $(BIN); do \
+		./$$test_binary; \
 		[[ $$? -ne 0 ]] && break; \
 	done; \
 	make clean
 
-./obj/%.o: ./src/%.c
-	$(CC) $(CFLAGS) -c $^ -o $@
-
-$(TESTS): % : ./test/%.c $(OBJ)
-	$(CC) $(CFLAGS) $< -o $@ $(OBJ)
-
+# Remove created files.
 clean:
-	rm $(TESTS) $(OBJ)
-
-#  $(wildcard *.o)
+	rm -f $(OBJ) $(BIN)

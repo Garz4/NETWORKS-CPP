@@ -21,7 +21,7 @@
 #include "../inc/linked_list.h"
 #include "../inc/memory.h"
 
-inline linked_list* new_linked_list(int value) {
+inline linked_list* allocate_linked_list(int value) {
   linked_list* response;
 
   ALLOCATE(linked_list, response);
@@ -32,6 +32,36 @@ inline linked_list* new_linked_list(int value) {
   response->tail = response->head;
 
   return response;
+}
+
+inline linked_list* allocate_empty_linked_list() {
+  linked_list* response;
+
+  ALLOCATE(linked_list, response);
+  response->size = 0;
+  response->head = NULL;
+  response->tail = NULL;
+
+  return response;
+}
+
+void deallocate_linked_list(linked_list* list) {
+  if (list == NULL) {
+    return;
+  }
+
+  linked_list_node* node;
+  linked_list_node* next;
+
+  for (node = list->head; node != NULL; node = next) {
+    next = node->next;
+    DEALLOCATE(node);
+  }
+
+  list->head = NULL;
+  list->tail = NULL;
+  list->size = 0;
+  DEALLOCATE(list);
 }
 
 void print_linked_list(const linked_list*const list) {
@@ -73,7 +103,7 @@ bool exist_in_linked_list(const linked_list*const list, int value) {
   return false;
 }
 
-// TODO(Garz4): Fix edge case when list is not NULL, but its head and tail are.
+// TODO: Fix edge case when list is not NULL, but its head and tail are.
 inline void add_to_linked_list(linked_list*const list, int value) {
   if (list == NULL) {
     return;
@@ -86,25 +116,6 @@ inline void add_to_linked_list(linked_list*const list, int value) {
   list->size++;
 }
 
-void delete_linked_list(linked_list* list) {
-  if (list == NULL) {
-    return;
-  }
-
-  linked_list_node* node;
-  linked_list_node* next;
-
-  for (node = list->head; node != NULL; node = next) {
-    next = node->next;
-    DEALLOCATE(node);
-  }
-
-  list->head = NULL;
-  list->tail = NULL;
-  list->size = 0;
-  DEALLOCATE(list);
-}
-
 void delete_single_match_linked_list(linked_list* list, int target) {
   if (list == NULL || list->head == NULL) {
     return;
@@ -114,7 +125,7 @@ void delete_single_match_linked_list(linked_list* list, int target) {
 
   if (node->value == target) {
     if (list->size == 1) {
-      delete_linked_list(list);
+      deallocate_linked_list(list);
       return;
     }
 
@@ -162,12 +173,13 @@ void reverse_linked_list(linked_list*const list) {
   list->tail = current;
 }
 
+// TODO: Return an empty list when list is not NULL but its contents are.
 linked_list* copy_linked_list(const linked_list*const list) {
   if (list == NULL || list->head == NULL) {
     return NULL;
   }
 
-  linked_list* copy = new_linked_list(list->head->value);
+  linked_list* copy = allocate_linked_list(list->head->value);
   linked_list_node* node = list->head->next;
 
   while (node != NULL) {
@@ -205,7 +217,7 @@ bool are_equal_linked_list(
 
 inline bool is_empty_linked_list(const linked_list*const list) {
   return list == NULL
-      || list->head == NULL
-      || list->tail == NULL
-      || list->size == 0;
+      || (list->head == NULL
+      && list->tail == NULL
+      && list->size == 0);
 }

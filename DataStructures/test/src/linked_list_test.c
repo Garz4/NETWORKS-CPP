@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include "../../Testing/comparators.h"
-#include "../inc/linked_list.h"
+#include "../../../Testing/comparators.h"
+#include "../../inc/linked_list.h"
 
 int main(void) {
   START_TEST("linked_list_test");
@@ -26,7 +26,7 @@ int main(void) {
   const size_t length = 5;
   const int last_element = length - 1;
   const int first_element = 0;
-  linked_list* list = new_linked_list(first_element);
+  linked_list* list = allocate_linked_list(first_element);
 
   for (int i = first_element + 1; i <= last_element; ++i) {
     add_to_linked_list(list, i);
@@ -57,8 +57,8 @@ int main(void) {
     EXPECT_EQUAL(node->value, curr_element--);
   }
 
-  delete_linked_list(list);
-  delete_linked_list(list_copy);
+  deallocate_linked_list(list);
+  deallocate_linked_list(list_copy);
 
   FINISH_TEST();
 

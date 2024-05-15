@@ -16,20 +16,20 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#include "../../Testing/comparators.h"
-#include "../inc/array.h"
+#include "../../../Testing/comparators.h"
+#include "../../inc/array.h"
 
 int main(void) {
   START_TEST("array_test");
 
   const size_t length = 1;
   const int first_element = length - 1;
-  array* arr = new_array(first_element);
+  array* arr = allocate_array(first_element);
 
   EXPECT_EQUAL(arr->data[0], first_element);
   EXPECT_EQUAL(length, arr->size);
 
-  delete_array(arr);
+  deallocate_array(arr);
 /*
   for (int i = first_element + 1; i <= last_element; ++i) {
     add_to_linked_list(list, i);

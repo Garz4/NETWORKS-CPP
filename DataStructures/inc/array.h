@@ -19,6 +19,7 @@
 #ifndef __ZNG_ARRAY_H__
 #define __ZNG_ARRAY_H__
 
+#include <stdbool.h>
 #include <stddef.h>
 
 typedef struct __zng_array {
@@ -26,11 +27,17 @@ typedef struct __zng_array {
   size_t size;
 } array;
 
-// Every new array needs to be deleted using delete_array(...).
-extern array* new_array(int value);
+// Every new array needs to be deleted using deallocate_array(...).
+extern array* allocate_array(int value);
+extern array* allocate_empty_array();
+extern void deallocate_array(array* arr);
 
 extern void add_to_array(array*const arr, int value);
 
-extern void delete_array(array* arr);
+extern bool exist_in_array(const array*const arr, int target);
+
+extern void delete_last_array(array* arr);
+
+extern bool is_empty_array(const array*const arr);
 
 #endif // __ZNG_ARRAY_H__

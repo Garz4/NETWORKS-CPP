@@ -22,19 +22,25 @@
 #include "../Terminal/outputstream.h"
 #include "results.h"
 
-#define EXPECT_EQUAL(lhs, rhs)         \
-  if ((lhs) != (rhs)) {                \
-    FAIL("Arguments should be equal.") \
-  }
+#define EXPECT_EQUAL(lhs, rhs)          \
+do {                                    \
+  if ((lhs) != (rhs)) {                 \
+    FAIL("Arguments should be equal."); \
+  }                                     \
+} while (0);
 
-#define EXPECT_TRUE(boolean)         \
-  if (!(boolean)) {                  \
-    FAIL("Argument should be true.") \
-  }
+#define EXPECT_TRUE(boolean)          \
+do {                                  \
+  if (!(boolean)) {                   \
+    FAIL("Argument should be true."); \
+  }                                   \
+} while (0);
 
-#define EXPECT_FALSE(boolean)         \
-  if ((boolean)) {                    \
-    FAIL("Argument should be false.") \
-  }
+#define EXPECT_FALSE(boolean)          \
+do {                                   \
+  if ((boolean)) {                     \
+    FAIL("Argument should be false."); \
+  }                                    \
+} while (0);
 
 #endif // COMPARATORS_H_
