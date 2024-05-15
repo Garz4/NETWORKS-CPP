@@ -38,6 +38,8 @@ extern linked_list* allocate_linked_list(int value);
 extern linked_list* allocate_empty_linked_list();
 extern void deallocate_linked_list(linked_list* list);
 
+extern bool is_empty_linked_list(const linked_list*const list);
+
 // Example output to screen: "list = {1, 2, 3, 4, 5};"
 extern void print_linked_list(const linked_list*const list);
 
@@ -66,7 +68,5 @@ extern bool are_equal_linked_list(
     const linked_list*const lhs, const linked_list*const rhs);
 
 extern void sort_linked_list(linked_list*const list);
-
-extern bool is_empty_linked_list(const linked_list*const list);
 
 #endif // __ZNG_LINKED_LIST_H__

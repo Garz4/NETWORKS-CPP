@@ -64,6 +64,13 @@ void deallocate_linked_list(linked_list* list) {
   DEALLOCATE(list);
 }
 
+inline bool is_empty_linked_list(const linked_list*const list) {
+  return list == NULL
+      || (list->head == NULL
+      && list->tail == NULL
+      && list->size == 0);
+}
+
 void print_linked_list(const linked_list*const list) {
   if (is_empty_linked_list(list)) {
     printf("list = {};\n");
@@ -214,10 +221,3 @@ bool are_equal_linked_list(
 }
 
 //void sort_linked_list(linked_list*const list) {}
-
-inline bool is_empty_linked_list(const linked_list*const list) {
-  return list == NULL
-      || (list->head == NULL
-      && list->tail == NULL
-      && list->size == 0);
-}

@@ -52,6 +52,10 @@ inline void deallocate_array(array* arr) {
   DEALLOCATE(arr);
 }
 
+inline bool is_empty_array(const array*const arr) {
+  return arr == NULL || (arr->data == NULL && arr->size == 0);
+}
+
 bool exist_in_array(const array*const arr, int target) {
   if (is_empty_array(arr)) {
     return false;
@@ -64,8 +68,4 @@ bool exist_in_array(const array*const arr, int target) {
   }
 
   return false;
-}
-
-inline bool is_empty_array(const array*const arr) {
-  return arr == NULL || (arr->data == NULL && arr->size == 0);
 }
