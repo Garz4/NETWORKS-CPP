@@ -19,7 +19,7 @@
 #include "../inc/array.h"
 #include "../inc/memory.h"
 
-array* new_array(int value) {
+inline array* allocate_array(int value) {
   array* response;
 
   ALLOCATE(array, response);
@@ -30,7 +30,17 @@ array* new_array(int value) {
   return response;
 }
 
-inline void delete_array(array* arr) {
+inline array* allocate_empty_array() {
+  array* response;
+
+  ALLOCATE(array, response);
+  response->size = 0;
+  response->data = NULL;
+
+  return response;
+}
+
+inline void deallocate_array(array* arr) {
   if (arr == NULL) {
     return;
   }
@@ -40,4 +50,18 @@ inline void delete_array(array* arr) {
   }
 
   DEALLOCATE(arr);
+}
+
+bool exist_in_array(const array*const arr, int target) {
+  for (size_t i = 0; i < arr->size; ++i) {
+    if (arr->data[i] == target) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+inline bool is_empty_array(const array*const arr) {
+  return arr == NULL || (arr->data == NULL && arr->size == 0);
 }

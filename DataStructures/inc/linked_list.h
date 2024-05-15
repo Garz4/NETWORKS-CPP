@@ -33,8 +33,10 @@ typedef struct __zng_ll {
   linked_list_node* tail;
 } linked_list;
 
-// Every new linked list needs to be deleted using delete_linked_list(...).
-extern linked_list* new_linked_list(int value);
+// Every new linked list needs to be deleted using deallocate_linked_list(...).
+extern linked_list* allocate_linked_list(int value);
+extern linked_list* allocate_empty_linked_list();
+extern void deallocate_linked_list(linked_list* list);
 
 // Example output to screen: "list = {1, 2, 3, 4, 5};"
 extern void print_linked_list(const linked_list*const list);
@@ -42,18 +44,16 @@ extern void print_linked_list(const linked_list*const list);
 // Linear time, stops when finding the first occurence.
 extern bool exist_in_linked_list(const linked_list*const list, int value);
 
+// TODO: Finish head and tail functions.
 extern void add_to_linked_list(linked_list*const list, int value);
-
-extern void delete_linked_list(linked_list* list);
+extern void add_head_linked_list(linked_list*const list, int value);
+extern void add_tail_linked_list(linked_list*const list, int value);
 
 // Deletes first occurence of 'target' in the linked list.
 // It frees its memory.
 extern void delete_single_match_linked_list(linked_list* list, int target);
-
 extern void delete_all_match_linked_list(linked_list* list, int target);
-
 extern void delete_head_linked_list(linked_list* list);
-
 extern void delete_tail_linked_list(linked_list* list);
 
 // Linear time.

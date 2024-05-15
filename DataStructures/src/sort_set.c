@@ -19,7 +19,7 @@
 #include "../inc/memory.h"
 #include "../inc/sort_set.h"
 
-inline sort_set* new_sort_set(int value) {
+inline sort_set* allocate_sort_set(int value) {
   sort_set* response;
 
   ALLOCATE(sort_set, response);
@@ -32,6 +32,28 @@ inline sort_set* new_sort_set(int value) {
   response->root->right = NULL;
 
   return response;
+}
+
+inline sort_set* allocate_empty_sort_set() {
+  sort_set* response;
+
+  ALLOCATE(sort_set, response);
+  response->size = 0;
+  response->root = NULL;
+
+  return response;
+}
+
+void deallocate_sort_set(sort_set* set) {
+  if (set == NULL) {
+    return;
+  }
+
+  if (set->root != NULL) {
+    DEALLOCATE(set->root);
+  }
+
+  DEALLOCATE(set);
 }
 
 //inline void add_to_sort_set(sort_set*const set, int value) { set; }
@@ -56,20 +78,8 @@ bool exist_in_sort_set(const sort_set*const set, int target) {
   return false;
 }
 
-void delete_sort_set(sort_set* set) {
-  if (set == NULL) {
-    return;
-  }
-
-  if (set->root != NULL) {
-    DEALLOCATE(set->root);
-  }
-
-  DEALLOCATE(set);
-}
-
 inline bool is_empty_sort_set(const sort_set*const set) {
   return set == NULL ||
-         set->root == NULL ||
-         set->size == 0;
+         (set->root == NULL &&
+         set->size == 0);
 }

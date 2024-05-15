@@ -23,15 +23,18 @@
 
 #include "../../Terminal/outputstream.h"
 
-#define ALLOCATE(type, pointer)            \
-  pointer = (type *) malloc(sizeof(type)); \
-  if ((pointer) == NULL) {                 \
-    STDERR_RED("ERROR: Out of memory.\n"); \
-    EXIT(1);                               \
-  }
+#define ALLOCATE(type, pointer)              \
+do {                                         \
+  (pointer) = (type *) malloc(sizeof(type)); \
+  if ((pointer) == NULL) {                   \
+    STDERR_RED("ERROR: Out of memory.\n");   \
+  }                                          \
+} while (0);
 
-#define DEALLOCATE(pointer) \
-  free((pointer));          \
-  pointer = NULL;
+#define DEALLOCATE(pointer)   \
+do {                          \
+  free((pointer));            \
+  (pointer) = NULL;           \
+} while (0);
 
 #endif // __ZNG_MEMORY_H__
