@@ -59,7 +59,7 @@ void deallocate_sort_set(sort_set* set) {
 //inline void add_to_sort_set(sort_set*const set, int value) { set; }
 
 bool exist_in_sort_set(const sort_set*const set, int target) {
-  if (set == NULL || set->size == 0) {
+  if (is_empty_sort_set(set)) {
     return false;
   }
 

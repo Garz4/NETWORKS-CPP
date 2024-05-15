@@ -65,7 +65,7 @@ void deallocate_linked_list(linked_list* list) {
 }
 
 void print_linked_list(const linked_list*const list) {
-  if (list == NULL) {
+  if (is_empty_linked_list(list)) {
     printf("list = {};\n");
     return;
   }
@@ -86,7 +86,7 @@ void print_linked_list(const linked_list*const list) {
 }
 
 bool exist_in_linked_list(const linked_list*const list, int value) {
-  if (list == NULL) {
+  if (is_empty_linked_list(list)) {
     return false;
   }
 
@@ -117,7 +117,7 @@ inline void add_to_linked_list(linked_list*const list, int value) {
 }
 
 void delete_single_match_linked_list(linked_list* list, int target) {
-  if (list == NULL || list->head == NULL) {
+  if (is_empty_linked_list(list)) {
     return;
   }
 
@@ -153,7 +153,7 @@ void delete_single_match_linked_list(linked_list* list, int target) {
 //void erase_all_match_linked_list(linked_list* list, int target) {}
 
 void reverse_linked_list(linked_list*const list) {
-  if (list == NULL) {
+  if (is_empty_linked_list(list)) {
     return;
   }
 
@@ -175,7 +175,7 @@ void reverse_linked_list(linked_list*const list) {
 
 // TODO: Return an empty list when list is not NULL but its contents are.
 linked_list* copy_linked_list(const linked_list*const list) {
-  if (list == NULL || list->head == NULL) {
+  if (is_empty_linked_list(list)) {
     return NULL;
   }
 

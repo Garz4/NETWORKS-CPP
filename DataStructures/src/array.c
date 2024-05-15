@@ -53,6 +53,10 @@ inline void deallocate_array(array* arr) {
 }
 
 bool exist_in_array(const array*const arr, int target) {
+  if (is_empty_array(arr)) {
+    return false;
+  }
+
   for (size_t i = 0; i < arr->size; ++i) {
     if (arr->data[i] == target) {
       return true;
