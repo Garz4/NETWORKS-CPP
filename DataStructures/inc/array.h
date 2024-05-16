@@ -31,10 +31,13 @@ typedef struct __zng_array {
 extern array* allocate_array(int value);
 extern array* allocate_empty_array();
 extern void deallocate_array(array* arr);
+// TODO:
+extern void deallocate_elements_in_array(array* arr);
 
 extern bool is_empty_array(const array*const arr);
 
 extern void add_to_array(array*const arr, int value);
+extern void add_to_empty_array(array*const arr, int value);
 
 extern bool exist_in_array(const array*const arr, int target);
 

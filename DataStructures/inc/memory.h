@@ -36,6 +36,23 @@ do {                                                 \
   }                                                  \
 } while (0)
 
+#define REALLOCATE(type, pointer, size)                                      \
+do {                                                                         \
+  type* __zng_temp_ptr = (type *) realloc((pointer), (size) * sizeof(type)); \
+  if (__zng_temp_ptr == NULL) {                                              \
+    STDERR_RED("ERROR: Out of memory. "                                      \
+               "Could not allocate memory of type '"                         \
+               #type                                                         \
+               "' for the variable '"                                        \
+               #pointer                                                      \
+               "' that required a new size of '"                             \
+               "%zu"                                                         \
+               "' using malloc.\n", (size));                                 \
+  } else {                                                                   \
+    pointer = __zng_temp_ptr;                                                \
+  }                                                                          \
+} while (0)
+
 #define DEALLOCATE(pointer) \
 do {                        \
   free((pointer));          \

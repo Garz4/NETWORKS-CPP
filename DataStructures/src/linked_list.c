@@ -73,7 +73,7 @@ inline bool is_empty_linked_list(const linked_list*const list) {
 
 void print_linked_list(const linked_list*const list) {
   if (is_empty_linked_list(list)) {
-    printf("list = {};\n");
+    printf("list = {}\n");
     return;
   }
 
@@ -85,11 +85,11 @@ void print_linked_list(const linked_list*const list) {
     head = head->next;
 
     if (head != NULL) {
-      printf(", ");
+      printf("}->{");
     }
   }
 
-  printf("};\n");
+  printf("}\n");
 }
 
 bool exist_in_linked_list(const linked_list*const list, int value) {
@@ -127,7 +127,6 @@ void delete_single_match_linked_list(linked_list* list, int target) {
   if (is_empty_linked_list(list)) {
     return;
   }
-
   linked_list_node* node = list->head;
 
   if (node->value == target) {
@@ -148,7 +147,10 @@ void delete_single_match_linked_list(linked_list* list, int target) {
         list->tail = node;
       }
 
-      DEALLOCATE(node->next);
+      linked_list_node* aux;
+      aux = node->next;
+      node->next = node->next->next;
+      DEALLOCATE(aux);
       list->size--;
       return;
     }

@@ -37,6 +37,8 @@ typedef struct __zng_ll {
 extern linked_list* allocate_linked_list(int value);
 extern linked_list* allocate_empty_linked_list();
 extern void deallocate_linked_list(linked_list* list);
+// TODO:
+extern void deallocate_elements_in_linked_list(linked_list* list);
 
 extern bool is_empty_linked_list(const linked_list*const list);
 
@@ -47,6 +49,7 @@ extern void print_linked_list(const linked_list*const list);
 extern bool exist_in_linked_list(const linked_list*const list, int value);
 
 extern void add_to_linked_list(linked_list*const list, int value);
+extern void add_to_empty_linked_list(linked_list*const list, int value);
 // TODO: Finish head and tail functions.
 extern void add_head_linked_list(linked_list*const list, int value);
 extern void add_tail_linked_list(linked_list*const list, int value);

@@ -27,7 +27,12 @@ int main(void) {
   array* arr = allocate_array(first_element);
 
   EXPECT_EQUAL(arr->data[0], first_element);
-  EXPECT_EQUAL(length, arr->size);
+  EXPECT_EQUAL(arr->size, length);
+
+  add_to_array(arr, 5);
+
+  EXPECT_EQUAL(arr->data[1], 5);
+  EXPECT_EQUAL(arr->size, 2);
 
   deallocate_array(arr);
 /*
