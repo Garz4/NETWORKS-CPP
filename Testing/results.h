@@ -32,7 +32,7 @@ static const char* __CURRENT_TEST() { return __CURRENT_TEST_.c_str(); }
 # define START_TEST(str)   \
 do {                       \
   __CURRENT_TEST_ = (str); \
-} while (0);
+} while (0)
 
 #else
 
@@ -43,25 +43,25 @@ static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
 do {                           \
   DEALLOCATE(__CURRENT_TEST_); \
   __CURRENT_TEST_ = (str);     \
-} while (0);
+} while (0)
 
 #endif // __cplusplus
 
 #define FINISH_TEST()                                \
 do {                                                 \
   STDOUT_GREEN("[%s]: Passed.\n", __CURRENT_TEST()); \
-} while (0);
+} while (0)
 
 #define FINISH_TEST_FAILED()                       \
 do {                                               \
   STDERR_RED("[%s]: Failed.\n", __CURRENT_TEST()); \
   EXIT(1);                                         \
-} while (0);
+} while (0)
 
 #define FAIL(string)                                    \
 do {                                                    \
   STDERR_RED("[%s]: %s\n", __CURRENT_TEST(), (string)); \
   FINISH_TEST_FAILED();                                 \
-} while (0);
+} while (0)
 
 #endif // __ZNG_RESULTS_H__

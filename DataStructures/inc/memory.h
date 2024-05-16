@@ -34,12 +34,12 @@ do {                                                 \
                #pointer                              \
                "' using malloc.\n");                 \
   }                                                  \
-} while (0);
+} while (0)
 
-#define DEALLOCATE(pointer)   \
-do {                          \
-  free((pointer));            \
-  (pointer) = NULL;           \
-} while (0);
+#define DEALLOCATE(pointer) \
+do {                        \
+  free((pointer));          \
+  (pointer) = NULL;         \
+} while (0)
 
 #endif // __ZNG_MEMORY_H__

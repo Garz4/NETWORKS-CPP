@@ -31,7 +31,7 @@ do {                            \
          #rhs                   \
          "' should be equal."); \
   }                             \
-} while (0);
+} while (0)
 
 #define EXPECT_TRUE(expression)                               \
 do {                                                          \
@@ -40,7 +40,7 @@ do {                                                          \
          #expression                                          \
          "'.");                                               \
   }                                                           \
-} while (0);
+} while (0)
 
 #define EXPECT_FALSE(expression)                               \
 do {                                                           \
@@ -49,6 +49,6 @@ do {                                                           \
          #expression                                           \
          "'.");                                                \
   }                                                            \
-} while (0);
+} while (0)
 
 #endif // __ZNG_COMPARATORS_H__
