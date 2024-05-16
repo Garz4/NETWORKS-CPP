@@ -29,23 +29,17 @@
 static std::string __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_.c_str(); }
 
-# define START_TEST(str)   \
-do {                       \
-  __CURRENT_TEST_ = (str); \
-} while (0)
-
 #else
 
 static char* __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
 
-# define START_TEST(str)       \
-do {                           \
-  DEALLOCATE(__CURRENT_TEST_); \
-  __CURRENT_TEST_ = (str);     \
-} while (0)
-
 #endif // __cplusplus
+
+# define START_TEST(str)   \
+do {                       \
+  __CURRENT_TEST_ = (str); \
+} while (0)
 
 #define FINISH_TEST()                                \
 do {                                                 \
