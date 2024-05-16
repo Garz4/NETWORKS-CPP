@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef OUTPUTSTREAM_H_
-#define OUTPUTSTREAM_H_
+#ifndef __ZNG_OUTPUTSTREAM_H__
+#define __ZNG_OUTPUTSTREAM_H__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,4 +40,4 @@ do {                            \
   fprintf(stdout, "\033[0m");   \
 } while (0);
 
-#endif // OUTPUTSTREAM_H_
+#endif // __ZNG_OUTPUTSTREAM_H__

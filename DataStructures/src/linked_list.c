@@ -67,8 +67,8 @@ void deallocate_linked_list(linked_list* list) {
 inline bool is_empty_linked_list(const linked_list*const list) {
   return list == NULL
       || (list->head == NULL
-      && list->tail == NULL
-      && list->size == 0);
+       && list->tail == NULL
+       && list->size == 0);
 }
 
 void print_linked_list(const linked_list*const list) {

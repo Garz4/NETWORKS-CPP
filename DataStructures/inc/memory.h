@@ -23,12 +23,17 @@
 
 #include "../../Terminal/outputstream.h"
 
-#define ALLOCATE(type, pointer)              \
-do {                                         \
-  (pointer) = (type *) malloc(sizeof(type)); \
-  if ((pointer) == NULL) {                   \
-    STDERR_RED("ERROR: Out of memory.\n");   \
-  }                                          \
+#define ALLOCATE(type, pointer)                      \
+do {                                                 \
+  (pointer) = (type *) malloc(sizeof(type));         \
+  if ((pointer) == NULL) {                           \
+    STDERR_RED("ERROR: Out of memory. "              \
+               "Could not allocate memory of type '" \
+               #type                                 \
+               "' for the variable '"                \
+               #pointer                              \
+               "' using malloc.\n");                 \
+  }                                                  \
 } while (0);
 
 #define DEALLOCATE(pointer)   \

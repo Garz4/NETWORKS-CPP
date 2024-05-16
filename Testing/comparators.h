@@ -16,31 +16,39 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef COMPARATORS_H_
-#define COMPARATORS_H_
+#ifndef __ZNG_COMPARATORS_H__
+#define __ZNG_COMPARATORS_H__
 
 #include "../Terminal/outputstream.h"
 #include "results.h"
 
-#define EXPECT_EQUAL(lhs, rhs)          \
-do {                                    \
-  if ((lhs) != (rhs)) {                 \
-    FAIL("Arguments should be equal."); \
-  }                                     \
+#define EXPECT_EQUAL(lhs, rhs)  \
+do {                            \
+  if ((lhs) != (rhs)) {         \
+    FAIL("Arguments '"          \
+         #lhs                   \
+         "' and '"              \
+         #rhs                   \
+         "' should be equal."); \
+  }                             \
 } while (0);
 
-#define EXPECT_TRUE(boolean)          \
-do {                                  \
-  if (!(boolean)) {                   \
-    FAIL("Argument should be true."); \
-  }                                   \
+#define EXPECT_TRUE(expression)                               \
+do {                                                          \
+  if (!(expression)) {                                        \
+    FAIL("The following boolean expression should be true: '" \
+         #expression                                          \
+         "'.");                                               \
+  }                                                           \
 } while (0);
 
-#define EXPECT_FALSE(boolean)          \
-do {                                   \
-  if ((boolean)) {                     \
-    FAIL("Argument should be false."); \
-  }                                    \
+#define EXPECT_FALSE(expression)                               \
+do {                                                           \
+  if ((expression)) {                                          \
+    FAIL("The following boolean expression should be false: '" \
+         #expression                                           \
+         "'.");                                                \
+  }                                                            \
 } while (0);
 
-#endif // COMPARATORS_H_
+#endif // __ZNG_COMPARATORS_H__

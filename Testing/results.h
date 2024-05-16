@@ -16,8 +16,8 @@
  * https://github.com/zoningorg/zoning/blob/main/LICENSE
  */
 
-#ifndef RESULTS_H_
-#define RESULTS_H_
+#ifndef __ZNG_RESULTS_H__
+#define __ZNG_RESULTS_H__
 
 #include "../DataStructures/inc/memory.h"
 #include "../Terminal/outputstream.h"
@@ -29,9 +29,9 @@
 static std::string __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_.c_str(); }
 
-# define START_TEST(string)   \
+# define START_TEST(str)      \
 do {                          \
-  __CURRENT_TEST_ = (string); \
+  __CURRENT_TEST_ = (str);    \
 } while (0);
 
 #else
@@ -39,10 +39,10 @@ do {                          \
 static char* __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_; }
 
-# define START_TEST(string)    \
+# define START_TEST(str)       \
 do {                           \
   DEALLOCATE(__CURRENT_TEST_); \
-  __CURRENT_TEST_ = (string);  \
+  __CURRENT_TEST_ = (str);     \
 } while (0);
 
 #endif // __cplusplus
@@ -64,4 +64,4 @@ do {                                                    \
   FINISH_TEST_FAILED();                                 \
 } while (0);
 
-#endif // RESULTS_H_
+#endif // __ZNG_RESULTS_H__
