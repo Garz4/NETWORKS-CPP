@@ -29,9 +29,9 @@
 static std::string __CURRENT_TEST_;
 static const char* __CURRENT_TEST() { return __CURRENT_TEST_.c_str(); }
 
-# define START_TEST(str)      \
-do {                          \
-  __CURRENT_TEST_ = (str);    \
+# define START_TEST(str)   \
+do {                       \
+  __CURRENT_TEST_ = (str); \
 } while (0);
 
 #else
