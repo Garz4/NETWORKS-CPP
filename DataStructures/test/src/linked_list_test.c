@@ -53,6 +53,9 @@ int main(void) {
   linked_list_node* node;
   int curr_element = last_element;
 
+  print_linked_list(list);
+  print_linked_list(list_copy);
+
   for (node = list->head; node != NULL; node = node->next) {
     EXPECT_EQUAL(node->value, curr_element--);
   }

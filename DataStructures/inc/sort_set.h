@@ -38,13 +38,16 @@ typedef struct __zng_ss {
 extern sort_set* allocate_sort_set(int value);
 extern sort_set* allocate_empty_sort_set();
 extern void deallocate_sort_set(sort_set* list);
+// TODO:
+extern void deallocate_elements_in_sort_set(sort_set* list);
+
+extern bool is_empty_sort_set(const sort_set*const set);
 
 extern void add_to_sort_set(sort_set*const set, int value);
+extern void add_to_empty_sort_set(sort_set*const set, int value);
 
 // Time: O(log(n))
 // Space: O(1)
 extern bool exist_in_sort_set(const sort_set*const set, int target);
-
-extern bool is_empty_sort_set(const sort_set*const set);
 
 #endif // __ZNG_SORT_SET_H__

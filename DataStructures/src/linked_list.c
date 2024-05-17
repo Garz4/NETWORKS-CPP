@@ -64,9 +64,16 @@ void deallocate_linked_list(linked_list* list) {
   DEALLOCATE(list);
 }
 
+inline bool is_empty_linked_list(const linked_list*const list) {
+  return list == NULL
+      || (list->head == NULL
+       && list->tail == NULL
+       && list->size == 0);
+}
+
 void print_linked_list(const linked_list*const list) {
-  if (list == NULL) {
-    printf("list = {};\n");
+  if (is_empty_linked_list(list)) {
+    printf("list = {}\n");
     return;
   }
 
@@ -78,15 +85,15 @@ void print_linked_list(const linked_list*const list) {
     head = head->next;
 
     if (head != NULL) {
-      printf(", ");
+      printf("}->{");
     }
   }
 
-  printf("};\n");
+  printf("}\n");
 }
 
 bool exist_in_linked_list(const linked_list*const list, int value) {
-  if (list == NULL) {
+  if (is_empty_linked_list(list)) {
     return false;
   }
 
@@ -117,7 +124,7 @@ inline void add_to_linked_list(linked_list*const list, int value) {
 }
 
 void delete_single_match_linked_list(linked_list* list, int target) {
-  if (list == NULL || list->head == NULL) {
+  if (is_empty_linked_list(list)) {
     return;
   }
 
@@ -141,7 +148,10 @@ void delete_single_match_linked_list(linked_list* list, int target) {
         list->tail = node;
       }
 
-      DEALLOCATE(node->next);
+      linked_list_node* aux;
+      aux = node->next;
+      node->next = node->next->next;
+      DEALLOCATE(aux);
       list->size--;
       return;
     }
@@ -153,7 +163,7 @@ void delete_single_match_linked_list(linked_list* list, int target) {
 //void erase_all_match_linked_list(linked_list* list, int target) {}
 
 void reverse_linked_list(linked_list*const list) {
-  if (list == NULL) {
+  if (is_empty_linked_list(list)) {
     return;
   }
 
@@ -173,10 +183,11 @@ void reverse_linked_list(linked_list*const list) {
   list->tail = current;
 }
 
-// TODO: Return an empty list when list is not NULL but its contents are.
 linked_list* copy_linked_list(const linked_list*const list) {
-  if (list == NULL || list->head == NULL) {
+  if (list == NULL) {
     return NULL;
+  } else if (is_empty_linked_list(list)) {
+    return allocate_empty_linked_list();
   }
 
   linked_list* copy = allocate_linked_list(list->head->value);
@@ -214,10 +225,3 @@ bool are_equal_linked_list(
 }
 
 //void sort_linked_list(linked_list*const list) {}
-
-inline bool is_empty_linked_list(const linked_list*const list) {
-  return list == NULL
-      || (list->head == NULL
-      && list->tail == NULL
-      && list->size == 0);
-}

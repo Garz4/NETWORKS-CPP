@@ -52,7 +52,38 @@ inline void deallocate_array(array* arr) {
   DEALLOCATE(arr);
 }
 
+inline bool is_empty_array(const array*const arr) {
+  return arr == NULL || (arr->data == NULL && arr->size == 0);
+}
+
+inline void add_to_array(array*const arr, int value) {
+  if (arr == NULL) {
+    return;
+  } else if (is_empty_array(arr)) {
+    add_to_empty_array(arr, value);
+    return;
+  }
+
+  arr->size++;
+  REALLOCATE(int, arr->data, arr->size);
+  arr->data[arr->size - 1] = value;
+}
+
+inline void add_to_empty_array(array*const arr, int value) {
+  if (arr == NULL) {
+    return;
+  }
+
+  ALLOCATE(int, arr->data);
+  arr->size = 1;
+  *(arr->data) = value;
+}
+
 bool exist_in_array(const array*const arr, int target) {
+  if (is_empty_array(arr)) {
+    return false;
+  }
+
   for (size_t i = 0; i < arr->size; ++i) {
     if (arr->data[i] == target) {
       return true;
@@ -60,8 +91,4 @@ bool exist_in_array(const array*const arr, int target) {
   }
 
   return false;
-}
-
-inline bool is_empty_array(const array*const arr) {
-  return arr == NULL || (arr->data == NULL && arr->size == 0);
 }
