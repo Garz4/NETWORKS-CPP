@@ -19,7 +19,6 @@
 #ifndef __ZNG_RESULTS_H__
 #define __ZNG_RESULTS_H__
 
-#include "../DataStructures/inc/memory.h"
 #include "../Terminal/outputstream.h"
 
 #ifdef __cplusplus
@@ -49,7 +48,6 @@ do {                                                 \
 #define FINISH_TEST_FAILED()                       \
 do {                                               \
   STDERR_RED("[%s]: Failed.\n", __CURRENT_TEST()); \
-  EXIT(1);                                         \
 } while (0)
 
 #define FAIL(string)                                    \

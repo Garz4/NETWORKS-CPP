@@ -22,8 +22,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define EXIT(code) exit(code)
-
 // To make it bold, add 01; between the brace and the number 
 
 #define STDERR_RED(...)         \
@@ -31,6 +29,7 @@ do {                            \
   fprintf(stderr, "\033[91m");  \
   fprintf(stderr, __VA_ARGS__); \
   fprintf(stderr, "\033[0m");   \
+  fflush(stderr);               \
 } while (0)
 
 #define STDOUT_GREEN(...)       \
@@ -38,6 +37,7 @@ do {                            \
   fprintf(stdout, "\033[92m");  \
   fprintf(stdout, __VA_ARGS__); \
   fprintf(stdout, "\033[0m");   \
+  fflush(stderr);               \
 } while (0)
 
 #endif // __ZNG_OUTPUTSTREAM_H__

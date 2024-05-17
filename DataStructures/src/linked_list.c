@@ -127,6 +127,7 @@ void delete_single_match_linked_list(linked_list* list, int target) {
   if (is_empty_linked_list(list)) {
     return;
   }
+
   linked_list_node* node = list->head;
 
   if (node->value == target) {
@@ -182,10 +183,11 @@ void reverse_linked_list(linked_list*const list) {
   list->tail = current;
 }
 
-// TODO: Return an empty list when list is not NULL but its contents are.
 linked_list* copy_linked_list(const linked_list*const list) {
-  if (is_empty_linked_list(list)) {
+  if (list == NULL) {
     return NULL;
+  } else if (is_empty_linked_list(list)) {
+    return allocate_empty_linked_list();
   }
 
   linked_list* copy = allocate_linked_list(list->head->value);
